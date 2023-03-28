@@ -6,7 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-
+    <style>
+    .social{
+        margin-top: 30px;
+        margin-left: 25px;
+        display: flex;
+    }
+    .social div{
+        background: red;
+        width: 150px;
+        border-radius: 3px;
+        padding: 5px 10px 10px 5px;
+        background-color: rgba(255,255,255,0.27);
+        color: #eaf0fb;
+        text-align: center;
+    }
+    .social div:hover{
+        background-color: rgba(255,255,255,0.47);
+    }
+    .social .fb{
+        margin-left: 25px;
+    }
+    .social i{
+        margin-right: 4px;
+    }
+    </style>
     <title>Form login</title>
 </head>
 <body style="margin: 0;"> 
@@ -34,6 +58,11 @@
                     </div>
                 </div>
                 <input type="submit" name ="submit" value="Log In" class="form-submit">
+
+                <div class="social">
+                    <div class="go"><i class="fab fa-google"></i>  Google</div>
+                    <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+                </div>
             </form>
         </div>
     </div>
