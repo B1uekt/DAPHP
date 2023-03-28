@@ -60,8 +60,8 @@
                 <input type="submit" name ="submit" value="Log In" class="form-submit">
 
                 <div class="social">
-                    <div class="go"><i class="fab fa-google"></i>  Google</div>
-                    <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+                    <div class="go" style="cursor: pointer"><i class="fab fa-google"></i>  Google</div>
+                    <div class="fb" style="cursor: pointer"><i class="fab fa-facebook"></i>  Facebook</div>
                 </div>
             </form>
         </div>
