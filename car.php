@@ -1,23 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
-    if(isset($_GET['submit'])){
-        echo $_GET["car"];
-        /*$servername = "localhost";
+    if(isset($_GET['search'])){
+        $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "sql_daphp";
-
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         if(!$conn){
             die("Connection failed: " . mysqli_connect_error());
         }
-        switch ($_GET['car']){
-        case 2:
-            $sql = "SELECT * FROM SanPham WHERE ThuongHieu = 'Ferrari'";
-            $result = mysqli_query($conn, $sql);
-        }*/
+        switch($_GET['car']){
+            case 1:
+                if($_GET['price']==1){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Vinfast' order by NamSX DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==2){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Vinfast' order by GiaBan DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==3){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Vinfast' order by GiaBan LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==4){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Vinfast' order by TenSP LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+            case 2:
+                if($_GET['price']==1){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Ferrari' order by NamSX DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==2){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Ferrari' order by GiaBan DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==3){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Ferrari' order by GiaBan LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==4){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Ferrari' order by TenSP LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+            case 3: 
+                if($_GET['price']==1){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Lamborghini' order by NamSX DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==2){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Lamborghini' order by GiaBan DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==3){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Lamborghini' order by GiaBan LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==4){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Lamborghini' order by TenSP LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+            case 4:
+                if($_GET['price']==1){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Mercedes' order by NamSX DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==2){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Mercedes' order by GiaBan DESC LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==3){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Mercedes' order by GiaBan LIMIT 3";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==4){
+                    $sql = "SELECT * FROM SanPham WHERE ThuongHieu ='Mercedes' order by TenSP LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+            case 5:
+                if($_GET['price']==1){
+                    $sql = "SELECT * FROM SanPham order by NamSX DESC LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==2){
+                    $sql = "SELECT * FROM SanPham order by GiaBan DESC LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==3){
+                    $sql = "SELECT * FROM SanPham order by GiaBan LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+                if($_GET['price']==4){
+                    $sql = "SELECT * FROM SanPham order by TenSP LIMIT 6";
+                    $result = mysqli_query($conn, $sql);
+                    break;
+                }
+        }
     }
+
     else{
         $servername = "localhost";
         $username = "root";
@@ -28,7 +129,7 @@
         if(!$conn){
             die("Connection failed: " . mysqli_connect_error());
         }
-        $sql = "SELECT * FROM SanPham ";
+        $sql = "SELECT * FROM SanPham";
         $result = mysqli_query($conn, $sql);
     }
 ?>
@@ -107,13 +208,13 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="index.php" class="nav-item nav-link">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item active">Car Listing</a>
+                                <a href="car.php" class="dropdown-item active">Car Listing</a>
                                 <a href="detail.html" class="dropdown-item">Car Detail</a>
                                 <a href="booking.html" class="dropdown-item">Car Booking</a>
                             </div>
@@ -154,15 +255,16 @@
                             <option value="2">Ferrari</option>
                             <option value="3">Lamborghini</option>
                             <option value="4">Mercedes</option>
+                            <option value="5">All</option>
                         </select>
                         <select name="price" class="custom-select px-4 mb-3 ml-4 mr-4" style="width: 200px; height: 50px; float: right">
-                            <option selected>Mới nhất</option>
-                            <option value="1">Giá giảm dần</option>
-                            <option value="2">Giá tăng dần</option>
-                            <option value="3">Theo tên A -> Z</option>
-                            <option value="4">Bán chạy</option>
+                            <option selected>Classify</option>
+                            <option value="1">Mới nhất</option>
+                            <option value="2">Giá giảm dần</option>
+                            <option value="3">Giá tăng dần</option>
+                            <option value="4">Theo tên A -> Z</option>
                         </select>
-                        <button class="btn btn-primary btn-block mb-3" type="submit" name="search" style="height: 50px; float: right">Search</button>
+                        <button class="btn btn-primary btn-block mb-3" name="search" style="height: 50px; float: right">Search</button>
                     </form>
                 </div>
             </div>
