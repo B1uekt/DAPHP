@@ -16,7 +16,7 @@
  ?>
 <head>
     <meta charset="utf-8">
-    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <title>ROYAL CARS </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -79,23 +79,23 @@
 
     <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
+        <div class="position-relative px-lg-5 pb-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1  class="text-uppercase text-primary mb-1">Royal Cars</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="index.html" class="nav-item nav-link">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
+                                <a href="car.php" class="dropdown-item active">Car Listing</a>
                                 <a href="detail.html" class="dropdown-item">Car Detail</a>
                                 <a href="booking.html" class="dropdown-item">Car Booking</a>
                             </div>
@@ -108,9 +108,9 @@
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <a class="nav-item nav-link" href="">
-                            <i class="fa fa-user"></i>
-                        </a>
+                        <div class="nav-item nav-link" style="padding: 17px 15px">
+                            <input class="custom-select px-4 mb-3 " style="height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -120,49 +120,7 @@
 
 
     <!-- Search Start -->
-    <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Pickup Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Drop Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                        data-target="#date" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="time" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                        data-target="#time" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Select A Car</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-            </div>
-        </div>
-    </div>
+    
     <!-- Search End -->
 
 
@@ -355,25 +313,30 @@
             <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
             <div class="row">
                 <?php 
+                    $num =0;
                     if(mysqli_num_rows($result)>0){
                         $soSP = mysqli_num_rows($result);
                         $s = "";
                         while($row = mysqli_fetch_assoc($result)){
+                            $num++;
                             $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                             $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<img class="img-fluid mb-4" src="%s" alt="">', $row['URL_Image']);
+                            $s .= sprintf('<a href="detail.html?id=%s"><img class="img-fluid mb-4" src="%s"></a>', $row['MaXe'], $row['URL_Image']);
                             $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
                             $s .= '<div class="d-flex justify-content-center mb-4">';
                             $s .= '<div class="px-2">';
                             $s .= '<i class="fa fa-car text-primary mr-1"></i>';
                             $s .= sprintf('<span>%s</span>', $row['NamSX']);
                             $s .= '</div><div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>AUTO</span></div><div class="px-2"><i class="fa fa-road text-primary mr-1"></i>';
-                            $s .= sprintf('<span>%skm</span>', $row['QuangDuong']);
+                            $s .= sprintf('<span>%sk</span>', $row['QuangDuong']);
                             $s .= '</div>';
                             $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="">%s VND</a>',  number_format($row['GiaBan'], 0, '', ','));
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.html?id=%s">%s VND</a>', $row['MaXe'], number_format($row['GiaBan'], 0, '', ','));
                             $s .= '</div>';
                             $s .= '</div>';
+                            if($num==6){
+                                break;
+                            }
                         }
                         echo($s);
                     }
