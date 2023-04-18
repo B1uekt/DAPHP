@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <?php 
@@ -10,9 +11,10 @@
     if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT * FROM SanPham";
+    $sql = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'xe' and t.MaTH = s.MaTH ";
     $result = mysqli_query($conn, $sql);
-
+    $sql1 = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'Phụ Kiện' and t.MaTH = s.MaTH ";
+    $result1 = mysqli_query($conn, $sql1);
  ?>
 <head>
     <meta charset="utf-8">
@@ -78,51 +80,24 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5 pb-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1  class="text-uppercase text-primary mb-1">Royal Cars</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.php" class="dropdown-item active">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <div class="nav-item nav-link" style="padding: 17px 15px">
-                            <input class="custom-select px-4 mb-3 " style="height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <?php require('navbar.php');  ?>
     <!-- Navbar End -->
 
-
     <!-- Search Start -->
-    
+    <div class="container-fluid bg-white pt-3 px-lg-5">
+        <form action="car.php" method="get">
+            <div class="row mx-n2 justify-content-end"> 
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+                    <input type="hidden" name="type" value="timkiem">
+                    <input name="search" class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2 pl-5">
+                    <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <!-- Search End -->
-
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0" style="margin-bottom: 90px;">
@@ -315,23 +290,21 @@
                 <?php 
                     $num =0;
                     if(mysqli_num_rows($result)>0){
-                        $soSP = mysqli_num_rows($result);
                         $s = "";
                         while($row = mysqli_fetch_assoc($result)){
                             $num++;
                             $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                             $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<a href="detail.html?id=%s"><img class="img-fluid mb-4" src="%s"></a>', $row['MaXe'], $row['URL_Image']);
+                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" src="%s"></a>', $row['IDSP'], $row['Url_image']);
                             $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
                             $s .= '<div class="d-flex justify-content-center mb-4">';
                             $s .= '<div class="px-2">';
                             $s .= '<i class="fa fa-car text-primary mr-1"></i>';
                             $s .= sprintf('<span>%s</span>', $row['NamSX']);
-                            $s .= '</div><div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>AUTO</span></div><div class="px-2"><i class="fa fa-road text-primary mr-1"></i>';
-                            $s .= sprintf('<span>%sk</span>', $row['QuangDuong']);
                             $s .= '</div>';
+                            $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
                             $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.html?id=%s">%s VND</a>', $row['MaXe'], number_format($row['GiaBan'], 0, '', ','));
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
                             $s .= '</div>';
                             $s .= '</div>';
                             if($num==6){
@@ -345,13 +318,47 @@
             </div>
         </div>
     </div>
-    <!-- Rent A Car End -->
 
+
+    <!-- Rent Accessory Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-1 text-primary text-center">04</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
+            <div class="row">
+                <?php 
+                    $num =0;
+                    if(mysqli_num_rows($result1)>0){
+                        $s = "";
+                        while($row1 = mysqli_fetch_assoc($result1)){
+                            $num++;
+                            $s .= '<div class="col-lg-4 col-md-6 mb-2">';
+                            $s .= '<div class="rent-item mb-4">';
+                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDSP'], $row1['Url_image']);
+                            $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenSP']);
+                            $s .= '<div class="d-flex justify-content-center mb-4">';
+                            $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row1['XuatXu']);
+                            $s .= '</div>';
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row1['IDSP'], number_format($row1['GiaBan'], 0, '', ','));
+                            $s .= '</div>';
+                            $s .= '</div>';
+                            if($num==6){
+                                break;
+                            }
+                        }
+                        echo($s);
+                    }
+                 ?>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Rent Accessory Start -->
 
     <!-- Team Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
-            <h1 class="display-1 text-primary text-center">04</h1>
+            <h1 class="display-1 text-primary text-center">05</h1>
             <h1 class="display-4 text-uppercase text-center mb-5">Meet Our Team</h1>
             <div class="owl-carousel team-carousel position-relative" style="padding: 0 30px;">
                 <div class="team-item">
@@ -441,7 +448,7 @@
     <!-- Testimonial Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
-            <h1 class="display-1 text-primary text-center">05</h1>
+            <h1 class="display-1 text-primary text-center">06</h1>
             <h1 class="display-4 text-uppercase text-center mb-5">Our Client's Say</h1>
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item d-flex flex-column justify-content-center px-4">
@@ -489,7 +496,7 @@
     <!-- Contact Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-1 text-primary text-center">06</h1>
+            <h1 class="display-1 text-primary text-center">07</h1>
             <h1 class="display-4 text-uppercase text-center mb-5">Contact Us</h1>
             <div class="row">
                 <div class="col-lg-7 mb-2">

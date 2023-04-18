@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+    if (!empty($_GET['id'])){
+        $MaXe = $_GET['id'];  
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "sql_daphp";
 
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $sql = "SELECT * FROM SanPham WHERE IDSP = '$MaXe'";
+        $result = mysqli_query($conn, $sql);
+    }
+
+ ?>
 <head>
     <meta charset="utf-8">
     <title>ROYAL CARS - Car Rental HTML Template</title>
@@ -65,87 +81,25 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item active">Car Booking</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <?php 
+    require('navbar.php');
+     ?>
     <!-- Navbar End -->
 
 
     <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Pickup Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Drop Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                        data-target="#date" data-toggle="datetimepicker" />
+        <form action="" method="get">
+            <div class="row mx-n2 justify-content-end"> 
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+                    <input type="hidden" name="type" value="timkiem">
+                    <input name= "search" class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2 pl-5">
+                    <button name ="timkiem" class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="time" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                        data-target="#time" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Select A Car</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-            </div>
-        </div>
+        </form>
     </div>
     <!-- Search End -->
 
@@ -165,88 +119,44 @@
     <!-- Detail Start -->
     <div class="container-fluid pt-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-4 text-uppercase mb-5">Mercedes Benz R3</h1>
-            <div class="row align-items-center pb-2">
-                <div class="col-lg-6 mb-4">
-                    <img class="img-fluid" src="img/bg-banner.jpg" alt="">
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <h4 class="mb-2">$99.00/Day</h4>
-                    <div class="d-flex mb-3">
-                        <h6 class="mr-2">Rating:</h6>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
-                            <small>(250)</small>
-                        </div>
-                    </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt</p>
-                    <div class="d-flex pt-1">
-                        <h6>Share on:</h6>
-                        <div class="d-inline-flex">
-                            <a class="px-2" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="px-2" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="px-2" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="px-2" href=""><i class="fab fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-n3 mt-lg-0 pb-4">
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-car text-primary mr-2"></i>
-                    <span>Model: 2015</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-cogs text-primary mr-2"></i>
-                    <span>Automatic</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-road text-primary mr-2"></i>
-                    <span>20km/liter</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-eye text-primary mr-2"></i>
-                    <span>GPS Navigation</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-car text-primary mr-2"></i>
-                    <span>Model: 2015</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-cogs text-primary mr-2"></i>
-                    <span>Automatic</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-road text-primary mr-2"></i>
-                    <span>20km/liter</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-eye text-primary mr-2"></i>
-                    <span>GPS Navigation</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-car text-primary mr-2"></i>
-                    <span>Model: 2015</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-cogs text-primary mr-2"></i>
-                    <span>Automatic</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-road text-primary mr-2"></i>
-                    <span>20km/liter</span>
-                </div>
-                <div class="col-md-3 col-6 mb-2">
-                    <i class="fa fa-eye text-primary mr-2"></i>
-                    <span>GPS Navigation</span>
-                </div>
-            </div>
-        </div>
-    </div>
+        <?php 
+            $s = "";
+            $row = mysqli_fetch_assoc($result);
+            $s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenSP']); 
+            $s .= ('<div class="row align-items-center pb-2">');
+            $s .= ('<div class="col-lg-6 mb-4">');
+            $s .= sprintf('<img class="img-fluid" src="%s" alt="">', $row['Url_image']);
+            $s .= ('</div>');
+            $s .= ('<div class="col-lg-6 mb-4">');
+            $s .= ('<h4 class="mb-2">$99.00/Day</h4>');
+            $s .= ('<div class="d-flex mb-3">');
+            $s .= ('<h6 class="mr-2">Rating:</h6>');
+            $s .= ('<div class="d-flex align-items-center justify-content-center mb-1">');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star-half-alt text-primary mr-1"></small>');
+            $s .= ('<small>(250)</small>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= sprintf('<p>%s</p>', $row['MoTa']);
+            $s .= ('<div class="d-flex pt-1">');
+            $s .= ('<h6>Share on:</h6>');
+            $s .= ('<div class="d-inline-flex">');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-facebook-f"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-twitter"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-linkedin-in"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-pinterest"></i></a>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            echo($s);
+        ?>
+                
     <!-- Detail End -->
 
 
@@ -280,17 +190,15 @@
                             <div class="col-6 form-group">
                                 <select class="custom-select px-4" style="height: 50px;">
                                     <option selected>Pickup Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
+                                    <option value="1">Chi nhánh 1: 273 An Dương Vương, Quận 5 TP HCM</option>
+                                    <option value="2">Chi nhánh 2: 123 Nguyễn Trãi, Quận 5 TP HCM</option>
                                 </select>
                             </div>
                             <div class="col-6 form-group">
                                 <select class="custom-select px-4" style="height: 50px;">
                                     <option selected>Drop Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
+                                    <option value="1">Chi nhánh 1: 273 An Dương Vương, Quận 5 TP HCM</option>
+                                    <option value="2">Chi nhánh 2: 123 Nguyễn Trãi, Quận 5 TP HCM</option>
                                 </select>
                             </div>
                         </div>
@@ -306,24 +214,6 @@
                                     <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
                                         data-target="#time2" data-toggle="datetimepicker" />
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 form-group">
-                                <select class="custom-select px-4" style="height: 50px;">
-                                    <option selected>Select Adult</option>
-                                    <option value="1">Adult 1</option>
-                                    <option value="2">Adult 2</option>
-                                    <option value="3">Adult 3</option>
-                                </select>
-                            </div>
-                            <div class="col-6 form-group">
-                                <select class="custom-select px-4" style="height: 50px;">
-                                    <option selected>Select Child</option>
-                                    <option value="1">Child 1</option>
-                                    <option value="2">Child 2</option>
-                                    <option value="3">Child 3</option>
-                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -462,7 +352,6 @@
     </div>
     <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
         <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
-        <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
     </div>
     <!-- Footer End -->
 

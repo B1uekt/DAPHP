@@ -36,15 +36,15 @@
 <body style="margin: 0;"> 
     <div style="background: rgba(28, 30, 50, 0.7)">
         <div id="wrapper">
-            <form action="" id="form-login">
+            <form name="DangNhap" action="code_login.PHP" method="post" id="form-login" enctype="multipart/form-data">
                 <h1 class="form-heading">ROYAL CARS</h1>
                 <div class="form-group">
                     <i class="far fa-user"></i>
-                    <input type="text" class="form-input" placeholder="Username">
+                    <input name ="sdt_dn" type="text" class="form-input" placeholder="Phone Number">
                 </div>
                 <div class="form-group">
                     <i class="fas fa-key"></i>
-                    <input type="password" class="form-input" placeholder="Password">
+                    <input name ="mk_dn" type="password" class="form-input" placeholder="Password">
                     <div id="eye">
                         <i class="far fa-eye"></i>
                     </div>

@@ -313,3 +313,233 @@ h6,
     background: linear-gradient(rgba(28, 30, 50, .9), rgba(28, 30, 50, .9)), url(../img/bg-banner.jpg);
     background-attachment: fixed;
 }
+.product{
+    padding: 24px;
+}
+
+.product-item button {
+    border: 1px solid #ececec;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    margin: 40px 0 24px 0px;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+.product-item button:hover {
+    background-color: #ececec;
+    font-weight: 600;
+    font-size: 24px;
+    border-radius: 10% ;
+}
+.list-product-item ul li a img{
+    height: 100px;
+    width: 100px;
+    margin: 12px 0px 24px 16px;
+}
+#item2 li a img{
+    width: 80px;
+    size: 50%;
+    margin: 5px 0px 18px 16px;
+}
+#item3 li a img{
+    width: 80px;
+    size: 50%;
+    margin: 5px 18px 18px 16px;
+}
+#name-shirts h1{
+    font-size: 48px;
+    font-weight: 500;
+}
+#name-shirts p span{
+    color: #3498db;
+    font-weight: 500;
+}
+#name-shirts p span.gach{   
+    color: #333;
+}
+#name-shirts p.price{   
+    color: #333;
+    font-size: 36px;
+    margin: 35px 12px 35px 0;
+    font-weight: 700;
+}
+.size button{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #CAD3C8;
+    background-color: white;
+    margin-right: 12px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease-in-out;
+}
+#buy-amount {
+    display: flex;
+}
+#buy-amount button{
+    width: 45px;
+    height: 45px;
+    outline: none;
+    background: none;
+    border: 1px solid #CAD3C8;
+    cursor: pointer;
+}
+#buy-amount button:hover{
+    background-color: #CAD3C8;
+    font-size: 23px;
+    text-align: center;
+}
+#buy-amount #amount{
+    width: 40px;
+    text-align: center;
+    border: 1px solid #CAD3C8;
+}
+.GH{
+    width: 200px;
+    height: 45px;
+    border: 1px solid #CAD3C8;
+    background: #F77D0A;
+    color: white;
+}
+#description button{
+    margin: 36px 0 0 0;
+    border: 1px solid #CAD3C8;
+    width: 150px;
+    height: 50px;
+    background: #F77D0A;
+    color: white;
+}
+#description1 {
+    border: 1px solid #CAD3C8;
+    font-size: 16px;
+    
+}
+#description1 p{
+    margin: 24px; 
+}
+#description1 span{
+    margin: 24px; 
+    font-size: 24px;
+    font-weight: 700;
+}
+.bord
+{
+    border: 1px solid #dfe6e9;
+    margin: 5px
+}
+.slider {
+  position: relative;
+  width: 100%;
+}
+.range {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: #ddd;
+  transform: translateY(-50%);
+}
+.handle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1;
+}
+.handle.min {
+  left: 0;
+}
+.handle.max {
+  right: 0;
+}
+.handle.min:before,
+.handle.max:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+.handle.min span {
+  position: absolute;
+  top: -25px;
+  left: -30px;
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  border-radius: 5px;
+  padding: 5px;
+  display: none;
+}
+.handle.max span {
+  position: absolute;
+  top: -25px;
+  right: -30px;
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  border-radius: 5px;
+  padding: 5px;
+  display: none;
+}
+.tooltip.min {
+  position: absolute;
+  top: -40px;
+  left: -10px;
+  height: 16px;
+  width: 1px;
+  background-color: #000;
+  z-index: 2;
+  transform: rotate(45deg);
+  display: none;
+}
+.tooltip.max {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  height: 16px;
+  width: 1px;
+  background-color: #000;
+  z-index: 2;
+  transform: rotate(-45deg);
+  display: none;
+}
+.tooltip.min span,
+.tooltip.max span {
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  display: none;
+}
+.number {
+position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 12px;
+}

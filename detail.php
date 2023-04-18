@@ -1,6 +1,24 @@
+<?php require_once('lib_session.php'); 
+?>
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+    if (!empty($_GET['id'])){
+      $MaXe = $_GET['id'];  
+      $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "sql_daphp";
 
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $sql = "SELECT * FROM SanPham WHERE IDSP = '$MaXe'";
+        $result = mysqli_query($conn, $sql);
+    }
+
+ ?>
 <head>
     <meta charset="utf-8">
     <title>ROYAL CARS - Car Rental HTML Template</title>
@@ -27,6 +45,10 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -66,25 +88,24 @@
 
     <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
+        <div class="position-relative px-lg-5 " style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1  class="text-uppercase text-primary mb-1">Royal Cars</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link active">About</a>
+                        <a href="index.php" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                                <a href="car.php?type=car" class="dropdown-item">Car</a>
+                                <a href="car.php?type=accessory" class="dropdown-item">Accessory</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -95,6 +116,27 @@
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <?php  
+                                    if(isAdminLogged()){
+                                        echo'<a href="account-setting.php" class="dropdown-item">Cập nhật thông tin</a>';
+                                        echo'<a href="" class="dropdown-item">Lịch sử đơn hàng</a>';
+                                        echo'<a href="Logout.php?isAdmin=1" class="dropdown-item">Đăng xuất</a>';
+                                    }
+                                    else{
+                                        echo'<a href="Login.php" class="dropdown-item">Đăng nhập</a>';
+                                        echo'<a href="Signup.php" class="dropdown-item">Đăng ký</a>';
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                                    <?php  
+                                        if(isAdminLogged()){
+                                            echo'<a class="nav-item nav-link" href="GioHang.html"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
+                                        }
+                                    ?>
                     </div>
                 </div>
             </nav>
@@ -104,107 +146,90 @@
 
 
     <!-- Search Start -->
+    <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
-        <form action="">
+        <form action="" method="get">
             <div class="row mx-n2 justify-content-end"> 
                 <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                    <input class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
+                    <input type="hidden" name="type" value="timkiem">
+                    <input name= "search" class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
                 </div>
                 <div class="col-xl-2 col-lg-4 col-md-6 px-2 pl-5">
-                    <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+                    <button name ="timkiem" class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
                 </div>
             </div>
         </form>
     </div>
     <!-- Search End -->
+    <!-- Search End -->
 
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">About</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">Car Detail</h1>
         <div class="d-inline-flex text-white">
             <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">About</h6>
+            <h6 class="text-uppercase text-body m-0">Car Detail</h6>
         </div>
     </div>
     <!-- Page Header Start -->
 
 
-    <!-- About Start -->
-    <div class="container-fluid py-5">
+    <!-- Detail Start -->
+    <div class="container-fluid pt-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">Royal Cars</span></h1>
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <img class="w-75 mb-4" src="img/about.png" alt="">
-                    <p>Justo et eos et ut takimata sed sadipscing dolore lorem, et elitr labore labore voluptua no rebum sed, stet voluptua amet sed elitr ea dolor dolores no clita. Dolores diam magna clita ea eos amet, amet rebum voluptua vero vero sed clita accusam takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no ipsum sanctus sanctus no et no ipsum amet, tempor labore est labore no. Eos diam eirmod lorem ut eirmod, ipsum diam sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr accusam takimata labore, et at erat eirmod consetetur tempor eirmod invidunt est, ipsum nonumy at et.</p>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-lg-4 mb-2">
-                    <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
-                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
-                            <i class="fa fa-2x fa-headset text-secondary"></i>
-                        </div>
-                        <h4 class="text-uppercase m-0">24/7 Car Rental Support</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-2">
-                    <div class="d-flex align-items-center bg-secondary p-4 mb-4" style="height: 150px;">
-                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
-                            <i class="fa fa-2x fa-car text-secondary"></i>
-                        </div>
-                        <h4 class="text-light text-uppercase m-0">Car Reservation Anytime</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-2">
-                    <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
-                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
-                            <i class="fa fa-2x fa-map-marker-alt text-secondary"></i>
-                        </div>
-                        <h4 class="text-uppercase m-0">Lots Of Pickup Locations</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-
-    <!-- Banner Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row mx-0">
-                <div class="col-lg-6 px-0">
-                    <div class="px-5 bg-secondary d-flex align-items-center justify-content-between" style="height: 350px;">
-                        <img class="img-fluid flex-shrink-0 ml-n5 w-50 mr-4" src="img/banner-left.png" alt="">
-                        <div class="text-right">
-                            <h3 class="text-uppercase text-light mb-3">Want to be driver?</h3>
-                            <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 px-0">
-                    <div class="px-5 bg-dark d-flex align-items-center justify-content-between" style="height: 350px;">
-                        <div class="text-left">
-                            <h3 class="text-uppercase text-light mb-3">Looking for a car?</h3>
-                            <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
-                        </div>
-                        <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="img/banner-right.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
+        <?php 
+            $s = "";
+            $row = mysqli_fetch_assoc($result);
+            $s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenSP']); 
+            $s .= ('<div class="row align-items-center pb-5">');
+            $s .= ('<div class="col-lg-6 mb-4">');
+            $s .= sprintf('<img class="img-fluid" src="%s" alt="">', $row['Url_image']);
+            $s .= ('</div>');
+            $s .= ('<div class="col-lg-6 mb-4">');
+            $s .= sprintf('<h4 class="mb-2">%s</h4>', number_format($row['GiaBan'], 0, '', ','));
+            $s .= ('<div class="d-flex mb-3">');
+            $s .= ('<h6 class="mr-2">Rating:</h6>');
+            $s .= ('<div class="d-flex align-items-center justify-content-center mb-1">');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star text-primary mr-1"></small>');
+            $s .= ('<small class="fa fa-star-half-alt text-primary mr-1"></small>');
+            $s .= ('<small>(250)</small>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= sprintf('<p>%s</p>', $row['MoTa']);
+            $s .= ('<div class="d-flex pt-1 pb-5">');
+            $s .= ('<h6>Share on:</h6>');
+            $s .= ('<div class="d-inline-flex">');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-facebook-f"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-twitter"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-linkedin-in"></i></a>');
+            $s .= ('<a class="px-2" href=""><i class="fab fa-pinterest"></i></a>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('<div class="d-flex">');
+            $s .= ('<div class ="col-6"  style="padding-left: 0px">');
+            $s .= sprintf('<a href="#"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP']);
+            $s .= ('</div>');
+            $s .= ('<div class ="col-6"  style="padding-left: 0px">');
+            $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            $s .= ('</div>');
+            echo($s);
+        ?>
+    <!-- Related Car End -->
 
 
     <!-- Vendor Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
+    <div class="container-fluid pb-5">
+        <div class="container pb-5">
             <div class="owl-carousel vendor-carousel">
                 <div class="bg-light p-4">
                     <img src="img/vendor-1.png" alt="">
@@ -303,7 +328,6 @@
     </div>
     <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
         <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
-        <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
     </div>
     <!-- Footer End -->
 
