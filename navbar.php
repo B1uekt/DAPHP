@@ -45,7 +45,7 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                             echo('</div>');
                         echo('</div>');
                                     if(isAdminLogged()){
-                                        echo'<a class="nav-item nav-link" href="GioHang.html"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
+                                        echo '<a class="nav-item nav-link" href="GH.php"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
                                     }
                     echo('</div>');
                 echo('</div>');

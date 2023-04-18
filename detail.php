@@ -51,7 +51,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<body>  
+    <script>
+        function GH(){
+        }
+    </script> 
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -134,7 +138,7 @@
                         </div>
                                     <?php  
                                         if(isAdminLogged()){
-                                            echo'<a class="nav-item nav-link" href="GioHang.html"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
+                                            echo '<a class="nav-item nav-link" href="GH.php"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
                                         }
                                     ?>
                     </div>
@@ -145,7 +149,6 @@
     <!-- Navbar End -->
 
 
-    <!-- Search Start -->
     <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
         <form action="" method="get">
@@ -160,7 +163,6 @@
             </div>
         </form>
     </div>
-    <!-- Search End -->
     <!-- Search End -->
 
 
@@ -210,14 +212,17 @@
             $s .= ('<a class="px-2" href=""><i class="fab fa-pinterest"></i></a>');
             $s .= ('</div>');
             $s .= ('</div>');
-            $s .= ('<div class="d-flex">');
-            $s .= ('<div class ="col-6"  style="padding-left: 0px">');
-            $s .= sprintf('<a href="#"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP']);
-            $s .= ('</div>');
-            $s .= ('<div class ="col-6"  style="padding-left: 0px">');
-            $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
-            $s .= ('</div>');
-            $s .= ('</div>');
+            if(isAdminLogged()){
+                $s .= ('<div class="d-flex">');
+                $s .= ('<div class ="col-6"  style="padding-left: 0px">');
+                $name_encoded = urlencode($row['TenSP']);
+                $s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s"><button onclick="GH();" class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP'], $name_encoded, $row['GiaBan'], $row['MaTH'], $row['Url_image']);
+                $s .= ('</div>');
+                $s .= ('<div class ="col-6"  style="padding-left: 0px">');
+                $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
+                $s .= ('</div>');
+                $s .= ('</div>');
+            }
             $s .= ('</div>');
             $s .= ('</div>');
             $s .= ('</div>');

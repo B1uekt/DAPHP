@@ -1,0 +1,127 @@
+.td2{
+    font-size: 15px;
+    text-align: center;
+}
+.td3{
+    color: #0652DD;
+    font-weight: 600;
+}
+.line{
+    height: 50%;
+    size: 50%;
+    width: 30%;
+    color: #CA6B2C;
+    margin: 12px auto;
+    display: block;
+}
+div.col-6 img{
+    height:100%;
+}
+.ten{
+    padding: 12px 0;
+    font-size: 24px;
+    color: #CA6B2C;
+    font-weight: 500;
+}
+.price{
+    font-size: 15px;
+    color:#333;
+    font-weight: 500;
+    padding: 0px 0px 10px 0px;
+}
+#buy-amount {
+    display: flex;
+}
+#buy-amount button{
+    width: 35px;
+    height: 35px;
+    outline: none;
+    background: none;
+    border: 1px solid #ececec;
+    cursor: pointer;
+}
+#buy-amount button:hover{
+    background-color: #ececec;
+    font-size: 23px;
+    text-align: center;
+}
+#buy-amount #amount{
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ececec;
+
+}
+a.bin {
+    justify-content: right;
+    font-size: 24px;
+    color: red;
+    align-items: center;
+    margin-right: 0;
+    width: 100%;
+}
+a.bin i{
+    padding: 24px 0;
+}
+a.bin:hover {
+    color: #111111;
+    transition: all 0.3s ease-in-out;
+}
+.price1{
+    font-size: 15px;
+    color:#333;
+    font-weight: 500;
+    padding: 32px 0px 10px 0px;
+}
+.line1{
+    width: 80%;
+    color: #CA6B2C;
+    margin: 24px auto;
+    display: block;
+}
+.gc{
+    border-radius: 0;
+    background: #ededed;
+    resize: none;
+    color: #333;
+    font-size: 15px;
+    padding: 20px;
+    outline: none;
+    width: 90%;
+    height: 150px;
+    border: 1px solid transparent;
+    transition: all 150ms linear;
+}
+.gc::placeholder{
+    color: #333;
+	font-family: Open Sans;
+    margin: 0 0 24px auto;
+}
+.tong{
+    margin-bottom: 55px;
+    margin-top: 30px
+}
+.tt{
+    text-align: right;
+    font-family: Open Sans;
+    font-size: 24px;
+    color:#111111;
+}
+.price2{
+    font-size: 32px;
+    color:#111111;
+    font-weight: 700;
+    font-family: Open Sans;
+}
+.tt div button{
+    text-align: center;
+    background-color: #CA6B2C;
+    margin-left:2px;
+    border: 1px solid #CA6B2C;
+    color:#ececec;
+    padding: 12px;
+    transition: all 0.3s ease-in-out;
+}
+.tt div button:hover{
+    background-color: #ededed;
+    color: #CA6B2C;
+}
