@@ -14,8 +14,16 @@
         if(!$conn){
             die("Connection failed: " . mysqli_connect_error());
         }
-        $sql = "SELECT * FROM SanPham WHERE IDSP = '$MaXe'";
-        $result = mysqli_query($conn, $sql);
+        $type = $_GET['type'];
+        if($type=='car'){
+            $sql = "SELECT * FROM SanPham WHERE IDSP = '$MaXe'";
+            $result = mysqli_query($conn, $sql);
+        }
+        else {
+            $sql = "SELECT * FROM PhuKien WHERE IDPK = '$MaXe'";
+            $result = mysqli_query($conn, $sql); 
+        }
+        
     }
 
  ?>
@@ -52,10 +60,6 @@
 </head>
 
 <body>  
-    <script>
-        function GH(){
-        }
-    </script> 
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -184,13 +188,25 @@
         <?php 
             $s = "";
             $row = mysqli_fetch_assoc($result);
-            $s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenSP']); 
+            if($type=='car'){
+                $s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenSP']);
+            }
+            else {
+                $s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenPK']);
+            }
+            //$s .= sprintf('<h1 class="display-4 text-uppercase mb-5">%s</h1>', $row['TenSP']); 
             $s .= ('<div class="row align-items-center pb-5">');
             $s .= ('<div class="col-lg-6 mb-4">');
             $s .= sprintf('<img class="img-fluid" src="%s" alt="">', $row['Url_image']);
             $s .= ('</div>');
             $s .= ('<div class="col-lg-6 mb-4">');
-            $s .= sprintf('<h4 class="mb-2">%s</h4>', number_format($row['GiaBan'], 0, '', ','));
+            if($type=='car'){
+                $s .= sprintf('<h4 class="mb-2">%s</h4>', number_format($row['GiaBan'], 0, '', ','));
+            }
+            else {
+                $s .= sprintf('<h4 class="mb-2">%s</h4>', number_format($row['Gia'], 0, '', ','));
+            }
+            //$s .= sprintf('<h4 class="mb-2">%s</h4>', number_format($row['GiaBan'], 0, '', ','));
             $s .= ('<div class="d-flex mb-3">');
             $s .= ('<h6 class="mr-2">Rating:</h6>');
             $s .= ('<div class="d-flex align-items-center justify-content-center mb-1">');
@@ -215,11 +231,25 @@
             if(isAdminLogged()){
                 $s .= ('<div class="d-flex">');
                 $s .= ('<div class ="col-6"  style="padding-left: 0px">');
-                $name_encoded = urlencode($row['TenSP']);
-                $s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s"><button onclick="GH();" class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP'], $name_encoded, $row['GiaBan'], $row['MaTH'], $row['Url_image']);
+                if($type=='car'){
+                    $name_encoded = urlencode($row['TenSP']);
+                    $s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s&type=%s"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP'], $name_encoded, $row['GiaBan'], $row['MaTH'], $row['Url_image'], $_GET['type']);
+                }
+                else {
+                    $name_encoded = urlencode($row['TenPK']);
+                    $s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s&type=%s"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDPK'], $name_encoded, $row['Gia'], $row['MaTH'], $row['Url_image'], $_GET['type']);
+                }
+                //$name_encoded = urlencode($row['TenSP']);
+                //$s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP'], $name_encoded, $row['GiaBan'], $row['MaTH'], $row['Url_image']);
                 $s .= ('</div>');
                 $s .= ('<div class ="col-6"  style="padding-left: 0px">');
-                $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
+                if($type=='car'){
+                    $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
+                }
+                else {
+                    $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDPK']);
+                }
+                //$s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
                 $s .= ('</div>');
                 $s .= ('</div>');
             }

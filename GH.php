@@ -80,59 +80,67 @@
   </div> 
 </div>
 <?php 
-    $Total =0;
-        foreach ($_SESSION['cart'] as $product){
-            
-            $s ='';
-            $s .= '<div class="container d-flex" style="height: 150px; max-width:1140px;">';
-            $s .= '<div class="col-2 d-flex" style="height: 150px">';
-            $s .= sprintf('<img style="height: 150px; width: 150px" src="%s" alt="">', $product['image']);
-            $s .= '</div>';
-            $s .= '<div class="col-9" style="height: 150px; display: flex; align-items:flex-end">';
-            $s .= '<div class="col-9" style="height: 150px">';
-            $s .= sprintf('<p class="ten pl-5">%s</p>', $product['name']);
-            $s .= sprintf('<p class="price pl-5">%s</p>',number_format($product['price'], 0, '', ','));
-            $s .= sprintf('<p class="price pl-5">Mã Thương Hiệu: %s</p>', $product['TH']);
-            $s .= '</div>';
-            $s .= '<div class="col-3" id="buy-amount">';
-            $s .= '<button class="minus-btn" onclick="handleMinus()">-</button>';
-            $s .= sprintf('<input type="text" name="amount" id="amount" value="%s">', $product['quantity']);
-            $s .= '<button class="plus-btn" onclick="handlePlus()">+</button>';
-            $s .= '</div>';
-            $s .= '</div>';
-            $s .= '<div class="col-1" style="height: 150px">';
-            $s .= sprintf('<a href="DeleteProductCart.php?id=%s" class="bin" tittle="Xóa sản phẩm này"><i class="fa fa-trash-o" aria-hidden="true"></i></a>', $product['id']);
-            $Price = $product['quantity'] * $product['price'];
-            $Total += $Price;
-            $s .= sprintf('<p class="price1">%s</p>', number_format($Price, 0, '', ','));
-            $s .= '</div>';
-            $s .= '</div>';
-            $s .= '<hr class="line1">';
-            echo($s);
-            }
+    if(empty($_SESSION['cart'])){
+        echo ('<h1 class="display-4 text-uppercase text-center mb-5">Không có sản phẩm nào</h1>');
+    }
+    else {
+        $Total =0;
+                foreach ($_SESSION['cart'] as $product){
+                    
+                    $s ='';
+                    $s .= '<div class="container d-flex" style="height: 150px; max-width:1140px;">';
+                    $s .= '<div class="col-2 d-flex" style="height: 150px">';
+                    $s .= sprintf('<img style="height: 150px; width: 150px" src="%s" alt="">', $product['image']);
+                    $s .= '</div>';
+                    $s .= '<div class="col-9" style="height: 150px; display: flex; align-items:flex-end">';
+                    $s .= '<div class="col-9" style="height: 150px">';
+                    $s .= sprintf('<p class="ten pl-5">%s</p>', $product['name']);
+                    $s .= sprintf('<p class="price pl-5">%s</p>',number_format($product['price'], 0, '', ','));
+                    $s .= sprintf('<p class="price pl-5">Mã Thương Hiệu: %s</p>', $product['TH']);
+                    $s .= '</div>';
+                    $s .= '<div class="col-3" id="buy-amount">';
+                    $s .= '<button class="minus-btn" onclick="handleMinus()">-</button>';
+                    $s .= sprintf('<input type="text" name="amount" id="amount" value="%s">', $product['quantity']);
+                    $s .= '<button class="plus-btn" onclick="handlePlus()">+</button>';
+                    $s .= '</div>';
+                    $s .= '</div>';
+                    $s .= '<div class="col-1" style="height: 150px">';
+                    $s .= sprintf('<a href="DeleteProductCart.php?id=%s" class="bin" tittle="Xóa sản phẩm này"><i class="fa fa-trash-o" aria-hidden="true"></i></a>', $product['id']);
+                    $Price = $product['quantity'] * $product['price'];
+                    $Total += $Price;
+                    $s .= sprintf('<p class="price1">%s</p>', number_format($Price, 0, '', ','));
+                    $s .= '</div>';
+                    $s .= '</div>';
+                    $s .= '<hr class="line1">';
+                    echo($s);
+                    } ?>
+                    <div class="container d-flex" style="height: 200px; max-width:1140px;">
+                      <div class="col-6" style="height: 200px">
+                        <input style ="margin: 0px; margin-top: 30px;" type="text" class="gc" placeholder="Ghi chú" >  
+                      </div>
+                      <div class="col-6 tt" style="height: 200px" >
+                        <div >
+                          <p class="tong" style ="margin-top: 30px; margin-bottom: 40px">Tổng tiền: <span class="price2"><?php echo(number_format($Total, 0, '', ',')) ?></span></p>
+                        </div>
+                          <div>
+                            <button>
+                              Tiếp tục mua hàng
+                            </button>
+                            <button> 
+                              Cập nhật
+                            </button>
+                            <button>
+                              Thanh toán
+                            </button>
+                          </div>
+                          
+                      </div>
+                    </div> 
+
+    <?php }
+    
         ?>
-            <div class="container d-flex" style="height: 200px; max-width:1140px;">
-              <div class="col-6" style="height: 200px">
-                <input style ="margin: 0px; margin-top: 30px;" type="text" class="gc" placeholder="Ghi chú" >  
-              </div>
-              <div class="col-6 tt" style="height: 200px" >
-                <div >
-                  <p class="tong" style ="margin-top: 30px; margin-bottom: 40px">Tổng tiền: <span class="price2"><?php echo(number_format($Total, 0, '', ',')) ?></span></p>
-                </div>
-                  <div>
-                    <button>
-                      Tiếp tục mua hàng
-                    </button>
-                    <button> 
-                      Cập nhật
-                    </button>
-                    <button>
-                      Thanh toán
-                    </button>
-                  </div>
-                  
-              </div>
-            </div> 
+            
         
 
 

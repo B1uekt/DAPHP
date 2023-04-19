@@ -4,6 +4,7 @@ require_once('lib_session.php');
 		echo 'Dang xuat admin thanh cong';
 		unset($_SESSION['current_username']);
 		unset($_SESSION['isAdmin']);
+		unset($_SESSION['cart']);
 		header('Location:' . 'index.php');
 	}
 ?>

@@ -16,29 +16,29 @@
         if($type=='car'){
             if($_GET['car']==5){
                 if($_GET['min-price']!='' && $_GET['max-price']!=''){
-                     $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d", $_GET['max-price'], $_GET['min-price']);
+                     $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d", $_GET['max-price'], $_GET['min-price']);
                         $result = mysqli_query($conn, $sql);
                 }
                 else {
                     switch($_GET['price']){
                         case 1: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH order by NamSX DESC";
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by NamSX DESC";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 2: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH order by GiaBan DESC";
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by GiaBan DESC";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 3: 
-                                $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH order by GiaBan";
+                                $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by GiaBan";
                                 $result = mysqli_query($conn, $sql);
                                 break;
                         case 4: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH order by TenSP";
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by TenSP";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 5: 
-                            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'xe' and t.MaTH = s.MaTH LIMIT 9";
+                            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH LIMIT 9";
                             $result = mysqli_query($conn, $sql);
                             break;
                     }  
@@ -46,59 +46,74 @@
                     
             }
             else if($_GET['car']!=5){
-                if(isset($_GET['min-price']) && isset($_GET['max-price'])){
-                    $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s'", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
+                if($_GET['min-price']!='' && $_GET['max-price']!=''){
+                    $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s'", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
                     $result = mysqli_query($conn, $sql);
                 }
-                switch($_GET['price']){
-                    case 1:
-                        $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and t.MaTH = '%s' and s.MaTH = t.MaTH order by NamSX DESC", $_GET['car']);
-                        $result = mysqli_query($conn, $sql);
-                        break;
-                    case 2: 
-                        $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan DESC", $_GET['car']);
-                        $result = mysqli_query($conn, $sql);
-                        break;
-                    case 3: 
-                        $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan", $_GET['car']);
-                        $result = mysqli_query($conn, $sql);
-                        break;
-                    case 4: 
-                        $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'xe' and t.MaTH ='%s' and s.MaTH = t.MaTH order by TenSP", $_GET['car']);
-                        $result = mysqli_query($conn, $sql);
-                        break;
-                    case 5: 
-                        $sql = sprintf("SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'xe' and t.MaTH ='%s' and t.MaTH = s.MaTH LIMIT 9", $_GET['car']);
-                        $result = mysqli_query($conn, $sql);
-                        break;
+                else{
+                    switch($_GET['price']){
+                        case 1:
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by NamSX DESC", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
+                            break;
+                        case 2: 
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan DESC", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
+                            break;
+                        case 3: 
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
+                            break;
+                        case 4: 
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH ='%s' and s.MaTH = t.MaTH order by TenSP", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
+                            break;
+                        case 5: 
+                            $sql = sprintf("SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH ='%s' and t.MaTH = s.MaTH LIMIT 9", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
+                            break;
+                    }
                 }
             }
             
 
         }
         else if($type=='accessory'){
-            if($_GET['price']==4){
-                $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'Phụ Kiện' and t.MaTH = s.MaTH LIMIT 9";
-                $result = mysqli_query($conn, $sql);
+            if($_GET['min-price']!='' && $_GET['max-price']!=''){
+                    $sql = sprintf("SELECT * FROM phukien WHERE Gia <= %d and Gia >= %d" , $_GET['max-price'], $_GET['min-price']);
+                    $result = mysqli_query($conn, $sql);
+                }
+            else {
+                switch($_GET['price']){
+                    case 1:
+                        $sql = "SELECT * FROM phukien order by Gia DESC";
+                        $result = mysqli_query($conn, $sql);
+                        break;
+                    case 2: 
+                        $sql = "SELECT * FROM phukien order by Gia";
+                        $result = mysqli_query($conn, $sql);
+                        break;
+                    case 3: 
+                        $sql = "SELECT * FROM phukien order by TenPK LIMIT 9";
+                        $result = mysqli_query($conn, $sql);
+                        break;
+                    case 4:
+                        $sql = "SELECT * FROM phukien LIMIT 9";
+                        $result = mysqli_query($conn, $sql);
+                        break;
+                }
             }
-            switch($_GET['price']){
-                case 1:
-                    $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'Phụ Kiện' and s.MaTH = t.MaTH order by GiaBan DESC";
-                    $result = mysqli_query($conn, $sql);
-                    break;
-                case 2: 
-                    $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'Phụ Kiện' and s.MaTH = t.MaTH order by GiaBan";
-                    $result = mysqli_query($conn, $sql);
-                    break;
-                case 3: 
-                    $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaLoai = 'Phụ Kiện' and s.MaTH = t.MaTH order by TenSP LIMIT 9";
-                    $result = mysqli_query($conn, $sql);
-                    break;
-            }
+            
         }
         else {
-            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and TenSP like '%%%s%%'", $_GET['search']);
-            $result = mysqli_query($conn, $sql);
+            //$sql = sprintf("SELECT t.*, s.*, p.* FROM SanPham s, ThuongHieu t, phukien p WHERE s.MaTH = t.MaTH and ( TenSP LIKE '%%%s%%' or TenPK LIKE '%%%s%%') ", $_GET['search'], $_GET['search']);
+            //var_dump($sql);
+            $sql1 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and TenSP LIKE '%%%s%%'", $_GET['search']);
+            $result = mysqli_query($conn, $sql1);
+            $sql2 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%'", $_GET['search']);
+            //var_dump($sql2);
+            $result1 = mysqli_query($conn, $sql2);
+            
         }
     }
 
@@ -114,11 +129,11 @@
         }
         $type = $_GET['type'];
         if($type=='car'){
-            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH  and s.MaLoai = 'xe' LIMIT 9";
+            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH LIMIT 9";
             $result = mysqli_query($conn, $sql);
         }
         else if($type=='accessory'){
-            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH and s.MaLoai = 'Phụ Kiện' LIMIT 9";
+            $sql = "SELECT *  FROM phukien LIMIT 9";
             $result = mysqli_query($conn, $sql);
         }
         else {
@@ -160,7 +175,12 @@
                 document.frm.price.value = 5;
             }
         }
-
+        function xuly1() {
+            if (document.frm['min-price'].value !== '' || document.frm['max-price'].value !== '') {
+                document.frm.price.disabled = true;
+                document.frm.price.value = 4;
+            }
+        }
     </script>
 </head>
 
@@ -266,9 +286,9 @@
                         }
                         else if($type=='accessory'){
                             echo('<input type="hidden" name="type" value="accessory">');
-                            echo('<input onchange="xuly();" style="border: 1px solid #ced4da" class="px-4 mb-3 ml-4" style="width: 200px; height: 50px" type="number" name="min-price" placeholder="Min Price" >');
+                            echo('<input onchange="xuly1();" style="border: 1px solid #ced4da" class="px-4 mb-3 ml-4" style="width: 200px; height: 50px" type="number" name="min-price" placeholder="Min Price" >');
                             echo('<p style="margin-top: 10px; margin-left: 15px; margin-right: 15px">-</p>');
-                            echo('<input onchange="xuly();" style="border: 1px solid #ced4da" class=" px-4 mb-3" style="width: 200px; height: 50px" type="number" name="max-price" placeholder="Max Price">');
+                            echo('<input onchange="xuly1();" style="border: 1px solid #ced4da" class=" px-4 mb-3" style="width: 200px; height: 50px" type="number" name="max-price" placeholder="Max Price">');
                             echo('<select name="price" class="custom-select px-4 mb-3 ml-4 mr-4" style="width: 200px; height: 50px; float:right">');
                             echo('<option value="4" selected>Classify</option>');
                             echo('<option value="1">Giá giảm dần</option>');
@@ -286,30 +306,98 @@
 
             <div class="row">
                 <?php 
-                    $num =0;
-                    if(mysqli_num_rows($result)>0){
-                        $s = "";
-                        while($row = mysqli_fetch_assoc($result)){
-                            
-                            $s .= '<div class="col-lg-4 col-md-6 mb-2">';
-                            $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $row['Url_image']);
-                            $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
-                            $s .= '<div class="d-flex justify-content-center mb-4">';
-                            if($type=='car'){
-                                $s .= '<div class="px-2">';
-                                $s .= '<i class="fa fa-car text-primary mr-1"></i>';
-                                $s .= sprintf('<span>%s</span>', $row['NamSX']);
+
+                    if($type=='car'){
+                        $num =0;
+                        if(mysqli_num_rows($result)>0){
+                            $s = "";
+                            while($row = mysqli_fetch_assoc($result)){
+                                
+                                $s .= '<div class="col-lg-4 col-md-6 mb-2">';
+                                $s .= '<div class="rent-item mb-4">';
+                                $s .= sprintf('<a href="detail.php?id=%s&type=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $_GET['type'], $row['Url_image']);
+                                $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
+                                $s .= '<div class="d-flex justify-content-center mb-4">';
+                                if($type=='car'){
+                                    $s .= '<div class="px-2">';
+                                    $s .= '<i class="fa fa-car text-primary mr-1"></i>';
+                                    $s .= sprintf('<span>%s</span>', $row['NamSX']);
+                                    $s .= '</div>';
+                                }
+                                $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
+                                $s .= '</div>';
+                                $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=%s">%s VND</a>', $row['IDSP'], $_GET['type'], number_format($row['GiaBan'], 0, '', ','));
+                                $s .= '</div>';
                                 $s .= '</div>';
                             }
-                            $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
-                            $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
-                            $s .= '</div>';
-                            $s .= '</div>';
+                            echo($s);
+                            }
+                    }
+                    else if($type=='accessory') {
+                        $num =0;
+                        if(mysqli_num_rows($result)>0){
+                            $s = "";
+                            while($row1 = mysqli_fetch_assoc($result)){
+                                $num++;
+                                $s .= '<div class="col-lg-4 col-md-6 mb-2">';
+                                $s .= '<div class="rent-item mb-4">';
+                                $s .= sprintf('<a href="detail.php?id=%s&type=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $_GET['type'], $row1['Url_image']);
+                                $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenPK']);
+                                $s .= '<div class="d-flex justify-content-center mb-4">';
+                                $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
+                                $s .= '</div>';
+                                $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=%s">%s VND</a>', $row1['IDPK'], $_GET['type'], number_format($row1['Gia'], 0, '', ','));
+                                $s .= '</div>';
+                                $s .= '</div>';
+                                if($num==6){
+                                    break;
+                                }
+                            }
+                            echo($s);
+                        }
+                    }
+                    else {
+                        $s = "";
+                        if(mysqli_num_rows($result)>0){
+                            
+                            while($row = mysqli_fetch_assoc($result)){
+                                
+                                $s .= '<div class="col-lg-4 col-md-6 mb-2">';
+                                $s .= '<div class="rent-item mb-4">';
+                                $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $row['Url_image']);
+                                $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
+                                $s .= '<div class="d-flex justify-content-center mb-4">';
+                                if($type=='car'){
+                                    $s .= '<div class="px-2">';
+                                    $s .= '<i class="fa fa-car text-primary mr-1"></i>';
+                                    $s .= sprintf('<span>%s</span>', $row['NamSX']);
+                                    $s .= '</div>';
+                                }
+                                $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
+                                $s .= '</div>';
+                                $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
+                                $s .= '</div>';
+                                $s .= '</div>';
+                            }
+                        }
+                        if(mysqli_num_rows($result1)>0){
+                            while($row1 = mysqli_fetch_assoc($result1)){
+                                
+                                $s .= '<div class="col-lg-4 col-md-6 mb-2">';
+                                $s .= '<div class="rent-item mb-4">';
+                                $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
+                                $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenPK']);
+                                $s .= '<div class="d-flex justify-content-center mb-4">';
+                                $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
+                                $s .= '</div>';
+                                $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row1['IDPK'], number_format($row1['Gia'], 0, '', ','));
+                                $s .= '</div>';
+                                $s .= '</div>';
+                            }
                         }
                         echo($s);
-                    }
+                    }  
+                    
                  ?>
             </div>
         </div>

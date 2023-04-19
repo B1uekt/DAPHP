@@ -7,7 +7,7 @@ session_start();
     $product_price = $_GET['price'];
     $product_price = $_GET['price'];
     $product_TH = $_GET['maTH'];
-
+    $type = $_GET['type'];
     // Tạo một mảng sản phẩm mới để thêm vào giỏ hàng
     $product = array(
         'id' => $product_id,
@@ -19,7 +19,7 @@ session_start();
     );
     if (!isset($_SESSION['cart'])) {
         // Nếu giỏ hàng không tồn tại, tạo mới giỏ hàng và thêm sản phẩm mới vào giỏ hàng
-        $_SESSION['cart'] = array();
+        
         $_SESSION['cart'][$product_id] = $product;
     } else {
         // Nếu giỏ hàng đã tồn tại, kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
@@ -31,6 +31,6 @@ session_start();
             $_SESSION['cart'][$product_id] = $product;
         }
     }
-    $a =sprintf('Location: detail.php?id=%s', $product_id);
+    $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
     header($a);
  ?>

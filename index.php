@@ -11,9 +11,9 @@
     if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'xe' and t.MaTH = s.MaTH ";
+    $sql = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH ";
     $result = mysqli_query($conn, $sql);
-    $sql1 = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE s.MaLoai = 'Phụ Kiện' and t.MaTH = s.MaTH ";
+    $sql1 = "SELECT * FROM phukien ";
     $result1 = mysqli_query($conn, $sql1);
  ?>
 <head>
@@ -334,12 +334,12 @@
                             $num++;
                             $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                             $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDSP'], $row1['Url_image']);
-                            $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenSP']);
+                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
+                            $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenPK']);
                             $s .= '<div class="d-flex justify-content-center mb-4">';
-                            $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row1['XuatXu']);
+                            $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
                             $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row1['IDSP'], number_format($row1['GiaBan'], 0, '', ','));
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row1['IDPK'], number_format($row1['Gia'], 0, '', ','));
                             $s .= '</div>';
                             $s .= '</div>';
                             if($num==6){

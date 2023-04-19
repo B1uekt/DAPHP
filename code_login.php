@@ -22,6 +22,7 @@
 	    echo 'Đăng nhập thành công';
 	    $_SESSION['current_username'] = $sdt;
 		$_SESSION['isAdmin'] = true;
+		$_SESSION['cart'] = array();
 		header('Location:' . 'index.php');
 	  } else {
 	    echo 'Mật khẩu đã nhập không đúng';
