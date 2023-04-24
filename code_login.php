@@ -18,16 +18,23 @@
 	if (mysqli_num_rows($result) == 1) {
 	  $row = mysqli_fetch_assoc($result);
 	  //$stored_password = $row['MatKhau'];
-	  if ($mk == $row['MatKhau']) {
+	  if($mk == $row['MatKhau'] && $mk == 'admin123'){
+	  	$_SESSION['current_adminname'] = $sdt;
+		$_SESSION['isAdmin'] = true;
+		header('Location:' . 'index.php');
+	  }
+	  else if ($mk == $row['MatKhau'] && $mk != 'admin123' ) {
 	    echo 'Đăng nhập thành công';
 	    $_SESSION['current_username'] = $sdt;
-		$_SESSION['isAdmin'] = true;
+		$_SESSION['isUser'] = true;
 		$_SESSION['cart'] = array();
 		header('Location:' . 'index.php');
-	  } else {
+	  } 
+	  else {
 	    echo 'Mật khẩu đã nhập không đúng';
 	  }
-	} else {
+	} 
+	else {
 	  echo 'Tài khoản không tồn tại';
 	}
 

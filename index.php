@@ -45,6 +45,7 @@
 </head>
 
 <body>
+    
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -82,7 +83,7 @@
     <!-- Navbar Start -->
     <?php require('navbar.php');  ?>
     <!-- Navbar End -->
-
+    
     <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
         <form action="car.php" method="get">
@@ -295,7 +296,7 @@
                             $num++;
                             $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                             $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" src="%s"></a>', $row['IDSP'], $row['Url_image']);
+                            $s .= sprintf('<a href="detail.php?id=%s&type=car"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $row['Url_image']);
                             $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
                             $s .= '<div class="d-flex justify-content-center mb-4">';
                             $s .= '<div class="px-2">';
@@ -304,7 +305,15 @@
                             $s .= '</div>';
                             $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
                             $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
+                            $s .= '<div class="justify-content-center mb-4">';
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=car">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
+                            $s .= '</div>';
+                            if(isAdminLogged()){
+                                $s .= '<div class="justify-content-center mb-4 btn-de-up">';
+                                $s .= '<button class="btn but-update btn btn-primary px-3">Update</button>'; 
+                                $s .= '</div>';
+                            }
+                            
                             $s .= '</div>';
                             $s .= '</div>';
                             if($num==6){
@@ -334,12 +343,20 @@
                             $num++;
                             $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                             $s .= '<div class="rent-item mb-4">';
-                            $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
+                            $s .= sprintf('<a href="detail.php?id=%s&type=accessory"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
                             $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenPK']);
                             $s .= '<div class="d-flex justify-content-center mb-4">';
                             $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
                             $s .= '</div>';
-                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s">%s VND</a>', $row1['IDPK'], number_format($row1['Gia'], 0, '', ','));
+                            $s .= '<div class="justify-content-center mb-4">';
+                            $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=accessory">%s VND</a>', $row1['IDPK'], number_format($row1['Gia'], 0, '', ','));
+                            $s .= '</div>';
+                            if(isAdminLogged()){
+                                $s .= '<div class="justify-content-center mb-4">';
+                                $s .= sprintf('<a class="btn btn-primary px-3 " href="detail.php?id=%s&type=accessory">Update</a>', $row1['IDPK']); 
+                                $s .= '</div>';
+                            }
+                            
                             $s .= '</div>';
                             $s .= '</div>';
                             if($num==6){
@@ -681,6 +698,23 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+            var buttonGroups =document.querySelectorAll('.btn-de-up')
+            var model0= document.querySelector('.model-0');
+            var icon0 = document.querySelector('.model-header-0 i');
+            var submit = document.querySelector('.submit')
+            function toggleCLose2(){
+                model0.classList.add('hide');
+            }
+            buttonGroups.forEach(group => {
+                const deleteButton = group.querySelector('.but-update');
+                 deleteButton.addEventListener('click', () => {
+                    model0.classList.remove('hide');
+                });
+            });
+            icon0.addEventListener('click',  toggleCLose2);
+            submit.addEventListener('click', toggleCLose2);
+        </script>
 </body>
 
 </html>

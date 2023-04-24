@@ -28,7 +28,7 @@
 
  ?>
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <title>ROYAL CARS - Car Rental HTML Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
@@ -95,61 +95,7 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5 " style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1  class="text-uppercase text-primary mb-1">Royal Cars</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index.php" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.php?type=car" class="dropdown-item">Car</a>
-                                <a href="car.php?type=accessory" class="dropdown-item">Accessory</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <?php  
-                                    if(isAdminLogged()){
-                                        echo'<a href="account-setting.php" class="dropdown-item">Cập nhật thông tin</a>';
-                                        echo'<a href="" class="dropdown-item">Lịch sử đơn hàng</a>';
-                                        echo'<a href="Logout.php?isAdmin=1" class="dropdown-item">Đăng xuất</a>';
-                                    }
-                                    else{
-                                        echo'<a href="Login.php" class="dropdown-item">Đăng nhập</a>';
-                                        echo'<a href="Signup.php" class="dropdown-item">Đăng ký</a>';
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                                    <?php  
-                                        if(isAdminLogged()){
-                                            echo '<a class="nav-item nav-link" href="GH.php"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
-                                        }
-                                    ?>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <?php require('navbar.php');  ?>
     <!-- Navbar End -->
 
 
@@ -228,7 +174,7 @@
             $s .= ('<a class="px-2" href=""><i class="fab fa-pinterest"></i></a>');
             $s .= ('</div>');
             $s .= ('</div>');
-            if(isAdminLogged()){
+            if(isUserLogged()){
                 $s .= ('<div class="d-flex">');
                 $s .= ('<div class ="col-6"  style="padding-left: 0px">');
                 if($type=='car'){
@@ -239,8 +185,6 @@
                     $name_encoded = urlencode($row['TenPK']);
                     $s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s&type=%s"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDPK'], $name_encoded, $row['Gia'], $row['MaTH'], $row['Url_image'], $_GET['type']);
                 }
-                //$name_encoded = urlencode($row['TenSP']);
-                //$s .= sprintf('<a href="AddProducttoCart.php?id=%s&name=%s&price=%d&maTH=%s&img=%s"><button class="GH">Thêm vào giỏ hàng</button></a>',  $row['IDSP'], $name_encoded, $row['GiaBan'], $row['MaTH'], $row['Url_image']);
                 $s .= ('</div>');
                 $s .= ('<div class ="col-6"  style="padding-left: 0px">');
                 if($type=='car'){
@@ -249,7 +193,6 @@
                 else {
                     $s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDPK']);
                 }
-                //$s .= sprintf('<a href="booking.php?id=%s"><button class="GH">Đăng kí lái thử</button></a>',  $row['IDSP']);
                 $s .= ('</div>');
                 $s .= ('</div>');
             }

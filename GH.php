@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <title>ROYAL CARS - Car Rental HTML Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
@@ -84,6 +84,8 @@
         echo ('<h1 class="display-4 text-uppercase text-center mb-5">Không có sản phẩm nào</h1>');
     }
     else {
+        $TotalCar =0;
+        $TotalAccessory = 0;
         $Total =0;
                 foreach ($_SESSION['cart'] as $product){
                     
@@ -105,37 +107,70 @@
                     $s .= '</div>';
                     $s .= '</div>';
                     $s .= '<div class="col-1" style="height: 150px">';
-                    $s .= sprintf('<a href="DeleteProductCart.php?id=%s" class="bin" tittle="Xóa sản phẩm này"><i class="fa fa-trash-o" aria-hidden="true"></i></a>', $product['id']);
+                    $s .= sprintf('<a href="DeleteProductCart.php?id=%s&type=%s" class="bin" tittle="Xóa sản phẩm này"><i class="fa fa-trash-o" aria-hidden="true"></i></a>', $product['id'], $product['type']);
                     $Price = $product['quantity'] * $product['price'];
-                    $Total += $Price;
+                    if($product['type']=='car'){
+                        $TotalCar += $Price;
+                        $Total += $Price;
+                    }
+                    else {
+                        $TotalAccessory += $Price;
+                        $Total += $Price;
+                    }
                     $s .= sprintf('<p class="price1">%s</p>', number_format($Price, 0, '', ','));
                     $s .= '</div>';
                     $s .= '</div>';
                     $s .= '<hr class="line1">';
                     echo($s);
                     } ?>
-                    <div class="container d-flex" style="height: 200px; max-width:1140px;">
-                      <div class="col-6" style="height: 200px">
-                        <input style ="margin: 0px; margin-top: 30px;" type="text" class="gc" placeholder="Ghi chú" >  
-                      </div>
-                      <div class="col-6 tt" style="height: 200px" >
-                        <div >
-                          <p class="tong" style ="margin-top: 30px; margin-bottom: 40px">Tổng tiền: <span class="price2"><?php echo(number_format($Total, 0, '', ',')) ?></span></p>
+                    <div class="container d-flex">
+                        <div class="col-6" style="height: 200px">
+                            <div class="col-12">
+                            <input style ="margin: 0px; margin-top: 30px; width: 100%" type="text" class="gc" placeholder="Ghi chú">  
+                            </div> 
+                            <div class="col-12 tt" style="height: 200px" >
+                                <div >
+                                    <p class="tong" style ="margin-top: 50px; margin-bottom: 40px">Tổng tiền: <span class="price2"><?php echo(number_format($Total, 0, '', ',')) ?></span></p>
+                                </div>
+                                    <div>
+                                        <?php 
+                                        $s = '';
+                                        $s .= sprintf('<a href="CreateOrder.php?tongtien=%s&tongtiencar=%s&tongtiena=%s"><button>Tiếp tục mua hàng</button></a>', $Total, $TotalCar, $TotalAccessory);
+                                        //var_dump($s);
+                                        echo($s);
+                                        ?> 
+                                        
+                                        <button>
+                                          Thanh toán
+                                        </button>
+                                    </div>
+                                  
+                            </div> 
                         </div>
-                          <div>
-                            <button>
-                              Tiếp tục mua hàng
-                            </button>
-                            <button> 
-                              Cập nhật
-                            </button>
-                            <button>
-                              Thanh toán
-                            </button>
-                          </div>
-                          
-                      </div>
-                    </div> 
+                        <div class="col-6">
+                            <div class="bg-secondary p-5 mb-5" style ="margin: 0px; margin-top: 30px; height: 350px;">
+                                <h2 class="text-primary mb-4">Payment</h2>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                                        <label class="custom-control-label" for="paypal">Paypal</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="directcheck">
+                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
+                                        <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
     <?php }
     

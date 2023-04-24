@@ -11,6 +11,9 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                 echo('</button>');
                 echo('<div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">');
                     echo('<div class="navbar-nav ml-auto py-0">');
+                        if(isAdminLogged()){
+                            echo('<a href="index.php" class="nav-item nav-link">Manage</a>'); 
+                        }
                         echo('<a href="index.php" class="nav-item nav-link">Home</a>');
                         echo('<a href="about.html" class="nav-item nav-link">About</a>');
                         echo('<a href="service.html" class="nav-item nav-link">Service</a>');
@@ -32,11 +35,13 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                         echo('<div class="nav-item dropdown">');
                             echo('<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i></a>');
                             echo('<div class="dropdown-menu rounded-0 m-0">');
-                                
-                                    if(isAdminLogged()){
+                                    if(isUserLogged()){
                                         echo'<a href="account-setting.php" class="dropdown-item">Cập nhật thông tin</a>';
                                         echo'<a href="" class="dropdown-item">Lịch sử đơn hàng</a>';
-                                        echo'<a href="Logout.php?isAdmin=1" class="dropdown-item">Đăng xuất</a>';
+                                        echo'<a href="Logout.php?isUser=1" class="dropdown-item">Đăng xuất</a>';
+                                    }
+                                    else if(isAdminLogged()){
+                                        echo'<a href="Logout.php?isAdmin=1" class="dropdown-item">Đăng xuất</a>';  
                                     }
                                     else{
                                         echo'<a href="Login.php" class="dropdown-item">Đăng nhập</a>';
@@ -44,8 +49,17 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                                     }
                             echo('</div>');
                         echo('</div>');
-                                    if(isAdminLogged()){
-                                        echo '<a class="nav-item nav-link" href="GH.php"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">0</span></a>';
+                                    if(isUserLogged()){
+                                        $count = 0; 
+                                        if(empty($_SESSION['cart'])){
+                                            $count = 0;
+                                        }
+                                        else {
+                                            foreach ($_SESSION['cart'] as $product){
+                                                $count += $product['quantity'];      
+                                            }  
+                                        }   
+                                        echo '<a class="nav-item nav-link" href="GH.php"><i class="fas fa-shopping-cart ic" ></i><span style="position: absolute; top: 25px;margin-right: 15px; background: #ee4266; color: white; border-radius: 70%; padding: 5px;font-size: 12px; width: 20px; height: 20px;  line-height: 20px;" id="NoOfItemsInCart">' . $count . '</span></a>';
                                     }
                     echo('</div>');
                 echo('</div>');
