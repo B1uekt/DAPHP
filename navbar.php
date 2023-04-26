@@ -12,7 +12,7 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                 echo('<div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">');
                     echo('<div class="navbar-nav ml-auto py-0">');
                         if(isAdminLogged()){
-                            echo('<a href="index.php" class="nav-item nav-link">Manage</a>'); 
+                            echo('<a href="admin.php" class="nav-item nav-link">Manage</a>'); 
                         }
                         echo('<a href="index.php" class="nav-item nav-link">Home</a>');
                         echo('<a href="about.html" class="nav-item nav-link">About</a>');

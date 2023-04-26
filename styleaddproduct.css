@@ -1,0 +1,100 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    background-color:rgba(192, 131, 131, 0.2);
+}
+h2{
+    margin-left: 20px;
+}
+.addproduct{
+    width:500px;
+    padding: 10px;
+    border: solid 1px #a4b0be;
+    background-color: #feffff;
+    box-shadow: 5px 5px 2.5px rgb(160, 160, 161);
+    margin: 0px auto;
+    margin-top: 100px;
+}
+.col-10{
+    margin-left: 16.66%;
+}
+.header-form{
+    text-align: center;
+    padding: 5px;
+    background-color: #17252a;
+    color:white;
+}
+.name{
+    width: 100%;
+    height:30px;
+    border: solid 1px #a4b0be;
+    margin-bottom: 10px;
+}
+.descr{
+    width: 100%;
+    border: none;
+    margin-bottom: 10px;
+    border: solid 1px #a4b0be;
+}
+
+.container-price-cate{
+    justify-content: space-between;
+}
+.price-cate{
+    border: solid 1px #a4b0be;
+    height: 25px;
+}
+.btn-img{
+    margin-top:5px;
+    margin-bottom: 5px;
+    border:solid 1px #a4b0be;
+}
+.btn-img input{
+    height: 30px;
+    padding:5px;
+}
+.id-number input{
+    border: solid 1px #a4b0be;
+    height: 30px;
+}
+.submit{
+    width: 100%;
+    height: 30px;
+    border:none;
+    background-color:#86c9e4;
+    color: white;
+
+}
+.nav{
+    background-color:#86c9e4;
+    height:100vh;
+    position:fixed;
+    padding-left: 0px;
+}
+.nav .nav-item a{
+    color:white;
+    font-size: large;
+}
+.nav .nav-item{
+    padding-top: 20px;
+    transition-duration: 0.4s;
+}
+.nav .nav-item a span{
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.nav .nav-item:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.nav .nav-item:hover a{
+    font-weight: bold;
+}
+.model{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+

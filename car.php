@@ -168,6 +168,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <script>
         function xuly() {
             if (document.frm['min-price'].value !== '' || document.frm['max-price'].value !== '') {
@@ -244,7 +245,7 @@
 
     <!-- Rent A Car Start -->
     <div class="container-fluid">
-        
+            
         <div class="container pb-3">
             <?php 
                 if($type=='car'){
@@ -303,7 +304,85 @@
             </div>
         </div>
     <!-- Search End -->
-
+    <div class="modal123 hide container-fluid">
+            <div class="modal_inner123">
+                    <div class="modal_header123">
+                        <p></p>
+                        <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    <div class="modal_body123">
+                        <form method="post" action="updateproduct.php" enctype="multipart/form-data">
+                        <?php 
+                            if($type=='car'){ ?>
+                                <input type="hidden" id="loaiSP" name="loaiSP" value="1" />
+                            <?php }
+                            else { ?>
+                                <input type="hidden" id="loaiSP" name="loaiSP" value="2" />
+                            <?php }
+                         ?>
+                        <label for="name">Product name</label><br>
+                        <input class="name" type="text" id="name" name="name" value=""><br>
+                        <div class="cate">
+                        <label for="cate">Producer</label><br>
+                        <select class="price-cate" id="name-producer" name="name-producer" required>
+                            <option value="">Choose Producer</option>
+                            <option value="Mer">Mercedes</option>
+                            <option value="Lam">Lamborghini</option>
+                            <option value="Fer">Ferrari</option>
+                            <option value="Au">Audi</option>
+                            <option value="Bu">Bugatti</option>
+                            <option value="BM">BMW</option>
+                            <option value="Vin">VinFast</option>
+                            <option value="NN">No Name</option>
+                        </select>
+                    </div>
+                        <label for="descr">Product description</label><br>
+                        <textarea class="descr" id="descr" name="descr"></textarea>
+                        <div class="container-price-cate my-3 d-flex">
+                            <div class="price">
+                                <label for="price">Price</label><br>
+                                <input class="float-left price-cate" type="text" id="price" name="price" value="">
+                            </div>
+                            <?php 
+                            if($type=='car'){ ?>
+                                <div class="cate">
+                                    <label for="cate">Category</label><br>
+                                    <select class="price-cate" name="cate" id="cate">
+                                        <option value="-1">Choose</option>
+                                        <option value="xe 2 chỗ">TWO-SEATER</option>
+                                        <option value="xe 4 chỗ">FOUR-SEATER</option>
+                                    </select>
+                                </div>
+                            <?php }
+                         ?>
+                            
+                        </div>
+                        <div class="id-number my-3">
+                            <label for="quantity">Quantity</label><br>
+                            <input type="text" name="quantity" id="quantity"  required> 
+                        </div>
+                        <label for="fileToUpload">Select image</label><br>
+                        <div class="btn-img">
+                            <input  type="file" placeholder= "File hình SP" name="fileToUpload"> 
+                        </div>
+                        <?php 
+                            if($type=='car'){ ?>
+                                <div class="id-number my-3">
+                                    <label for="year">Year Of Manufacture</label><br>
+                                    <input type="text" name="year" id="year"> 
+                                </div>
+                            <?php } ?>
+                        
+                        <div class="id-number my-3">
+                            <label for="id">ID Product</label><br>
+                            <input type="text" name="id" id="id"> 
+                        </div>    
+                    </div>
+                    <div class="modal_footer123">
+                    <input class="submit" name="submit" type="submit" value="SUBMIT">
+                    </div>
+            </div>
+        </div>                   
             <div class="row">
                 <?php 
 
@@ -327,6 +406,11 @@
                                 $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>%s</span></div>', $row['XuatXu']);
                                 $s .= '</div>';
                                 $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=%s">%s VND</a>', $row['IDSP'], $_GET['type'], number_format($row['GiaBan'], 0, '', ','));
+                                if(isAdminLogged()){
+                                    $s .= '<div class="justify-content-center mt-3 mb-4 btn-de-up">';
+                                    $s .= sprintf('<button onclick="UpdateForm1(this)" name="update" value=%s type="button" class="btn but-update btn btn-primary px-3 open-modal-btn">Update</button>',$row['MaSP']); ?>
+                                    <?php $s .= '</div>';
+                                }
                                 $s .= '</div>';
                                 $s .= '</div>';
                             }
@@ -347,6 +431,11 @@
                                 $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
                                 $s .= '</div>';
                                 $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=%s">%s VND</a>', $row1['IDPK'], $_GET['type'], number_format($row1['Gia'], 0, '', ','));
+                                if(isAdminLogged()){
+                                    $s .= '<div class="justify-content-center mt-3 mb-4 btn-de-up">';
+                                    $s .= sprintf('<button onclick="UpdateForm2(this)" name="update" value=%s type="button" class="btn but-update btn btn-primary px-3 open-modal-btn">Update</button>',$row1['MaPK']); ?>
+                                    <?php $s .= '</div>';
+                                }
                                 $s .= '</div>';
                                 $s .= '</div>';
                                 if($num==6){
@@ -557,6 +646,32 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="ajax.js"></script>
+    <script>
+        function toggleModal(e) {
+            console.log(e.target);
+	        modal.classList.toggle('hide')
+        }
+
+        var btnOpen = document.querySelectorAll('.open-modal-btn');
+        for (var i = 0; i < btnOpen.length; i++) {
+            btnOpen[i].addEventListener('click', toggleModal);
+            console.log(btnOpen[i]);
+        }
+
+        var iconClose = document.querySelectorAll('.modal_header123 i');
+        for (var i = 0; i < iconClose.length; i++) {
+            iconClose[i].addEventListener('click', toggleModal);
+            console.log(iconClose[i]);
+        }
+
+        var modal = document.querySelector('.modal123')
+        modal.addEventListener('click', function(e){
+            if(e.target==currenTarget){
+                toggleModal()
+            }
+	    })
+    </script>
 </body>
 
 </html>

@@ -42,6 +42,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
 <body>
@@ -308,11 +310,6 @@
                             $s .= '<div class="justify-content-center mb-4">';
                             $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=car">%s VND</a>', $row['IDSP'], number_format($row['GiaBan'], 0, '', ','));
                             $s .= '</div>';
-                            if(isAdminLogged()){
-                                $s .= '<div class="justify-content-center mb-4 btn-de-up">';
-                                $s .= '<button class="btn but-update btn btn-primary px-3">Update</button>'; 
-                                $s .= '</div>';
-                            }
                             
                             $s .= '</div>';
                             $s .= '</div>';
@@ -351,11 +348,6 @@
                             $s .= '<div class="justify-content-center mb-4">';
                             $s .= sprintf('<a class="btn btn-primary px-3" href="detail.php?id=%s&type=accessory">%s VND</a>', $row1['IDPK'], number_format($row1['Gia'], 0, '', ','));
                             $s .= '</div>';
-                            if(isAdminLogged()){
-                                $s .= '<div class="justify-content-center mb-4">';
-                                $s .= sprintf('<a class="btn btn-primary px-3 " href="detail.php?id=%s&type=accessory">Update</a>', $row1['IDPK']); 
-                                $s .= '</div>';
-                            }
                             
                             $s .= '</div>';
                             $s .= '</div>';
@@ -609,7 +601,7 @@
         </div>
     </div>
     <!-- Vendor End -->
-
+                   
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
@@ -698,23 +690,32 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="ajax.js"></script>
     <script>
-            var buttonGroups =document.querySelectorAll('.btn-de-up')
-            var model0= document.querySelector('.model-0');
-            var icon0 = document.querySelector('.model-header-0 i');
-            var submit = document.querySelector('.submit')
-            function toggleCLose2(){
-                model0.classList.add('hide');
+        function toggleModal(e) {
+            console.log(e.target);
+	        modal.classList.toggle('hide')
+        }
+
+        var btnOpen = document.querySelectorAll('.open-modal-btn');
+        for (var i = 0; i < btnOpen.length; i++) {
+            btnOpen[i].addEventListener('click', toggleModal);
+            console.log(btnOpen[i]);
+        }
+
+        var iconClose = document.querySelectorAll('.modal_header123 i');
+        for (var i = 0; i < iconClose.length; i++) {
+            iconClose[i].addEventListener('click', toggleModal);
+            console.log(iconClose[i]);
+        }
+
+        var modal = document.querySelector('.modal123')
+        modal.addEventListener('click', function(e){
+            if(e.target==currenTarget){
+                toggleModal()
             }
-            buttonGroups.forEach(group => {
-                const deleteButton = group.querySelector('.but-update');
-                 deleteButton.addEventListener('click', () => {
-                    model0.classList.remove('hide');
-                });
-            });
-            icon0.addEventListener('click',  toggleCLose2);
-            submit.addEventListener('click', toggleCLose2);
-        </script>
+	    })
+    </script>
 </body>
 
 </html>

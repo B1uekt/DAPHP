@@ -99,7 +99,7 @@
 
             $taoDH_PK = sprintf("INSERT INTO `donhang_pk`(`MaDHPK`, `MaPK`, `SoLuong`, `MaHD`, `Gia`) VALUES ('%s','%s','%s','%s','%s')",$MaDHPK, $product['MaSP'], $product['quantity'], $MaHD, $row1['Gia']);
             $result6 = mysqli_query($conn, $taoDH_PK);
-            var_dump($taoDH_PK);
+            //var_dump($taoDH_PK);
             //var_dump($update_pk);
         }
     }
