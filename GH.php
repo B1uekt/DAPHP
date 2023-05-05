@@ -135,14 +135,12 @@
                                     <div>
                                         <?php 
                                         $s = '';
-                                        $s .= sprintf('<a href="CreateOrder.php?tongtien=%s&tongtiencar=%s&tongtiena=%s"><button>Tiếp tục mua hàng</button></a>', $Total, $TotalCar, $TotalAccessory);
+                                        $s .= sprintf('<a href="CreateOrder.php?tongtien=%s&tongtiencar=%s&tongtiena=%s"><button>Thanh toán</button></a>', $Total, $TotalCar, $TotalAccessory);
                                         //var_dump($s);
                                         echo($s);
                                         ?> 
                                         
-                                        <button>
-                                          Thanh toán
-                                        </button>
+                                        <a href="index.php"><button>Tiếp tục mua hàng</button></a>
                                     </div>
                                   
                             </div> 

@@ -28,6 +28,14 @@
 	    $sql = sprintf("SELECT * from khachhang where sdt = '%s'", $_SESSION['current_username']);
     	$result = mysqli_query($conn, $sql);
 
+
+    	$sql1 = sprintf("SELECT * from khachhang k, donhang d, sanpham s where sdt = '%s' and k.MaKH = d.MaKH and s.MaSP = d.MaSP", $_SESSION['current_username']); 
+    	$result1 = mysqli_query($conn, $sql1);
+    	
+
+    	$sql2 = sprintf("SELECT * from khachhang k, donhang_pk d, phukien p where sdt = '%s' and k.MaKH = d.MaKH and d.MaPK = p.MaPK", $_SESSION['current_username']); 
+    	$result2 = mysqli_query($conn, $sql2);
+    	//var_dump($row1['GiaBan']); 
 	?>
 	<section class="py-5 my-5">
 		<div class="container">
@@ -145,9 +153,9 @@
 								<h6>Order ID: OD45345345435</h6>
 								<article class="card">
 									<div class="card-body row">
-										<div class="col"> <strong>Estimated Delivery time:</strong> <br>29 Mar 2023 </div>
+										<div class="col"> <strong>Order date:</strong> <br>29 Mar 2023 </div>
 										<div class="col"> <strong>Status:</strong> <br> Picked by the courier </div>
-										<div class="col"> <strong>Tracking #:</strong> <br> BD045903594059 </div>
+										
 									</div>
 								</article>
 								<div class="track">
@@ -172,54 +180,54 @@
 										
 									</div>
 								</div>
-									<div class="bg-white shadow d-sm-flex justify-content-between my-4" style="border-radius: 10px;">
-										<div class="media d-block d-sm-flex text-left text-sm-left">
-											<a class="cart-item-thumb mx-auto mr-sm-4" style="width:220px; height:200px;" href="#"><img src="img/car-rent-2.png" alt="Product" style="width:250px; height:200px;"></a>
-											<div style=" margin-top: 50px; padding-left: 40px;">
-												<h3 class="product-card-title font-weight-semibold border-0 pb-0"><a class="nav-link" id="Product-tab" data-toggle="pill" href="Order_Status.html" role="tab" aria-controls="Product" aria-selected="false">BMW X8</a></h3>
-												<div><span class="text-muted mr-2">Date Order:</span>29 Mar 2023</div>
-												<div><span class="text-muted mr-2">Price</span>19$</div>
-												<div><span class="text-muted mr-2">Date Delivery: </span>30 Mar 2023</div>
-												<div><span class="text-muted mr-2">Status: </span>delivery</div>
-											</div>
-										</div>
-										<div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem; margin-top: 50px; padding-right: 10px;">
-											<a href="Status_History.html"><button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button"><polyline points="23 4 23 10 17 10"></polyline>
-													<polyline points="1 20 1 14 7 14"></polyline>
-													<i class="fa-solid fa-eye"></i>
-													View Order</button></a>
-											<button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button">
-													<polyline points="3 6 5 6 21 6"></polyline>
-													<i class="fa-solid fa-trash-can"></i>
-													<line x1="10" y1="11" x2="10" y2="17"></line>
-													<line x1="14" y1="11" x2="14" y2="17"></line>
-													Remove Order</button>
-										</div>
-									</div>
-									<div class="bg-white shadow d-sm-flex justify-content-between my-4" style="border-radius: 10px;">
-										<div class="media d-block d-sm-flex text-left text-sm-left">
-											<a class="cart-item-thumb mx-auto mr-sm-4" style="width:220px; height:200px;" href="#"><img src="img/car-rent-2.png" alt="Product" style="width:250px; height:200px;"></a>
-											<div style=" margin-top: 50px; padding-left: 40px;">
-												<h3 class="product-card-title font-weight-semibold border-0 pb-0"><a class="nav-link" id="Product-tab" data-toggle="pill" href="Order_Status.html" role="tab" aria-controls="Product" aria-selected="false">BMW X8</a></h3>
-												<div><span class="text-muted mr-2">Date Order:</span>29 Mar 2023</div>
-												<div><span class="text-muted mr-2">Price: </span>19$</div>
-												<div><span class="text-muted mr-2">Date Delivery: </span>30 Mar 2023</div>
-												<div><span class="text-muted mr-2">Status: </span>delivery</div>
-											</div>
-										</div>
-										<div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem; margin-top: 50px; padding-right: 10px;">
-											<a href="Status_History.html"><button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button"><polyline points="23 4 23 10 17 10"></polyline>
-													<polyline points="1 20 1 14 7 14"></polyline>
-													<i class="fa-solid fa-eye"></i>
-													View Order</button></a>
-											<button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button">
-													<polyline points="3 6 5 6 21 6"></polyline>
-													<i class="fa-solid fa-trash-can"></i>
-													<line x1="10" y1="11" x2="10" y2="17"></line>
-													<line x1="14" y1="11" x2="14" y2="17"></line>
-													Remove Order</button>
-										</div>
-									</div>
+								<?php 
+								while($row1 = mysqli_fetch_assoc($result1)){
+									$s ='';
+									$s .= '<div class="bg-white shadow d-sm-flex justify-content-between my-4" style="border-radius: 10px;">';
+									$s .= '<div class="media d-block d-sm-flex text-left text-sm-left">';
+									$s .= sprintf('<a class="cart-item-thumb mx-auto mr-sm-4" style="width:220px; height:200px;" href="#"><img src="%s" alt="Product" style="width:250px; height:200px;"></a>', $row1['Url_image']);
+									$s .= '<div style=" margin-top: 50px; padding-left: 40px;">';
+
+									$s .= sprintf('<h3 class="product-card-title font-weight-semibold border-0 pb-0"><a class="nav-link" id="Product-tab" data-toggle="pill" href="Order_Status.html" role="tab" aria-controls="Product" aria-selected="false">%s</a></h3>', $row1['TenSP']);
+									$s .= sprintf('<div><span class="text-muted mr-2">Date Order:</span>%s</div>', $row1['NgayDat']);
+									$s .= sprintf('<div><span class="text-muted mr-2">Price</span>%s VND</div>',number_format($row1['GiaBan'], 0, '', ','));
+									if( $row1['NgayGiao']==null){
+										$s .= '<div><span class="text-muted mr-2">Date Delivery: </span></div>';
+									}
+									else{
+										$s .= sprintf('<div><span class="text-muted mr-2">Date Delivery: </span>%s</div>', $row1['NgayGiao']);
+									}
+									$s .= '<div><span class="text-muted mr-2">Status: '.$row1['TrangThaiDH'].'</span></div>';
+									$s .= '</div>';
+									$s .= '</div>';
+									$s .= '</div>';
+									echo($s);
+								}
+								while($row2 = mysqli_fetch_assoc($result2)){
+									$s ='';
+									$s .= '<div class="bg-white shadow d-sm-flex justify-content-between my-4" style="border-radius: 10px;">';
+									$s .= '<div class="media d-block d-sm-flex text-left text-sm-left">';
+									$s .= sprintf('<a class="cart-item-thumb mx-auto mr-sm-4" style="width:220px; height:200px;" href="#"><img src="%s" alt="Product" style="width:250px; height:200px;"></a>', $row2['Url_image']);
+									$s .= '<div style=" margin-top: 50px; padding-left: 40px;">';
+
+									$s .= sprintf('<h3 class="product-card-title font-weight-semibold border-0 pb-0"><a class="nav-link" id="Product-tab" data-toggle="pill" href="Order_Status.html" role="tab" aria-controls="Product" aria-selected="false">%s</a></h3>', $row2['TenPK']);
+									$s .= sprintf('<div><span class="text-muted mr-2">Date Order:</span>%s</div>', $row2['NgayDat']);
+									$s .= sprintf('<div><span class="text-muted mr-2">Price</span>%s VND</div>',number_format($row2['Gia'], 0, '', ','));
+									if( $row2['NgayGiao']==null){
+										$s .= '<div><span class="text-muted mr-2">Date Delivery: </span></div>';
+									}
+									else{
+										$s .= sprintf('<div><span class="text-muted mr-2">Date Delivery: </span>%s</div>', $row2['NgayGiao']);
+									}
+									$s .= '<div><span class="text-muted mr-2">Status: '.$row2['TrangthaiDH'].'</span></div>';
+									$s .= '</div>';
+									$s .= '</div>';
+									$s .= '</div>';
+									echo($s);
+								}
+
+								 ?>
+									
 							</div>
 					</div>
 				

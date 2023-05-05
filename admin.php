@@ -22,7 +22,7 @@
     <body>
         <div class="col-2 nav float-left">
             <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
-            <div class="nav-item"><a href="admin.html"><span class="material-symbols-outlined">home</span>Home</a></div>
+            <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
             <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
             <a href="manageproduct.php?page=1">ALL CAR</a>
@@ -31,7 +31,7 @@
                 <a href="manageproduct.php?page=4">ACCESSORY</a>
             </div>
             <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-            <div class="nav-item"><a href="manageorder.html"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
+            <div class="nav-item"><a href="manageorder.php"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
         </div>
         <div class="col-10 float-left" style = "margin-left: 16.66%;">
             <div class="text-center welcome">

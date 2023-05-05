@@ -1,4 +1,5 @@
-<?php
+<?php // coi lại r mới sài nhe con đỉ
+
 if(isset($_REQUEST['SDT'])){
     $userID = $_REQUEST['SDT'];
     $severname = "localhost";

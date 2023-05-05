@@ -57,6 +57,14 @@
     
     
     $MaHD = generateMAHD(); 
+    $MaHD_PK = generateMAHD(); 
+    foreach($_SESSION['cart'] as $product ){
+        if($product['type']=='accessory'){
+            $taoHD_PK = sprintf("INSERT INTO `hoadon_pk`(`MaHDPK`, `TongTien`) VALUES ('%s','%f')", $MaHD_PK, $TotalAccessory);
+            $result5 = mysqli_query($conn, $taoHD_PK);
+            break;
+        }
+    }
     foreach($_SESSION['cart'] as $product ){
         
         if($product['type']=='car'){
@@ -72,8 +80,8 @@
                 $result3 = mysqli_query($conn, $update_sp);
             }
             
-
-            $taoDH = sprintf("INSERT INTO `donhang`(`MaDH`, `MaSP`, `MaKH`, `TrangThaiDH`, `Gia`) VALUES ('%s','%s','%s','Preparing','%f')", $MaDH, $product['MaSP'], $MaKH, $Totalcar);
+            $current_date = date("Y-m-d H:i:s");
+            $taoDH = sprintf("INSERT INTO `donhang`(`MaDH`, `MaSP`, `MaKH`, `TrangThaiDH`, `Gia`, `NgayDat`, `NgayGiao`) VALUES ('%s','%s','%s','Preparing','%f','%s', NULL)", $MaDH, $product['MaSP'], $MaKH, $Totalcar, date('Y-m-d', strtotime($current_date)));
             $result4 = mysqli_query($conn, $taoDH);
             $taoHD = sprintf("INSERT INTO `hoadon`(`MaHD`, `TongTien`, `MaDH`) VALUES ('%s','%f','%s')", $MaHD, $Total, $MaDH);
             $result5 = mysqli_query($conn, $taoHD);
@@ -83,9 +91,6 @@
             $MaDHPK = generateOrderCode1();
             
 
-
-
-            
             $sql1 = sprintf("SELECT  * FROM phukien WHERE MaPK = '%s'", $product['MaSP']);
             $result1 = mysqli_query($conn, $sql1);
             $row1 = mysqli_fetch_assoc($result1);
@@ -96,15 +101,15 @@
                 $update_pk = sprintf("UPDATE `phukien` SET `SoLuong`='%d' WHERE MaPK = '%s'", $current_quality, $product['MaSP']);
                 $result7 = mysqli_query($conn, $update_pk);
             }  
-
-            $taoDH_PK = sprintf("INSERT INTO `donhang_pk`(`MaDHPK`, `MaPK`, `SoLuong`, `MaHD`, `Gia`) VALUES ('%s','%s','%s','%s','%s')",$MaDHPK, $product['MaSP'], $product['quantity'], $MaHD, $row1['Gia']);
+            $current_date = date("Y-m-d H:i:s");
+            $taoDH_PK = sprintf("INSERT INTO `donhang_pk`(`MaDHPK`, `MaPK`, `SoLuong`, `MaHDPK`, `Gia`, `MaKH`, `NgayDat`,`NgayGiao`, `TrangthaiDH`) VALUES ('%s','%s','%s','%s','%f','%s','%s',NULL,'Preparing')",$MaDHPK, $product['MaSP'], $product['quantity'], $MaHD_PK, $row1['Gia'], $MaKH, date('Y-m-d', strtotime($current_date)));
             $result6 = mysqli_query($conn, $taoDH_PK);
             //var_dump($taoDH_PK);
             //var_dump($update_pk);
         }
     }
     unset($_SESSION['cart']);
-    
+    header('Location:' . 'GH.php');
     //var_dump($taoDH);
     //var_dump($taoHD);
     

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$flag = 0;
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -69,9 +70,7 @@ if (isset($_SESSION['cart'][$MaSP])) {
 
     } else {
         $_SESSION['cart'][$MaSP]['quantity']++;
-        $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
-        header($a);
-        exit();
+        $flag=1;
     }
 
 } 
@@ -90,16 +89,17 @@ else {
         } 
         else {
             $_SESSION['cart'][$MaSP] = $product;
-            $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
-            header($a);
-            exit();
+            $flag=1;
         }
 
     } else {
         $_SESSION['cart'][$MaSP] = $product;
-        $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
-        header($a);
-        exit();
+        $flag=1;
     }
+}
+if($flag==1){
+    $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
+    header($a);
+    exit();
 }
  ?>
