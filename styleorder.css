@@ -213,6 +213,7 @@ body{
 }
 .status{
     text-transform: capitalize;
+    font-size: small;
 }
 .btn{
     border: none;

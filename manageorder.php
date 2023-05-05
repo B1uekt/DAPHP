@@ -33,7 +33,7 @@
         }   
     }
     if(!$conn){
-         die("Connection failed". mysqli_connect_error($conn));
+        die("Connection failed". mysqli_connect_error($conn));
     }
     if(!empty($where)){
         $sql = "SELECT * FROM donhang".$from." WHERE ".$where;
@@ -204,23 +204,24 @@
 
             <div class="container-fluid all-p">
                 <div class="container-fluid row-title d-flex my-3">
-                    <div class="col-2 text-center title">ORDER NUMBER</div>
+                    <div class="col-1 text-center title">ORDER NUMBER</div>
                     <div class="col-2 text-center title">CUSTOMER NUMBER</div>
                     <div class="col-2 text-center title">PRODUCT NUMBER</div>
+                    <div class="col-2 text-center title">DELIVERY DAY</div>
                     <div class="col-2 text-center title">TOTAL PRICE</div>
-                    <div class="col-2 text-center title">STATUS</div>
+                    <div class="col-1 text-center title">STATUS</div>
                     <div class="col-2 text-center title">UPDATE/DELETE</div>
                 </div>
                 <?php
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
                         $s.='<div class="conatiern-fluid row-order d-flex">';
-                        $s.= sprintf('<div class="col-2 text-center order my-22"><p>%d</p></div>',$row['IDDH']);
+                        $s.= sprintf('<div class="col-1 text-center order my-22"><p>%d</p></div>',$row['IDDH']);
                         $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                         $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
-                    
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
-                        $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND </p></div>',$row['Gia']);
+                        $s.=sprintf('<div class="col-1 text-center order status my-1"><p>%s</p></div>',$row['TrangThaiDH']);
                         $s.='<div class="col-2 text-center product btn-de-up my-2">';
                         $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
                         $s.= sprintf('<a href="deleteorder.php?id=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH']);
