@@ -19,6 +19,8 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -173,6 +175,46 @@
     <?php }
     
         ?>
+        <div class="modal123 hide container-fluid">
+            <div class="modal_inner123"  style="padding :0px; overflow: hidden; height: 500px" >
+                <div class="modal_header123" style="background: #e26e70; padding :15px; color: white;">
+                <p></p>
+                <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal_body123">
+                <h2 class="notification" >Cảm ơn Quý khách đã đặt hàng tại trang web. Khi nào đơn hàng về thì chúng tôi sẽ gửi cho Quý Khách email thông báo</h2>
+                <h2 class="notification" >Các sản phẩm được bảo hành vĩnh viễn và sẽ được nhân viên của chúng tôi bảo hành tận nơi</h2>    
+            </div>
+                <div class="modal_footer123">
+                
+                </div>
+            </div>
+            </div>
+
+            <script>
+                var modal = document.querySelector('.modal123');
+                var iconClose = document.querySelector('.modal_header123 i');
+                <?php
+                    if(isset($_GET['Buy'])){ ?>
+                        var showModal = true;
+                    <?php }
+                ?>; // Kiểm tra nếu người dùng đã đăng nhập, showModal sẽ là true
+                
+                function toggleModal() {
+                    modal.classList.toggle('hide');
+                }
+
+                if (showModal) {
+                    modal.classList.remove('hide'); // Hiển thị modal tức thời
+                }
+
+                iconClose.addEventListener('click', toggleModal);
+                modal.addEventListener('click', function(e) {
+                    if (e.target == modal) {
+                    toggleModal();
+                    }
+                });
+            </script>
             
         
 
