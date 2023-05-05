@@ -54,7 +54,7 @@
                         <a href="">Forgot Password</a>
                     </div>
                     <div class="form-signup" style="float: right;">
-                        <a href="Signup.html">Sign Up</a>
+                        <a href="Signup.php">Sign Up</a>
                     </div>
                 </div>
                 <input type="submit" name ="submit" value="Log In" class="form-submit">

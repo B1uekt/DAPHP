@@ -60,28 +60,57 @@ if (isset($_POST['sdt']) && isset($_POST['email']) && isset($_POST['mk'])) {
       'status' => 'exists',
       'message' => 'Số điện thoại hoặc email đã được đăng ký!'
     );
-  } else {
-    $maKH = generateCustomerId();
-    $themkhachhang = sprintf("INSERT INTO `khachhang`(`MaKH`, `SDT`, `Email`) VALUES ('%s','%s', '%s')", $maKH, $sdt, $email);
-    $insertSql = "INSERT INTO `taikhoan`(`MatKhau`, `SDT`, `Email`) VALUES (?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $insertSql);
-    mysqli_stmt_bind_param($stmt, "sss", $matkhau, $sdt, $email);
+  } 
+  else if($matkhau!='admin123'){
+      $maKH = generateCustomerId();
+      $themkhachhang = sprintf("INSERT INTO `khachhang`(`MaKH`, `SDT`, `Email`) VALUES ('%s','%s', '%s')", $maKH, $sdt, $email);
+      $matkhau = password_hash($matkhau, PASSWORD_DEFAULT);
 
-    if (mysqli_stmt_execute($stmt) && mysqli_query($conn, $themkhachhang)) {
-      $response = array(
-        'status' => 'success',
-        'message' => 'Đăng ký tài khoản thành công'
-      );
-      //header('Location:' . 'login.php');
-    }
-    else {
+      $insertSql = "INSERT INTO `taikhoan`(`MatKhau`, `SDT`, `Email`) VALUES (?, ?, ?)";
+
+
+      $stmt = mysqli_prepare($conn, $insertSql);
+      mysqli_stmt_bind_param($stmt, "sss", $matkhau, $sdt, $email);
+
+      if (mysqli_stmt_execute($stmt) && mysqli_query($conn, $themkhachhang)) {
         $response = array(
-            'status' => 'error',
-            'message' => 'Lỗi trong quá trình đăng ký tài khoản'
-            );
-    }
+          'status' => 'success',
+          'message' => 'Đăng ký tài khoản thành công'
+        );
+        //header('Location:' . 'login.php');
+      }
+      else {
+          $response = array(
+              'status' => 'error',
+              'message' => 'Lỗi trong quá trình đăng ký tài khoản'
+              );
+      }
 }
+  else{
+    $matkhau = password_hash($matkhau, PASSWORD_DEFAULT);
+
+      $insertSql = "INSERT INTO `taikhoan`(`MatKhau`, `SDT`, `Email`) VALUES (?, ?, ?)";
+
+
+      $stmt = mysqli_prepare($conn, $insertSql);
+      mysqli_stmt_bind_param($stmt, "sss", $matkhau, $sdt, $email);
+
+      if (mysqli_stmt_execute($stmt) && mysqli_query($conn, $themkhachhang)) {
+        $response = array(
+          'status' => 'success',
+          'message' => 'Đăng ký tài khoản thành công'
+        );
+        //header('Location:' . 'login.php');
+      }
+      else {
+          $response = array(
+              'status' => 'error',
+              'message' => 'Lỗi trong quá trình đăng ký tài khoản'
+              );
+      }
+  }
     mysqli_close($conn);
     echo json_encode($response);
+    header('Location:' . 'login.php');
 }
 ?>

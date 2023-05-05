@@ -109,7 +109,7 @@
         }
     }
     unset($_SESSION['cart']);
-    header('Location:' . 'GH.php');
+    header('Location:' . 'GH.php?Buy=1');
     //var_dump($taoDH);
     //var_dump($taoHD);
     
