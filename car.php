@@ -16,29 +16,71 @@
         if($type=='car'){
             if($_GET['car']==5){
                 if($_GET['min-price']!='' && $_GET['max-price']!=''){
-                     $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d", $_GET['max-price'], $_GET['min-price']);
+                        $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and GiaBan <= %d and GiaBan >= %d", $_GET['max-price'], $_GET['min-price']);
+                        $result3 = mysqli_query($conn, $sql3);
+                        $total_records = mysqli_num_rows($result3);
+                        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                        $total_pages = ceil($total_records / $limit);
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                        $offset = ($current_page - 1) * $limit;
+                        $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and GiaBan <= %d and GiaBan >= %d LIMIT $offset, $limit", $_GET['max-price'], $_GET['min-price']);
                         $result = mysqli_query($conn, $sql);
                 }
                 else {
                     switch($_GET['price']){
                         case 1: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by NamSX DESC";
+                            $sql3 = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by NamSX DESC";
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0  order by NamSX DESC LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 2: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by GiaBan DESC";
+                            $sql3 = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan DESC";
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan DESC LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 3: 
-                                $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by GiaBan";
+                                $sql3 = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan";
+                                $result3 = mysqli_query($conn, $sql3);
+                                $total_records = mysqli_num_rows($result3);
+                                $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                                $total_pages = ceil($total_records / $limit);
+                                $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                                $offset = ($current_page - 1) * $limit;
+                                $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan LIMIT $offset, $limit";
                                 $result = mysqli_query($conn, $sql);
                                 break;
                         case 4: 
-                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH order by TenSP";
+                            $sql3 = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by TenSP";
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = "SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 order by TenSP LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 5: 
-                            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH LIMIT 9";
+                            $sql3 = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH and s.SoLuong >0";
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH and s.SoLuong >0 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
                             break;
                     }  
@@ -47,29 +89,71 @@
             }
             else if($_GET['car']!=5){
                 if($_GET['min-price']!='' && $_GET['max-price']!=''){
-                    $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s'", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
-                    $result = mysqli_query($conn, $sql);
+                    $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s'", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
+                    $result3 = mysqli_query($conn, $sql3);
+                    $total_records = mysqli_num_rows($result3);
+                    $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                    $total_pages = ceil($total_records / $limit);
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                    $offset = ($current_page - 1) * $limit;
+                    $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s' LIMIT $offset, $limit ", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
+                    $result3 = mysqli_query($conn, $sql);
                 }
                 else{
                     switch($_GET['price']){
                         case 1:
-                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by NamSX DESC", $_GET['car']);
-                            $result = mysqli_query($conn, $sql);
+                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by NamSX DESC", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by NamSX DESC LIMIT $offset, $limit", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
                             break;
                         case 2: 
-                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan DESC", $_GET['car']);
+                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan DESC", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan DESC LIMIT $offset, $limit", $_GET['car']);
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 3: 
-                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH order by GiaBan", $_GET['car']);
+                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan LIMIT $offset, $limit", $_GET['car']);
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 4: 
-                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH ='%s' and s.MaTH = t.MaTH order by TenSP", $_GET['car']);
+                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH ='%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by TenSP", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH ='%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by TenSP LIMIT $offset, $limit", $_GET['car']);
                             $result = mysqli_query($conn, $sql);
                             break;
                         case 5: 
-                            $sql = sprintf("SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH ='%s' and t.MaTH = s.MaTH LIMIT 9", $_GET['car']);
+                            $sql3 = sprintf("SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH ='%s' and t.MaTH = s.MaTH and s.SoLuong >0 LIMIT 9", $_GET['car']);
+                            $result3 = mysqli_query($conn, $sql3);
+                            $total_records = mysqli_num_rows($result3);
+                            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                            $total_pages = ceil($total_records / $limit);
+                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                            $offset = ($current_page - 1) * $limit;
+                            $sql = sprintf("SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH ='%s' and t.MaTH = s.MaTH and s.SoLuong >0 LIMIT $offset, $limit ", $_GET['car']);
                             $result = mysqli_query($conn, $sql);
                             break;
                     }
@@ -80,26 +164,61 @@
         }
         else if($type=='accessory'){
             if($_GET['min-price']!='' && $_GET['max-price']!=''){
-                    $sql = sprintf("SELECT * FROM phukien WHERE Gia <= %d and Gia >= %d" , $_GET['max-price'], $_GET['min-price']);
+                    $sql3 = sprintf("SELECT * FROM phukien WHERE and SoLuong >0 Gia <= %d and Gia >= %d" , $_GET['max-price'], $_GET['min-price']);
+                    $result3 = mysqli_query($conn, $sql3);
+                    $total_records = mysqli_num_rows($result3);
+                    $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                    $total_pages = ceil($total_records / $limit);
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                    $offset = ($current_page - 1) * $limit;
+                    $sql = sprintf("SELECT * FROM phukien WHERE and SoLuong >0 Gia <= %d and Gia >= %d LIMIT $offset, $limit" , $_GET['max-price'], $_GET['min-price']);
                     $result = mysqli_query($conn, $sql);
                 }
             else {
                 switch($_GET['price']){
                     case 1:
-                        $sql = "SELECT * FROM phukien order by Gia DESC";
+                        $sql3 = "SELECT * FROM phukien where SoLuong >0 order by Gia DESC";
+                        $result3 = mysqli_query($conn, $sql3);
+                        $total_records = mysqli_num_rows($result3);
+                        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                        $total_pages = ceil($total_records / $limit);
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                        $offset = ($current_page - 1) * $limit;
+                        $sql = "SELECT * FROM phukien where SoLuong >0 order by Gia DESC LIMIT $offset, $limit";
                         $result = mysqli_query($conn, $sql);
                         break;
                     case 2: 
-                        $sql = "SELECT * FROM phukien order by Gia";
+                        $sql3 = "SELECT * FROM phukien where SoLuong >0 order by Gia";
+                        $result3 = mysqli_query($conn, $sql3);
+                        $total_records = mysqli_num_rows($result3);
+                        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                        $total_pages = ceil($total_records / $limit);
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                        $offset = ($current_page - 1) * $limit;
+                        $sql = "SELECT * FROM phukien where SoLuong >0 order by Gia LIMIT $offset, $limit";
                         $result = mysqli_query($conn, $sql);
                         break;
                     case 3: 
-                        $sql = "SELECT * FROM phukien order by TenPK LIMIT 9";
+                        $sql3 = "SELECT * FROM phukien where SoLuong >0 order by TenPK LIMIT 9";
+                        $result3 = mysqli_query($conn, $sql3);
+                        $total_records = mysqli_num_rows($result3);
+                        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                        $total_pages = ceil($total_records / $limit);
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                        $offset = ($current_page - 1) * $limit;
+                        $sql = "SELECT * FROM phukien where SoLuong >0 order by TenPK LIMIT $offset, $limit";
                         $result = mysqli_query($conn, $sql);
                         break;
                     case 4:
-                        $sql = "SELECT * FROM phukien LIMIT 9";
-                        $result = mysqli_query($conn, $sql);
+                        $sql3 = "SELECT * FROM phukien where SoLuong >0 LIMIT 9";
+                        $result3 = mysqli_query($conn, $sql3);
+                        $total_records = mysqli_num_rows($result3);
+                        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+                        $total_pages = ceil($total_records / $limit);
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+                        $offset = ($current_page - 1) * $limit;
+                        $sql3 = "SELECT * FROM phukien where SoLuong >0 LIMIT $offset, $limit";
+                        $result3 = mysqli_query($conn, $sql3);
                         break;
                 }
             }
@@ -108,12 +227,28 @@
         else {
             //$sql = sprintf("SELECT t.*, s.*, p.* FROM SanPham s, ThuongHieu t, phukien p WHERE s.MaTH = t.MaTH and ( TenSP LIKE '%%%s%%' or TenPK LIKE '%%%s%%') ", $_GET['search'], $_GET['search']);
             //var_dump($sql);
-            $sql1 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and TenSP LIKE '%%%s%%'", $_GET['search']);
+            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and TenSP LIKE '%%%s%%'", $_GET['search']);
+            $result3 = mysqli_query($conn, $sql3);
+            $total_records = mysqli_num_rows($result3);
+            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+            $total_pages = ceil($total_records / $limit);
+            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+            $offset = ($current_page - 1) * $limit;
+            $sql1 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and TenSP LIKE '%%%s%%' LIMIT $offset, $limit ", $_GET['search']);
             $result = mysqli_query($conn, $sql1);
-            $sql2 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%'", $_GET['search']);
+
+
+            $sql4 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%' and SoLuong >0 ", $_GET['search']);
+            //var_dump($sql2);
+            $result4 = mysqli_query($conn, $sql4);
+            $total_records = mysqli_num_rows($result4);
+            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+            $total_pages = ceil($total_records / $limit);
+            $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+            $offset = ($current_page - 1) * $limit;
+            $sql2 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%' and SoLuong >0 LIMIT $offset, $limit", $_GET['search']);
             //var_dump($sql2);
             $result1 = mysqli_query($conn, $sql2);
-            
         }
     }
 
@@ -129,15 +264,25 @@
         }
         $type = $_GET['type'];
         if($type=='car'){
-            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH LIMIT 9";
+            $Countsp = "SELECT COUNT(*) FROM SanPham s";
+            $resultcountsp = mysqli_query($conn, $Countsp);
+        }
+        else if($type=='accessory'){
+            $Countsp = "SELECT COUNT(*) FROM phukien";
+            $resultcountsp = mysqli_query($conn, $Countsp);
+        }
+        $row = mysqli_fetch_row($resultcountsp);
+        $total_records = $row[0];
+        $limit = 6; // số bản ghi hiển thị trên mỗi trang
+        $total_pages = ceil($total_records / $limit);
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
+        $offset = ($current_page - 1) * $limit; // tổng số trang cần hiển thị
+        if($type=='car'){
+            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH and s.SoLuong >0 LIMIT $offset, $limit";
             $result = mysqli_query($conn, $sql);
         }
         else if($type=='accessory'){
-            $sql = "SELECT *  FROM phukien LIMIT 9";
-            $result = mysqli_query($conn, $sql);
-        }
-        else {
-            $sql = "SELECT t.*, s.*  FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH ";
+            $sql = "SELECT *  FROM phukien WHERE SoLuong >0 LIMIT $offset, $limit";
             $result = mysqli_query($conn, $sql);
         }
     }
@@ -491,6 +636,17 @@
             </div>
         </div>
     </div>
+    <?php 
+    echo "<ul class='pagination'>";
+
+    for ($i = 1; $i <= $total_pages; $i++){
+        echo "<li><a href='car.php?page=".$i."&type=".$type."'";
+        if($i==$current_page) echo "class='active'";
+        echo ">".$i."</a></li>";
+    }
+    
+    echo "</ul>";
+    ?>
     <!-- Rent A Car End -->
 
 

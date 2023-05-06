@@ -616,3 +616,33 @@ h6,
   .hide{
     display: none;
   }
+  .pagination {
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+  }
+  
+  .pagination li {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .pagination li a {
+    text-decoration: none;
+    color: #333;
+  } 
+  
+  .pagination li.active {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+  }
+  
+  .pagination li.active a {
+    color: #fff;
+  }
+  
