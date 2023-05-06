@@ -11,7 +11,7 @@
     if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH ";
+    $sql = "SELECT t.XuatXu, s.* FROM SanPham s, thuonghieu t WHERE t.MaTH = s.MaTH and s.SoLuong >0";
     $result = mysqli_query($conn, $sql);
     $sql1 = "SELECT * FROM phukien ";
     $result1 = mysqli_query($conn, $sql1);

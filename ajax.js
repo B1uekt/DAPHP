@@ -65,7 +65,7 @@ function UpdateForm3(button){
         document.getElementById("price").value = product["Gia"];
         document.getElementById("pro-number").value = product["MaSP"];
         document.getElementById("cus-number").value = product["MaKH"];
-        document.getElementById("date").value = product["NgayDat"];
+        document.getElementById("date").value = product["NgayGiao"];
     }
 }
 requestProductInfo.open("GET", "i4-order.php?MaDH=" + ID);
@@ -85,7 +85,7 @@ function UpdateForm4(button){
         document.getElementById("price").value = product["Gia"];
         document.getElementById("pro-number").value = product["MaPK"];
         document.getElementById("cus-number").value = product["MaKH"];
-        document.getElementById("date").value = product["NgayDat"];
+        document.getElementById("date").value = product["NgayGiao"];
         document.getElementById("quantity").value = product["SoLuong"];
     }
 }

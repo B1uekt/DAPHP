@@ -21,7 +21,7 @@
                             case 'status':
                                 $where .=(!empty($where))?" AND "." TrangThaiDH ='".$value."'":"TrangThaiDH ='".$value."'";
                                 break;
-                            case 'hidden':
+                            case 'price':
                                 $max = (double)$_REQUEST['max'];
                                 $min = (double)$_REQUEST['min'];
                                 $where .= (!empty($where))? sprintf("AND Gia <= %d AND Gia >= %d",$max,$min) : sprintf("Gia <= %d AND Gia >= %d",$max,$min);
@@ -46,11 +46,12 @@
                                 case 'status':
                                     $where .=(!empty($where))?" AND "." TrangthaiDH ='".$value."'":"TrangthaiDH ='".$value."'";
                                     break;
-                                case 'hidden':
+                                case 'price':
                                     $max = (double)$_REQUEST['max'];
                                     $min = (double)$_REQUEST['min'];
                                     $where .= (!empty($where))? sprintf("AND Gia <= %d AND Gia >= %d",$max,$min) : sprintf("Gia <= %d AND Gia >= %d",$max,$min);
                                     break;
+                                
 
                         }
                     }
@@ -258,6 +259,14 @@
                         </div>
                         <div class="min-price"><input type="text" onchange="Check()" name="min" id="min" placeholder="&nbsp MIN PRICE"></div>
                         <div class="max-price"><input type="text" onchange="Check()" name="max" id="max" placeholder="&nbsp MAX PRICE"></div>
+                        <div class="min-price">
+                            <label for="min-date">From:</label>   
+                            <input  type="date" id="min-date" name="min-date">
+                        </div>
+                        <div class="max-price">
+                            <label for="max-date">To:</label>
+                            <input type="date" id="max-date" name="max-date">
+                        </div>
                         <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>
                     </div>
@@ -296,7 +305,7 @@
                             $s.='<div class="conatiern-fluid row-order d-flex">';
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayGiao']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
                             $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
                             $s.='<div class="col-2 text-center product btn-de-up my-2">';
@@ -312,12 +321,12 @@
                     }else{
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
-                        if($row['TrangthaiDH'] == 'Canceled'){
+                        if($row['TrangthaiDH'] != 'Canceled'){
                             $s.='<div class="conatiern-fluid row-order d-flex">';
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayGiao']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
                             $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangthaiDH']);
                             $s.='<div class="col-2 text-center product btn-de-up my-2">';
@@ -395,13 +404,23 @@
             function Check(){
                 var min = document.getElementById('min');
                 var max = document.getElementById('max');
-                var inputForm = min.form;
+                var max_date = document.getElementById('max-date');
+                var min_date =  document.getElementById('min-date');
+                var inputForm1 = min.form;
+                var inputForm2 = min_date.form;
                 if(min.value != "" || max.value != ""){  
-                        var inputHidden = document.createElement("input");
-                        inputHidden.type = "hidden";
-                        inputHidden.name = "hidden";
-                        inputHidden.value = "1";
-                        inputForm.appendChild(inputHidden);
+                        var inputHidden1 = document.createElement("input");
+                        inputHidden1.type = "hidden";
+                        inputHidden1.name = "price";
+                        inputHidden1.value = "1";
+                        inputForm1.appendChild(inputHidden1);
+                }
+                if(!min_date.value || !max_date.value){
+                        var inputHidden2 = document.createElement("input");
+                        inputHidden2.type = "hidden";
+                        inputHidden2.name = "date";
+                        inputHidden2.value = "1";
+                        inputForm2.appendChild(inputHidden2);
                 }
             }
         </script>
