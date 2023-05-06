@@ -31,7 +31,11 @@
                 <a href="manageproduct.php?page=4">ACCESSORY</a>
             </div>
             <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-            <div class="nav-item"><a href="manageorder.php"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
+            <button class="dropdown-btn"><span class="material-symbols-outlined">list_alt</span>Manage Orders</button>
+            <div class="dropdown-container">
+                <a href="manageorder.php?page=1">CAR</a>
+                <a href="manageorder.php?page=2">ACCESSORY</a>
+            </div>
         </div>
         <div class="col-10 float-left" style = "margin-left: 16.66%;">
             <div class="text-center welcome">

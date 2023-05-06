@@ -37,7 +37,6 @@ echo('<div class="container-fluid position-relative nav-bar p-0">');
                             echo('<div class="dropdown-menu rounded-0 m-0">');
                                     if(isUserLogged()){
                                         echo'<a href="account-setting.php" class="dropdown-item">Cập nhật thông tin</a>';
-                                        echo'<a href="" class="dropdown-item">Lịch sử đơn hàng</a>';
                                         echo'<a href="Logout.php?isUser=1" class="dropdown-item">Đăng xuất</a>';
                                     }
                                     else if(isAdminLogged()){

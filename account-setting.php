@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styleaccount.css">
 	<link rel="stylesheet" type="text/css" href="css/style_order.css">
+	<link rel="stylesheet" href="css/styleGH.css">
+	<link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
@@ -36,6 +38,10 @@
     	$sql2 = sprintf("SELECT * from khachhang k, donhang_pk d, phukien p where sdt = '%s' and k.MaKH = d.MaKH and d.MaPK = p.MaPK", $_SESSION['current_username']); 
     	$result2 = mysqli_query($conn, $sql2);
     	//var_dump($row1['GiaBan']); 
+
+		$sql3 = sprintf("SELECT * from khachhang where sdt = '%s'", $_SESSION['current_username']);
+    	$result3 = mysqli_query($conn, $sql);
+		$row3 = mysqli_fetch_assoc($result3);
 	?>
 	<section class="py-5 my-5">
 		<div class="container">
@@ -114,13 +120,14 @@
 						</form>
 					</div>
 					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-						<form action="">
+						<form id="changepass" action="changepwd.php" method = "post">
+						<?php echo '<input type="hidden" name="SDT" value="'.$row3['SDT'].'">'; ?>
 							<h3 class="mb-4">Password Settings</h3>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 									  	<label>Old password</label>
-									  	<input type="password" class="form-control">
+									  	<input type="password" id ="old" name="old" class="form-control">
 									</div>
 								</div>
 							</div>
@@ -128,18 +135,18 @@
 								<div class="col-md-6">
 									<div class="form-group">
 									  	<label>New password</label>
-									  	<input type="password" class="form-control">
+									  	<input type="password" id ="new" name = "new" class="form-control">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 									  	<label>Confirm new password</label>
-									  	<input type="password" class="form-control">
+									  	<input type="password" name ="confirm" class="form-control">
 									</div>
 								</div>
 							</div>
 							<div>
-								<button class="btn btn-primary">Update</button>
+								<button type ="submit" name="update" class="btn btn-primary">Update</button>
 								<button class="btn btn-light">Cancel</button>
 							</div>
 						</form>
@@ -237,8 +244,51 @@
 			</div>
 		</div>
 	</section>
+	<div class="modal123 hide container-fluid">
+            <div class="modal_inner123"  style="padding :0px; overflow: hidden; height: 500px" >
+                <div class="modal_header123" style="background: #e26e70; padding :15px; color: white;">
+                <p></p>
+                <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal_body123">
+					<?php if($_GET['Wrong']==1) { ?>
+						<h2 class="notification" >Mật khẩu cũ không đúng</h2>
+					<?php }
+					else { ?>
+						<h2 class="notification" >Mật khẩu mới không trùng nhau</h2>
+					<?php }
+					?>    
+            </div>
+                <div class="modal_footer123">
+                
+                </div>
+            </div>
+            </div>
+			<script>
+                var modal = document.querySelector('.modal123');
+                var iconClose = document.querySelector('.modal_header123 i');
+            	 // Kiểm tra nếu người dùng đã đăng nhập, showModal sẽ là true
+				 <?php
+                    if(isset($_GET['Buy'])){ ?>
+                        var showModal = true;
+                    <?php }
+                ?>;
 
+                function toggleModal() {
+                    modal.classList.toggle('hide');
+                }
 
+                if (showModal) {
+                    modal.classList.remove('hide'); // Hiển thị modal tức thời
+                }
+
+                iconClose.addEventListener('click', toggleModal);
+                modal.addEventListener('click', function(e) {
+                    if (e.target == modal) {
+                    toggleModal();
+                    }
+                });
+            </script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
