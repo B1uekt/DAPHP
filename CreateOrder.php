@@ -83,7 +83,7 @@
             $current_date = date("Y-m-d H:i:s");
             $taoDH = sprintf("INSERT INTO `donhang`(`MaDH`, `MaSP`, `MaKH`, `TrangThaiDH`, `Gia`, `NgayDat`, `NgayGiao`) VALUES ('%s','%s','%s','Preparing','%f','%s', NULL)", $MaDH, $product['MaSP'], $MaKH, $Totalcar, date('Y-m-d', strtotime($current_date)));
             $result4 = mysqli_query($conn, $taoDH);
-            $taoHD = sprintf("INSERT INTO `hoadon`(`MaHD`, `TongTien`, `MaDH`) VALUES ('%s','%f','%s')", $MaHD, $Total, $MaDH);
+            $taoHD = sprintf("INSERT INTO `hoadon`(`MaHD`, `TongTien`, `MaDH`) VALUES ('%s','%f','%s')", $MaHD, $Totalcar, $MaDH);
             $result5 = mysqli_query($conn, $taoHD);
         }
         else{

@@ -58,15 +58,13 @@
 					$s .= '<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">';
 					$s .= '<i class="fa fa-key text-center mr-1"></i>';
 					$s .= 'Password</a>';
-					$s .= '<a class="nav-link" id="order-tab" data-toggle="pill" href="#order" role="tab" aria-controls="order" aria-selected="false">';
-					$s .= '<i class="fa-solid fa-cart-shopping"></i>';
-					$s .= 'Current Order</a>';
 					$s .= '<a class="nav-link" id="History-tab" data-toggle="pill" href="#history" role="tab" aria-controls="history" aria-selected="false">';
 					$s .= '<i class="fa-solid fa-cart-shopping"></i>';
 					$s .= 'History Order</a>';
-					$s .= '<a class="nav-link" id="Logout-tab" data-toggle="pill" href="#logout" role="tab" aria-controls="logout" aria-selected="false" style="padding-left: 24px;">';
+					$s .= '<a class="nav-link" href="index.php" role="tab" aria-controls="logout" aria-selected="false" style="padding-left: 24px;">';
 					$s .= '<i class="fa-solid fa-right-from-bracket"></i>';
-					$s .= 'Logout</a>';
+					$s .= 'Back To Home Page</a>';
+					
 					$s .= '</div>';
 					$s .= '</div>';
 					$s .= '<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">';
@@ -146,28 +144,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
-						<div class="container">
-							<header class="card-header"> My Orders / Tracking </header>
-							<div class="card-body">
-								<h6>Order ID: OD45345345435</h6>
-								<article class="card">
-									<div class="card-body row">
-										<div class="col"> <strong>Order date:</strong> <br>29 Mar 2023 </div>
-										<div class="col"> <strong>Status:</strong> <br> Picked by the courier </div>
-										
-									</div>
-								</article>
-								<div class="track">
-									<div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
-									<div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
-									<div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-									<div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
-								</div>
-								
-							</div>
-						</div>
-					</div>
+					
 					<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="History-tab">
 							<div class="container">
 								<div class="bg-white shadow rounded-lg d-block d-sm-flex" style="margin-bottom: 10px; width: 150px;">
@@ -200,6 +177,19 @@
 									$s .= '<div><span class="text-muted mr-2">Status: '.$row1['TrangThaiDH'].'</span></div>';
 									$s .= '</div>';
 									$s .= '</div>';
+									$s .= '<div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem; margin-top: 50px; padding-right: 10px;">';
+									$s .= sprintf('<a href="Status_History.php?IDDH=%s&type=car"><button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button"><polyline points="23 4 23 10 17 10"></polyline>', $row1['IDDH']);
+									$s .= '<polyline points="1 20 1 14 7 14"></polyline>';
+									$s .= '<i class="fa-solid fa-eye"></i>';
+									$s .= 'View Order</button></a>';
+									$s .= '<button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button">';
+									$s .= '<polyline points="3 6 5 6 21 6"></polyline>';
+									$s .= '<i class="fa-solid fa-trash-can"></i>';
+									$s .= '<line x1="10" y1="11" x2="10" y2="17"></line>';
+									$s .= '<line x1="14" y1="11" x2="14" y2="17"></line>';
+									$s .= 'Remove Order</button>';
+									
+									$s .= '</div>';
 									$s .= '</div>';
 									echo($s);
 								}
@@ -221,6 +211,19 @@
 									}
 									$s .= '<div><span class="text-muted mr-2">Status: '.$row2['TrangthaiDH'].'</span></div>';
 									$s .= '</div>';
+									$s .= '</div>';
+									$s .= '<div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem; margin-top: 50px; padding-right: 10px;">';
+									$s .= sprintf('<a href="Status_History.php?IDDHPK=%s&type=accessory"><button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button"><polyline points="23 4 23 10 17 10"></polyline>', $row2['IDDHPK']);
+									$s .= '<polyline points="1 20 1 14 7 14"></polyline>';
+									$s .= '<i class="fa-solid fa-eye"></i>';
+									$s .= 'View Order</button></a>';
+									$s .= '<button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button">';
+									$s .= '<polyline points="3 6 5 6 21 6"></polyline>';
+									$s .= '<i class="fa-solid fa-trash-can"></i>';
+									$s .= '<line x1="10" y1="11" x2="10" y2="17"></line>';
+									$s .= '<line x1="14" y1="11" x2="14" y2="17"></line>';
+									$s .= 'Remove Order</button>';
+									
 									$s .= '</div>';
 									$s .= '</div>';
 									echo($s);
