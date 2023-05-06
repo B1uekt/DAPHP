@@ -6,7 +6,7 @@
      $password ="";
      $dbname = "sql_daphp";
      $conn = mysqli_connect($severname,$username,$password,$dbname);
-     if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'filter'){
+     if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'filter' && $_REQUEST['page'] == 1){
         $_SESSION['product_filter'] = $_REQUEST;
         if(!empty($_SESSION['product_filter'])){
             $where = "";
@@ -15,7 +15,7 @@
                 if(!empty($value)){  
                     switch($field){
                             case 'provinces':
-                                $from = ",khachhang";
+                                $from = " ,khachhang";
                                 $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang.MaKH AND DiaChi LIKE '%".$value."%'";   
                                 break;
                             case 'status':
@@ -24,22 +24,53 @@
                             case 'hidden':
                                 $max = (double)$_REQUEST['max'];
                                 $min = (double)$_REQUEST['min'];
-                                $where .= (!empty($where))? sprintf("AND TongTien <= %d AND TongTien >= %d",$max,$min) : sprintf("TongTien <= %d AND TongTien >= %d",$max,$min);
+                                $where .= (!empty($where))? sprintf("AND Gia <= %d AND Gia >= %d",$max,$min) : sprintf("Gia <= %d AND Gia >= %d",$max,$min);
                                 break;
 
                     }
                 }
             }
-        }   
-    }
+        }
+    }else{
+            $_SESSION['product_filter'] = $_REQUEST;
+            if(!empty($_SESSION['product_filter'])){
+                $where = "";
+                $from ="";
+                foreach($_SESSION['product_filter'] as $field => $value){
+                    if(!empty($value)){  
+                        switch($field){
+                                case 'provinces':
+                                    $from = ",khachhang";
+                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'";   
+                                    break;
+                                case 'status':
+                                    $where .=(!empty($where))?" AND "." TrangthaiDH ='".$value."'":"TrangthaiDH ='".$value."'";
+                                    break;
+                                case 'hidden':
+                                    $max = (double)$_REQUEST['max'];
+                                    $min = (double)$_REQUEST['min'];
+                                    $where .= (!empty($where))? sprintf("AND Gia <= %d AND Gia >= %d",$max,$min) : sprintf("Gia <= %d AND Gia >= %d",$max,$min);
+                                    break;
+
+                        }
+                    }
+                }
+            }   
+        }
     if(!$conn){
-        die("Connection failed". mysqli_connect_error($conn));
+         die("Connection failed". mysqli_connect_error($conn));
     }
     if(!empty($where)){
-        $sql = "SELECT * FROM donhang".$from." WHERE ".$where;
+        if($_REQUEST['page'] == 1)
+            $sql = "SELECT * FROM donhang".$from." WHERE ".$where;
+        else
+            $sql = "SELECT * FROM donhang_pk".$from." WHERE ".$where;
     }
     else{
-        $sql = "SELECT * FROM donhang ";
+        if($_REQUEST['page'] ==1 )
+            $sql = "SELECT * FROM donhang";
+        else
+            $sql = "SELECT * FROM donhang_pk";
     }
     $result = mysqli_query($conn,$sql);
 ?>
@@ -67,8 +98,18 @@
                     <i class="fa fa-window-close"></i>
                 </div>
                 <div class="model-body-0">
-                    <form action="updateorder.php" method="post">
-                        <input type="hidden" name="id" id="id">
+                    <form action="updateorder.php" method="post" enctype="multipart/form-data">
+                        <?php
+                            if($_REQUEST['page']== 1){
+                        ?>
+                            <input type="hidden" name="id" value ="1">
+                        <?php
+                            }else{
+                        ?>
+                            <input type="hidden" name="id" value ="2">
+                        <?php
+                            }
+                        ?>
                         <div class="container-price-cate my-3 d-flex">
                             <div class="price">
                                 <label for="cus-number">Customer Number</label><br>
@@ -94,6 +135,22 @@
                                 </select> 
                             </div>
                         </div>
+                        <div class="container-price-cate my-3 d-flex">
+                            <div class="price">
+                                <label for="date">Delivery Day</label><br>
+                                <input class="float-left price-cate" type="date" id="date" name="date">
+                            </div>
+                            <?php
+                                if($_REQUEST['page']==2){
+                            ?>
+                                <div class="price">
+                                    <label for="quantity">Quantity</label><br>
+                                    <input class="float-left price-cate" type="text" id="quantity" name="quantity" value="">
+                                </div>
+                            <?php
+                                }
+                            ?>
+                        </div>
                         <input class="submit" type="submit" name="submit" value="SUBMIT">
                     </form>
                 </div>
@@ -101,16 +158,20 @@
         </div>
         <div class="col-2 nav float-left">
             <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
-            <div class="nav-item"><a href="admin.html"><span class="material-symbols-outlined">home</span>Home</a></div>
-            <button class="dropdown-btn"><span class="material-symbols-outlined">category</span>Manage Products</button>
+            <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
+            <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
-                <a href="manageproduct.html">ALL PRODUCTS</a>
-                <a href="#">SHIRTS</a>
-                <a href="#">PANTS</a>
-                <a href="#">ACCESSORY</a>
+            <a href="manageproduct.php?page=1">ALL CAR</a>
+                <a href="manageproduct.php?page=2">TWO-SEATER CAR</a>
+                <a href="manageproduct.php?page=3">FOUR-SEATER CAR</a>
+                <a href="manageproduct.php?page=4">ACCESSORY</a>
             </div>
-            <div class="nav-item"><a href="manageuser.html"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-            <div class="nav-item"><a href="manageorder.html"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
+            <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
+            <button class="dropdown-btn"><span class="material-symbols-outlined">list_alt</span>Manage Orders</button>
+            <div class="dropdown-container">
+                <a href="manageorder.php?page=1">CAR</a>
+                <a href="manageorder.php?page=2">ACCESSORY</a>
+            </div>
         </div>
         <div class="col-10" style="margin-left:16.66%">
             <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage Order</h1>
@@ -184,7 +245,7 @@
                                 <option value="Tp.Đà Nẵng">Tp.Đà Nẵng
                                 <option value="Tp.Hải Phòng">Tp.Hải Phòng
                                 <option value="Tp.Hà Nội">Tp.Hà Nội
-                                <option value="TP  HCM">TP HCM
+                                <option value="TP HCM">TP HCM
                             </select>
                         </div>
                         <div class="choose" >
@@ -197,6 +258,7 @@
                         </div>
                         <div class="min-price"><input type="text" onchange="Check()" name="min" id="min" placeholder="&nbsp MIN PRICE"></div>
                         <div class="max-price"><input type="text" onchange="Check()" name="max" id="max" placeholder="&nbsp MAX PRICE"></div>
+                        <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>
                     </div>
                 </form>
@@ -204,31 +266,71 @@
 
             <div class="container-fluid all-p">
                 <div class="container-fluid row-title d-flex my-3">
-                    <div class="col-1 text-center title">ORDER NUMBER</div>
                     <div class="col-2 text-center title">CUSTOMER NUMBER</div>
-                    <div class="col-2 text-center title">PRODUCT NUMBER</div>
+                    <?php
+                        if($_REQUEST['page'] == 1){
+                    ?>
+                        <div class="col-2 text-center title">PRODUCT NUMBER</div>
+                    <?php
+                        }else{
+                    ?>
+                         <div class="col-1 text-center title">PRODUCT NUMBER</div>
+                    <?php
+                        }
+                        if($_REQUEST['page']==2){
+                    ?>
+                        <div class="col-1 text-center title">QUANTITY</div>
+                    <?php
+                        }
+                    ?>
                     <div class="col-2 text-center title">DELIVERY DAY</div>
                     <div class="col-2 text-center title">TOTAL PRICE</div>
-                    <div class="col-1 text-center title">STATUS</div>
+                    <div class="col-2 text-center title">STATUS</div>
                     <div class="col-2 text-center title">UPDATE/DELETE</div>
                 </div>
                 <?php
+                    if($_REQUEST['page']==1){   
                         $s = '';
-                        while($row = mysqli_fetch_assoc($result)){
-                        $s.='<div class="conatiern-fluid row-order d-flex">';
-                        $s.= sprintf('<div class="col-1 text-center order my-22"><p>%d</p></div>',$row['IDDH']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND </p></div>',$row['Gia']);
-                        $s.=sprintf('<div class="col-1 text-center order status my-1"><p>%s</p></div>',$row['TrangThaiDH']);
-                        $s.='<div class="col-2 text-center product btn-de-up my-2">';
-                        $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
-                        $s.= sprintf('<a href="deleteorder.php?id=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH']);
-                        $s.='</div>';
-                        $s.='</div>';
+                            while($row = mysqli_fetch_assoc($result)){
+                            if($row['TrangThaiDH'] != 'Canceled'){
+                            $s.='<div class="conatiern-fluid row-order d-flex">';
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
+                            $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
+                            $s.='<div class="col-2 text-center product btn-de-up my-2">';
+                            $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
+                            /*if($row['TrangThaiDH'] != 'Shipped'){
+                                $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH'],$_REQUEST['page']);
+                            }*/    
+                            $s.='</div>';
+                            $s.='</div>';
+                        }
                         }
                         echo($s);
+                    }else{
+                        $s = '';
+                        while($row = mysqli_fetch_assoc($result)){
+                        if($row['TrangthaiDH'] == 'Canceled'){
+                            $s.='<div class="conatiern-fluid row-order d-flex">';
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
+                            $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
+                            $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangthaiDH']);
+                            $s.='<div class="col-2 text-center product btn-de-up my-2">';
+                            $s .= sprintf('<button onclick="UpdateForm4(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDHPK']);
+                            /*if($row['TrangthaiDH'] != 'Shipped'){
+                                $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDHPK'],$_REQUEST['page']);
+                            }*/
+                            $s.='</div>';
+                            $s.='</div>';
+                        }
+                        }
+                        echo($s);
+                    }
                 ?>
         </div>
         <script>
