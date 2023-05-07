@@ -10,7 +10,7 @@
             if(!$conn){
                 die("Connection failed: " . mysqli_connect_error());
             }
-            $sql = "SELECT t.SDT, t.MatKhau, k.* FROM khachhang k, taikhoan t WHERE t.SDT = k.SDT ";
+            $sql = "SELECT t.SDT, t.MatKhau, t.Status, k.* FROM khachhang k, taikhoan t WHERE t.SDT = k.SDT ";
             $result = mysqli_query($conn, $sql);
 ?>
 <head>
@@ -31,7 +31,7 @@
 <div class="model-0 hide">
     <div class="model-inner-0">
         <div class="model-header-0 d-flex">
-            <div class="header-form"><h3>UPDATE YOUR ORDER</h3></div>
+            <div class="header-form"><h3>UPDATE YOUR USER</h3></div>
             <i class="fa fa-window-close"></i>
         </div>
         <div class="model-body-0">
@@ -64,18 +64,22 @@
     </div>
 </div>
 <div class="col-2 nav float-left">
-    <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
-    <div class="nav-item"><a href="admin.html"><span class="material-symbols-outlined">home</span>Home</a></div>
-    <button class="dropdown-btn"><span class="material-symbols-outlined">category</span>Manage Products</button>
-    <div class="dropdown-container">
-        <a href="manageproduct.html">ALL PRODUCTS</a>
-        <a href="#">SHIRTS</a>
-        <a href="#">PANTS</a>
-        <a href="#">ACCESSORY</a>
-    </div>
-    <div class="nav-item"><a href="manageuser.html"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-    <div class="nav-item"><a href="manageorder.html"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
-</div>
+            <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
+            <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
+            <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
+            <div class="dropdown-container">
+            <a href="manageproduct.php?page=1">ALL CAR</a>
+                <a href="manageproduct.php?page=2">TWO-SEATER CAR</a>
+                <a href="manageproduct.php?page=3">FOUR-SEATER CAR</a>
+                <a href="manageproduct.php?page=4">ACCESSORY</a>
+            </div>
+            <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
+            <button class="dropdown-btn"><span class="material-symbols-outlined">list_alt</span>Manage Orders</button>
+            <div class="dropdown-container">
+                <a href="manageorder.php?page=1">CAR</a>
+                <a href="manageorder.php?page=2">ACCESSORY</a>
+            </div>
+        </div>
 <div class="col-10" style="margin-left:16.66%">
     <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage Order</h1>
 
@@ -108,26 +112,26 @@
     <div class="container-fluid all-p">
         <div class="container-fluid row-title d-flex my-3">
             <div class="col-1 text-center title">ID</div>
-            <div class="col-1 text-center title">ACCOUNT</div>
-            <div class="col-1 text-center title">PASSWORD</div>
+            <div class="col-1 text-center title">NAME</div>
             <div class="col-3 text-center title">ADDRESS</div>
-            <div class="col-2 text-center title">EMAIL</div>
+            <div class="col-3 text-center title">EMAIL</div>
             <div class="col-2 text-center title">PHONE NUMBER</div>
-            <div class="col-2 text-center title">UPDATE/DELETE</div>
+            <div class="col-2 text-center title">UPDATE/BLOCK</div>
         </div>
         <?php
                 $s = "";
                 while ($row = mysqli_fetch_assoc($result)) {
+                    //var_dump($row['Status']);
                     $s .= '<div class="container-fluid row-order d-flex">';
                     $s .= sprintf('<div class="col-1 text-center order"><p>%s</p></div>', $row['MaKH']);
                     $s .= sprintf('<div class="col-1 text-center order"><p>%s</p></div>', $row['TenKH']);
-                    $s .= sprintf('<div class="col-1 text-center order"><p>%s</p></div>', $row['MatKhau']);
+                    
                     $s .= sprintf('<div class="col-3 text-center order"><p>%s</p></div>', $row['DiaChi']);
-                    $s .= sprintf('<div class="col-2 text-center order"><p>%s</p></div>', $row['Email']);
+                    $s .= sprintf('<div class="col-3 text-center order"><p>%s</p></div>', $row['Email']);
                     $s .= sprintf('<div class="col-2 text-center order"><p>%s</p></div>', $row['SDT']);
                     $s .= '<div class="col-2 text-center order btn-de-up">';
                     $s .= sprintf('<button class="btn but-update">UPDATE</button>', $row['MaKH']);
-                    $s .= sprintf('<a href="deleteuser.php?SDT=%s" onclick="YesorNo()"  class="btn but-delete ">DELETE</a>',$row['SDT']);
+                    $s .= sprintf('<a href="deleteuser.php?SDT=%s&status=%s"  class="btn but-delete ">%s</a>',$row['SDT'], $row['Status'], $row['Status']);
                     $s .= '</div>';
                     $s .= '</div>';
                 }

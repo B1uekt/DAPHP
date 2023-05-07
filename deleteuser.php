@@ -1,4 +1,4 @@
-<?php // coi lại r mới sài nhe con đỉ
+<?php
 
 if(isset($_REQUEST['SDT'])){
     $userID = $_REQUEST['SDT'];
@@ -11,11 +11,21 @@ if(isset($_REQUEST['SDT'])){
     if(!$conn){
         die("Connection failed". mysqli_connect_error());
     }
-    $sql = sprintf("DELETE FROM khachhang WHERE `SDT` = %d",  $userID);
-    $sql1 = sprintf("DELETE FROM taikhoan WHERE `SDT` = %d",  $userID);
-    if ($conn->query($sql) === TRUE && $conn->query($sql1) === TRUE) {
+    if($_GET['status']=='Block'){
+        $sql = sprintf("UPDATE `taikhoan` SET `Status`='None' WHERE SDT='%s'",  $userID);
+        var_dump($sql);
+    }
+    else {
+        $sql = sprintf("UPDATE `taikhoan` SET `Status`='Block' WHERE SDT = '%s' ",  $userID);
+    }
+    if ($conn->query($sql) === TRUE ) {
         echo "The record deleted successfully";
-        header("Location: manageuser.php");
+        if($_GET['status']=='block'){
+            header("Location: manageuser.php?Status-Status=none");
+        }
+        else {
+            header("Location: manageuser.php?Status-Status=block");
+        }
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

@@ -8,10 +8,15 @@
     if(!$conn){
         die("Connection failed". mysqli_connect_error($conn));
     }
+    if(isset($_GET['MaDH'])){
         $orderId = $_GET['MaDH'];
         $sql = "SELECT * FROM donhang WHERE MaDH = '" .$orderId . "'";
-        $result = mysqli_query($conn,$sql);
-        $row = mysqli_fetch_assoc($result);
-        echo json_encode($row);
-        $conn->close();
+    }else{
+        $orderId = $_GET['MaDHPK'];
+        $sql = "SELECT * FROM donhang_pk WHERE MaDHPK = '" .$orderId . "'";
+    }
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
+    echo json_encode($row);
+    $conn->close();
 ?>

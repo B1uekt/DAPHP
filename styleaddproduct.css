@@ -71,6 +71,7 @@ h2{
     height:100vh;
     position:fixed;
     padding-left: 0px;
+    z-index: 1;
 }
 .nav .nav-item a{
     color:white;
@@ -89,6 +90,38 @@ h2{
 }
 .nav .nav-item:hover a{
     font-weight: bold;
+}
+.dropdown-btn{
+    background: none;
+    border:none;
+    color:white;
+    width:100%;
+    text-align: left;
+    font-size: large;
+    padding-top: 20px;
+}
+.dropdown-btn span{
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.dropdown-container a{
+    display:block;
+    width:100%;
+    cursor: pointer;
+    background-color:#808e9b;
+    font-size: large;
+    color:white;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+.dropdown-container a:hover{
+    font-weight: bold;
+}
+.dropdown-container{
+    display:none;
+}
+.dropdown-btn:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .model{
     height: 100vh;

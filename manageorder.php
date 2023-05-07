@@ -301,7 +301,7 @@
                     if($_REQUEST['page']==1){   
                         $s = '';
                             while($row = mysqli_fetch_assoc($result)){
-                            if($row['TrangThaiDH'] != 'Canceled'){
+                            
                             $s.='<div class="conatiern-fluid row-order d-flex">';
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
@@ -315,13 +315,13 @@
                             }*/    
                             $s.='</div>';
                             $s.='</div>';
-                        }
+                        
                         }
                         echo($s);
                     }else{
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
-                        if($row['TrangthaiDH'] != 'Canceled'){
+                        
                             $s.='<div class="conatiern-fluid row-order d-flex">';
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
@@ -339,7 +339,7 @@
                         }
                         }
                         echo($s);
-                    }
+                    
                 ?>
         </div>
         <script>
