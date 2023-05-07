@@ -14,12 +14,22 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body>
-        <div class="col-2 nav float-left">
+    <div class="col-2 nav float-left">
             <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
-            <div class="nav-item"><a href="admin.html"><span class="material-symbols-outlined">home</span>Home</a></div>
-            <div class="nav-item"><a href="manageproduct.html"><span class="material-symbols-outlined">category</span>Manage Products</a></div>
-            <div class="nav-item"><a href="manageuser.html"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-            <div class="nav-item"><a href="manageorder.html"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
+            <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
+            <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
+            <div class="dropdown-container">
+            <a href="manageproduct.php?page=1">ALL CAR</a>
+                <a href="manageproduct.php?page=2">TWO-SEATER CAR</a>
+                <a href="manageproduct.php?page=3">FOUR-SEATER CAR</a>
+                <a href="manageproduct.php?page=4">ACCESSORY</a>
+            </div>
+            <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
+            <button class="dropdown-btn"><span class="material-symbols-outlined">list_alt</span>Manage Orders</button>
+            <div class="dropdown-container">
+                <a href="manageorder.php?page=1">CAR</a>
+                <a href="manageorder.php?page=2">ACCESSORY</a>
+            </div>
         </div>
         <div class="col-10 float-left">
             <div class="addproduct">
@@ -86,6 +96,21 @@
         <script>
             function myFunction() {
                 alert("The product was added");
+            }
+
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+            
+            for (i = 0; i < dropdown.length; i++) {
+              dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                  dropdownContent.style.display = "none";
+                } else {
+                  dropdownContent.style.display = "block";
+                }
+              });
             }
         </script>
     </body>
