@@ -155,15 +155,19 @@
         <div class="col-2 nav float-left">
             <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
             <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
-            <button class="dropdown-btn"><span class="material-symbols-outlined">category</span>Manage Products</button>
+            <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
-                <a href="manageproduct.php?page=1">ALL CAR</a>
+            <a href="manageproduct.php?page=1">ALL CAR</a>
                 <a href="manageproduct.php?page=2">TWO-SEATER CAR</a>
                 <a href="manageproduct.php?page=3">FOUR-SEATER CAR</a>
                 <a href="manageproduct.php?page=4">ACCESSORY</a>
             </div>
-            <div class="nav-item"><a href="manageuser.html"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
-            <div class="nav-item"><a href="manageorder.html"><span class="material-symbols-outlined">list_alt</span>Manage Orders</a></div>
+            <div class="nav-item"><a href="manageuser.php"><span class="material-symbols-outlined">manage_accounts</span>Manage Users</a></div>
+            <button class="dropdown-btn"><span class="material-symbols-outlined">list_alt</span>Manage Orders</button>
+            <div class="dropdown-container">
+                <a href="manageorder.php?page=1">CAR</a>
+                <a href="manageorder.php?page=2">ACCESSORY</a>
+            </div>
         </div>
         <div class="col-10" style="margin-left:16.66%">
             <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage Product</h1>
