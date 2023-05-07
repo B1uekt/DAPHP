@@ -66,11 +66,11 @@ if (isset($_POST['sdt']) && isset($_POST['email']) && isset($_POST['mk'])) {
       $themkhachhang = sprintf("INSERT INTO `khachhang`(`MaKH`, `SDT`, `Email`) VALUES ('%s','%s', '%s')", $maKH, $sdt, $email);
       $matkhau = password_hash($matkhau, PASSWORD_DEFAULT);
 
-      $insertSql = "INSERT INTO `taikhoan`(`MatKhau`, `SDT`, `Email`) VALUES (?, ?, ?)";
-
+      $insertSql = "INSERT INTO `taikhoan`(`MatKhau`, `SDT`, `Email`, `Status`) VALUES (?, ?, ?, ?)";
 
       $stmt = mysqli_prepare($conn, $insertSql);
-      mysqli_stmt_bind_param($stmt, "sss", $matkhau, $sdt, $email);
+      $status = 'None';
+      mysqli_stmt_bind_param($stmt, "ssss", $matkhau, $sdt, $email, $status);
 
       if (mysqli_stmt_execute($stmt) && mysqli_query($conn, $themkhachhang)) {
         $response = array(
