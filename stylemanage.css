@@ -32,7 +32,7 @@ body{
     border: none;
     width:  50px;
     height: 50px;
-    background-color: #86c9e4;
+    background-color: #2B2E4A;
 }
 .search button:hover{
     background-color: rgba(0, 0, 0, 0.5); 
@@ -45,7 +45,7 @@ body{
     display:inline-block;
     height:50px;
     width:50px;
-    background-color: #86c9e4;
+    background-color: #2B2E4A;
     text-align: center;
     border-radius: 20px;
     position: relative;
@@ -108,14 +108,14 @@ body{
     display:block
 }
 .nav{
-    background-color:#86c9e4;
+    background-color:#2B2E4A;
     height:100vh;
     position:fixed;
     padding-left: 0px;
     z-index: 1;
 }
 .nav .nav-item a{
-    color:white;
+    color:#F77D0A;
     font-size: large;
 }
 .nav .nav-item{
@@ -135,7 +135,7 @@ body{
 .dropdown-btn{
     background: none;
     border:none;
-    color:white;
+    color:#F77D0A;
     width:100%;
     text-align: left;
     font-size: large;
@@ -165,14 +165,14 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
 }
 .new-p {
-    background-color:#86c9e4 ;
+    background-color:#2B2E4A ;
     width:max-content;
     transition-duration: 0.4s;
     border-radius: 20px;
     cursor: pointer;
 }
 .new-p a{
-    color:white;
+    color:#F77D0A;
     padding: 10px;
     font-size: larger;
 }
@@ -213,8 +213,8 @@ body{
     padding:5px
 }
 .but-update {
-    background-color: #86c9e4; 
-    color:  white; 
+    background-color: #2B2E4A; 
+    color:  #F77D0A; 
 }
 .but-delete {
     background-color: white; 

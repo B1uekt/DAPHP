@@ -22,9 +22,9 @@
           die("Connection failed: " . mysqli_connect_error());
         }
         if($id == 1){
-            $sql = sprintf("UPDATE `donhang` SET `TrangThaiDH`='%s',`Gia`='%d', `NgayDat` = '%s' WHERE MaKH ='%s' AND MaSP ='%s'",$status,$total,$mysql_date,$cus,$pro);
+            $sql = sprintf("UPDATE `donhang` SET `TrangThaiDH`='%s',`Gia`='%d', `NgayGiao` = '%s' WHERE MaKH ='%s' AND MaSP ='%s'",$status,$total,$mysql_date,$cus,$pro);
         }else{
-            $sql = sprintf("UPDATE `donhang_pk` SET `SoLuong`= '%d' ,`TrangthaiDH`='%s',`Gia`='%d', `NgayDat` = '%s' WHERE MaKH ='%s' AND MaPK ='%s'",$qty,$status,$total,$mysql_date,$cus,$pro);
+            $sql = sprintf("UPDATE `donhang_pk` SET `SoLuong`= '%d' ,`TrangthaiDH`='%s',`Gia`='%d', `NgayGiao` = '%s' WHERE MaKH ='%s' AND MaPK ='%s'",$qty,$status,$total,$mysql_date,$cus,$pro);
         }
         if ($conn->query($sql) === TRUE) {
             if($id == 1)

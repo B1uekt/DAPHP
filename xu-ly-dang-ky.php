@@ -111,6 +111,6 @@ if (isset($_POST['sdt']) && isset($_POST['email']) && isset($_POST['mk'])) {
   }
     mysqli_close($conn);
     echo json_encode($response);
-    header('Location:' . 'login.php');
+    //header('Location:' . 'login.php');
 }
 ?>

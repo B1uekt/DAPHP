@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="col-2 nav float-left">
-            <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
+            <h2 style="color:#F77D0A;padding-bottom: 20px;">Royal Cars</h2>
             <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
             <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
@@ -85,7 +85,7 @@
             labels: xValues,
             datasets: [{
                 label:'Amount',
-                backgroundColor: "#86c9e4",
+                backgroundColor: "#F77D0A",
                 data: yValues,
                 borderWidth:1,
                 borderColor:'#777',

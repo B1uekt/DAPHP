@@ -97,7 +97,7 @@
                     $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
                     $offset = ($current_page - 1) * $limit;
                     $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and GiaBan <= %d and GiaBan >= %d and t.MaTH = '%s' LIMIT $offset, $limit ", $_GET['max-price'], $_GET['min-price'], $_GET['car']);
-                    $result3 = mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sql);
                 }
                 else{
                     switch($_GET['price']){
@@ -109,8 +109,8 @@
                             $total_pages = ceil($total_records / $limit);
                             $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
                             $offset = ($current_page - 1) * $limit;
-                            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by NamSX DESC LIMIT $offset, $limit", $_GET['car']);
-                            $result3 = mysqli_query($conn, $sql3);
+                            $sql = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by NamSX DESC LIMIT $offset, $limit", $_GET['car']);
+                            $result = mysqli_query($conn, $sql);
                             break;
                         case 2: 
                             $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE t.MaTH = '%s' and s.MaTH = t.MaTH and s.SoLuong >0 order by GiaBan DESC", $_GET['car']);
@@ -164,14 +164,14 @@
         }
         else if($type=='accessory'){
             if($_GET['min-price']!='' && $_GET['max-price']!=''){
-                    $sql3 = sprintf("SELECT * FROM phukien WHERE and SoLuong >0 Gia <= %d and Gia >= %d" , $_GET['max-price'], $_GET['min-price']);
+                    $sql3 = sprintf("SELECT * FROM phukien WHERE SoLuong >0 and Gia <= %d and Gia >= %d" , $_GET['max-price'], $_GET['min-price']);
                     $result3 = mysqli_query($conn, $sql3);
                     $total_records = mysqli_num_rows($result3);
                     $limit = 6; // số bản ghi hiển thị trên mỗi trang
                     $total_pages = ceil($total_records / $limit);
                     $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
                     $offset = ($current_page - 1) * $limit;
-                    $sql = sprintf("SELECT * FROM phukien WHERE and SoLuong >0 Gia <= %d and Gia >= %d LIMIT $offset, $limit" , $_GET['max-price'], $_GET['min-price']);
+                    $sql = sprintf("SELECT * FROM phukien WHERE SoLuong >0 and Gia <= %d and Gia >= %d LIMIT $offset, $limit" , $_GET['max-price'], $_GET['min-price']);
                     $result = mysqli_query($conn, $sql);
                 }
             else {

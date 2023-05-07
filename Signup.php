@@ -32,7 +32,11 @@
                     <div id="eye1">
                         <i class="far fa-eye"></i>
                     </div>
+                    
                 </div>
+                <div class="form-signup">
+                        <a href="Login.php">LogIn</a>
+                    </div>
                 <input name="submit" type="submit" value="Sign Up" class="form-submit">
             </form>
         </div>

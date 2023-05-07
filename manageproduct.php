@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="col-2 nav float-left">
-            <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
+            <h2 style="color:#F77D0A;padding-bottom: 20px;">ROYAL CARS</h2>
             <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
             <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
@@ -181,11 +181,11 @@
                     <div class="search d-flex">
                         <input type="hidden" name="page" value ="<?=$_REQUEST['page']?>">
                         <input type="text" name="key" placeholder="&#160;&#160;&#160;Search here" style = "width:100%">     
-                        <button type="submit" name="search" value ="search" style="font-size:30px;margin-left:3px; margin-top: auto; margin-bottom:auto;"><span class="material-symbols-outlined">search</span></button>
+                        <button type="submit" name="search" value ="search" style="font-size:30px;margin-left:3px; margin-top: auto; margin-bottom:auto;"><span style="color: #F77D0A" class="material-symbols-outlined">search</span></button>
                     </div>
                 </form>
                 <div class="sort" onclick="toggleDropdown()">
-                    <i class="fa fa-sort" style="font-size:30px;"></i>
+                    <i style = "color: #F77D0A" class="fa fa-sort" style="font-size:30px;"></i>
                     <div class="dropdown-button">
                         <form action="">
                             <input type="hidden" name="page" value ="<?=$_REQUEST['page']?>">

@@ -168,7 +168,7 @@
             </div>
         </div>
         <div class="col-2 nav float-left">
-            <h2 style="color:white;padding-bottom: 20px;">Panacea</h2>
+            <h2 style="color:#F77D0A;padding-bottom: 20px;">ROYAL CARS</h2>
             <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
             <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
