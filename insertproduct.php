@@ -1,4 +1,14 @@
 <?php
+    function generateIDProductCode() {
+      $length = 5; // Số ký tự cho mã đơn hàng
+      $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; //Các ký tự cho mã đơn hàng
+      $result = '';
+      $max = strlen($characters) - 1;
+      for ($i = 0; $i < $length; $i++) {
+      $result .= $characters[mt_rand(0, $max)]; // Chọn một ký tự ngẫu nhiên từ các ký tự cho sẵn và thêm vào chuỗi kết quả
+      }
+      return $result; // Trả về mã đơn hàng ngẫu nhiên
+    }
     if(isset($_POST['submit'])){
         $servername = "localhost";
         $username = "root";
@@ -11,7 +21,7 @@
         if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
         }
-        $id = $_REQUEST['id'];
+        $id = generateIDProductCode();
         $price = (double)$_REQUEST['price'];
         $name = $_REQUEST['name'];
         $cate = $_REQUEST['cate'];

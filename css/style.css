@@ -645,4 +645,33 @@ h6,
   .pagination li.active a {
     color: #fff;
   }
-  
+  #toast {
+    position: fixed;
+    top: 50px;
+    right: 32px;
+    z-index: 999999;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 0;
+    min-width: 400px;
+    max-width: 450px;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    }
+    #toast i.fas{
+        padding: 20px 18px 0px 12px;
+        color: #F77D0A;
+        font-size: 32px;
+    }
+    #toast p{
+       padding-left: 60px
+    }
+    .Noti {
+        transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+      }
+      
+      .Noti.hide {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+

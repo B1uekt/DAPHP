@@ -28,18 +28,23 @@
 		header('Location:' . 'index.php');
 	  }
 	  else if (password_verify($mk, $row['MatKhau']) && $mk_check != 'admin123' ) {
-	    echo 'Đăng nhập thành công';
-	    $_SESSION['current_username'] = $sdt;
-		$_SESSION['isUser'] = true;
-		$_SESSION['cart'] = array();
-		header('Location:' . 'index.php');
+		if($row['Status']=='None'){
+			echo 'Đăng nhập thành công';
+			$_SESSION['current_username'] = $sdt;
+			$_SESSION['isUser'] = true;
+			$_SESSION['cart'] = array();
+			header('Location:' . 'index.php');
+		}
+		else{
+			header('Location:' . 'Login.php?isWrong=1');
+		}
 	  } 
 	  else {
-	    echo 'Mật khẩu đã nhập không đúng';
+	    header('Location:' . 'Login.php?isWrong=2');
 	  }
 	} 
 	else {
-	  echo 'Tài khoản không tồn tại';
+		header('Location:' . 'Login.php?isWrong=3');
 	}
 	
 	mysqli_close($conn);

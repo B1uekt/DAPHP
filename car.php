@@ -2,7 +2,7 @@
 <html lang="en">
 <?php 
     if(isset($_GET['search'])){
-        
+        var_dump($_GET['search']);
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -227,10 +227,11 @@
         else {
             //$sql = sprintf("SELECT t.*, s.*, p.* FROM SanPham s, ThuongHieu t, phukien p WHERE s.MaTH = t.MaTH and ( TenSP LIKE '%%%s%%' or TenPK LIKE '%%%s%%') ", $_GET['search'], $_GET['search']);
             //var_dump($sql);
-            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and TenSP LIKE '%%%s%%'", $_GET['search']);
+
+            $sql3 = sprintf("SELECT t.*, s.* FROM SanPham s, ThuongHieu t WHERE s.MaTH = t.MaTH and s.SoLuong >0 and TenSP LIKE '%%%s%% '", $_GET['search']);
             $result3 = mysqli_query($conn, $sql3);
             $total_records = mysqli_num_rows($result3);
-            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+            $limit = 3; // số bản ghi hiển thị trên mỗi trang
             $total_pages = ceil($total_records / $limit);
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
             $offset = ($current_page - 1) * $limit;
@@ -238,15 +239,15 @@
             $result = mysqli_query($conn, $sql1);
 
 
-            $sql4 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%' and SoLuong >0 ", $_GET['search']);
-            //var_dump($sql2);
+            $sql4 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE N'%%%s%%'  and SoLuong >0 ", $_GET['search']);
             $result4 = mysqli_query($conn, $sql4);
+
             $total_records = mysqli_num_rows($result4);
-            $limit = 6; // số bản ghi hiển thị trên mỗi trang
+            $limit =3 ; // số bản ghi hiển thị trên mỗi trang
             $total_pages = ceil($total_records / $limit);
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
             $offset = ($current_page - 1) * $limit;
-            $sql2 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE '%%%s%%' and SoLuong >0 LIMIT $offset, $limit", $_GET['search']);
+            $sql2 = sprintf("SELECT p.* FROM phukien p WHERE TenPK LIKE N'%%%s%%' and SoLuong >0 LIMIT $offset, $limit", $_GET['search']);
             //var_dump($sql2);
             $result1 = mysqli_query($conn, $sql2);
         }
@@ -264,17 +265,17 @@
         }
         $type = $_GET['type'];
         if($type=='car'){
-            $Countsp = "SELECT COUNT(*) FROM SanPham s";
+            $Countsp = "SELECT COUNT(*) FROM SanPham s where SoLuong > 0";
             $resultcountsp = mysqli_query($conn, $Countsp);
         }
         else if($type=='accessory'){
-            $Countsp = "SELECT COUNT(*) FROM phukien";
+            $Countsp = "SELECT COUNT(*) FROM phukien where SoLuong > 0";
             $resultcountsp = mysqli_query($conn, $Countsp);
         }
         $row = mysqli_fetch_row($resultcountsp);
         $total_records = $row[0];
         $limit = 6; // số bản ghi hiển thị trên mỗi trang
-        $total_pages = ceil($total_records / $limit);
+        $total_pages = ceil($total_records / $limit);  
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // trang hiện tại
         $offset = ($current_page - 1) * $limit; // tổng số trang cần hiển thị
         if($type=='car'){
@@ -598,7 +599,8 @@
                                 
                                 $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                                 $s .= '<div class="rent-item mb-4">';
-                                $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $row['Url_image']);
+                                $s .= sprintf('<a href="detail.php?id=%s&type=car"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row['IDSP'], $row['Url_image']);
+                                
                                 $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row['TenSP']);
                                 $s .= '<div class="d-flex justify-content-center mb-4">';
                                 if($type=='car'){
@@ -619,7 +621,7 @@
                                 
                                 $s .= '<div class="col-lg-4 col-md-6 mb-2">';
                                 $s .= '<div class="rent-item mb-4">';
-                                $s .= sprintf('<a href="detail.php?id=%s"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
+                                $s .= sprintf('<a href="detail.php?id=%s&type=accessory"><img class="img-fluid mb-4" style="width: 300px; height: 200px" src="%s"></a>', $row1['IDPK'], $row1['Url_image']);
                                 $s .= sprintf('<h4 class="text-uppercase mb-4">%s</h4>', $row1['TenPK']);
                                 $s .= '<div class="d-flex justify-content-center mb-4">';
                                 $s .= sprintf('<div class="px-2 border-left border-right"><i class="fa fa-cogs text-primary mr-1"></i><span>Số Lượng: %s</span></div>', $row1['SoLuong']);
@@ -638,11 +640,19 @@
     </div>
     <?php 
     echo "<ul class='pagination'>";
-
     for ($i = 1; $i <= $total_pages; $i++){
-        echo "<li><a href='car.php?page=".$i."&type=".$type."'";
-        if($i==$current_page) echo "class='active'";
-        echo ">".$i."</a></li>";
+        if(isset($_GET['search'])){
+            echo "<li><a href='car.php?page=".$i."&type=".$type."&search=".$_GET['search']."'";
+            if($i==$current_page) echo "class='active'";
+                echo ">".$i."</a></li>";
+        }
+        else{
+            for ($i = 1; $i <= $total_pages; $i++){
+                echo "<li><a href='car.php?page=".$i."&type=".$type."'";
+                if($i==$current_page) echo "class='active'";
+                echo ">".$i."</a></li>";
+            }
+        }
     }
     
     echo "</ul>";

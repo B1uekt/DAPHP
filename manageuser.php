@@ -84,7 +84,7 @@
     <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage Order</h1>
 
     <div class="new-p my-3">
-        <a href="adduser.html"><i class="fa fa-plus-circle" style="margin-right: 10px;"></i>ADD NEW USER</a>
+        <a href="Signup.php"><i class="fa fa-plus-circle" style="margin-right: 10px;"></i>ADD NEW USER</a>
     </div>
 
     <div class="my-4 sort-search d-flex">
@@ -116,7 +116,7 @@
             <div class="col-3 text-center title">ADDRESS</div>
             <div class="col-3 text-center title">EMAIL</div>
             <div class="col-2 text-center title">PHONE NUMBER</div>
-            <div class="col-2 text-center title">UPDATE/BLOCK</div>
+            <div class="col-2 text-center title">BLOCK</div>
         </div>
         <?php
                 $s = "";
@@ -130,7 +130,6 @@
                     $s .= sprintf('<div class="col-3 text-center order"><p>%s</p></div>', $row['Email']);
                     $s .= sprintf('<div class="col-2 text-center order"><p>%s</p></div>', $row['SDT']);
                     $s .= '<div class="col-2 text-center order btn-de-up">';
-                    $s .= sprintf('<button class="btn but-update">UPDATE</button>', $row['MaKH']);
                     $s .= sprintf('<a href="deleteuser.php?SDT=%s&status=%s"  class="btn but-delete ">%s</a>',$row['SDT'], $row['Status'], $row['Status']);
                     $s .= '</div>';
                     $s .= '</div>';

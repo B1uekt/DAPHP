@@ -46,7 +46,7 @@
                         switch($field){
                                 case 'provinces':
                                     $from = ",khachhang";
-                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'";   
+                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%%".$value."%%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%%".$value."%%'";   
                                     break;
                                 case 'status':
                                     $where .=(!empty($where))?" AND "." TrangthaiDH ='".$value."'":"TrangthaiDH ='".$value."'";
@@ -252,11 +252,11 @@
                                 <option value="Vĩnh Phúc">Vĩnh Phúc
                                 <option value="Yên Bái">Yên Bái
                                 <option value="Phú Yên">Phú Yên
-                                <option value="Tp.Cần Thơ">Tp.Cần Thơ
-                                <option value="Tp.Đà Nẵng">Tp.Đà Nẵng
-                                <option value="Tp.Hải Phòng">Tp.Hải Phòng
-                                <option value="Tp.Hà Nội">Tp.Hà Nội
-                                <option value="TP HCM">TP HCM
+                                <option value="Cần Thơ">Cần Thơ
+                                <option value="Đà Nẵng">Đà Nẵng
+                                <option value="Hải Phòng">Hải Phòng
+                                <option value="Hà Nội">Hà Nội
+                                <option value="HCM">HCM
                             </select>
                         </div>
                         <div class="choose" >
@@ -269,13 +269,14 @@
                         </div>
                         <div class="min-price"><input type="text" onchange="addprice()" name="min" id="min" placeholder="&nbsp MIN PRICE"></div>
                         <div class="max-price"><input type="text" onchange="addprice()" name="max" id="max" placeholder="&nbsp MAX PRICE"></div>
-                        <div class="min-price">
-                            <label for="min-date">From:</label>   
-                            <input onchange ="adddate()" type="date" id="min-date" name="min-date">
+                        <div class="min-price">  
+                            
+                            <label for="max-date">From:</label>
+                            <input onchange="adddate()" type="date" id="min-date" name="min-date" value="<?php echo $_GET['min-date'] ?? ''; ?>">
                         </div>
                         <div class="max-price">
                             <label for="max-date">To:</label>
-                            <input onchange ="adddate()" type="date" id="max-date" name="max-date">
+                            <input onchange="adddate()" type="date" id="max-date" name="max-date" value="<?php echo $_GET['max-date'] ?? ''; ?>">
                         </div>
                         <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>

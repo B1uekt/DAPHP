@@ -57,9 +57,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/font-awesome.min.css">
+
 </head>
 
 <body>  
+    <?php 
+    if(isset($_GET['isAdd'])){
+        $isAdd = filter_var($_GET['isAdd'], FILTER_VALIDATE_BOOLEAN);
+        if ($isAdd === true){ ?>
+            <div id="toast" class="Noti" style="position: fixed; top: 20px; right: 20px;">
+                <div class="col-1 ">
+                    <i class="fas fa-check-circle" style="float: left"></i> 
+                </div>
+                <div class="col-11 closeNoti">
+                    <h2 style="margin: 0; float: left">Thành công</h2>
+                    <p style="margin-top: 8px; clear: both;">Bạn đã thêm sản phẩm vào giỏ hàng</p> 
+                    <i style="position: absolute; top: 0; right: 0; cursor:pointer;" class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        <?php }
+        else { ?>
+            <div id="toast" class="Noti" style="position: fixed; top: 20px; right: 20px;">
+                <div class="col-1 ">
+                    <i class="fas fa-check-circle" style="float: left"></i> 
+                </div>
+                <div class="col-11 closeNoti">
+                    <h2 style="margin: 0; float: left">Thất bại</h2>
+                    <p style="margin-top: 8px; clear: both;">Không thể thêm nhiều hơn 1 chiếc xe</p> 
+                    <i style="position: absolute; top: 0; right: 0; cursor:pointer;" class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        <?php }
+    }
+    ?>
+<script>
+    var modal = document.querySelector('.Noti');
+    var iconClose = document.querySelector('.closeNoti i');
+    function toggleModal() {
+                    modal.classList.toggle('hide');
+                }
+    iconClose.addEventListener('click', toggleModal);
+    setTimeout(function(){
+    modal.classList.add('hide');
+    }, 2000);
+</script>
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -101,14 +145,14 @@
 
     <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
-        <form action="" method="get">
+        <form action="car.php" method="get">
             <div class="row mx-n2 justify-content-end"> 
                 <div class="col-xl-2 col-lg-4 col-md-6 px-2">
                     <input type="hidden" name="type" value="timkiem">
                     <input name= "search" class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
                 </div>
                 <div class="col-xl-2 col-lg-4 col-md-6 px-2 pl-5">
-                    <button name ="timkiem" class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+                    <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
                 </div>
             </div>
         </form>
@@ -308,11 +352,9 @@
         <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
     </div>
     <!-- Footer End -->
-
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+        
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

@@ -68,10 +68,7 @@
                         </div>  
                     </div>
                     <div class="d-flex" style ="justify-content:space-between">
-                        <div class="id-number my-3">
-                            <label for="quantity">Quantity</label><br>
-                            <input type="text" name="quantity" id="quantity"  required> 
-                        </div>
+                        
                         <div class="id-number my-3">
                             <label for="quantity">Year</label><br>
                             <input type="text" name="year" id="year"  required> 
@@ -84,10 +81,6 @@
                     <label for="fileToUpload">Select image</label><br>
                     <div class="btn-img">
                         <input  type="file" placeholder= "File hình SP" name="fileToUpload"> 
-                    </div>
-                    <div class="id-number my-3">
-                        <label for="id">ID Product</label><br>
-                        <input type="text" name="id" id="id"  required> 
                     </div>
                     <input class="submit" type="submit" name="submit" value="SUBMIT">
                 </form> 

@@ -38,6 +38,19 @@
         <div id="wrapper">
             <form name="DangNhap" action="code_login.PHP" method="post" id="form-login" enctype="multipart/form-data">
                 <h1 class="form-heading">ROYAL CARS</h1>
+                <?php 
+                if(isset($_GET['isWrong'])){
+                    if($_GET['isWrong']==1){ ?>
+                        <h2 style="color: red; font-size: 18px">Tài khoản đã bị khóa</h2>
+                    <?php } 
+                    else if($_GET['isWrong']==2){ ?>
+                        <h2 style="color: red; font-size: 18px">Mật khẩu không đúng</h2>
+                    <?php }
+                    else {  ?> 
+                        <h2 style="color: red; font-size: 18px; font-weight:300">Tài khoản không tồn tại</h2>
+                    <?php }
+                }
+                ?>
                 <div class="form-group">
                     <i class="far fa-user"></i>
                     <input name ="sdt_dn" type="text" class="form-input" placeholder="Phone Number">

@@ -61,7 +61,8 @@ if (isset($_SESSION['cart'][$MaSP])) {
         }
 
         if ($count >= 1) {
-            echo "<div style='color: white; background-color: #f44336;padding: 10px;margin-bottom: 10px;' class='error-message'>Bạn không thể thêm sản phẩm này nữa.</div>";
+            $a =sprintf('Location: detail.php?id=%s&type=%s&isAdd=false', $product_id, $type);
+            header($a);
         }
         else {
             $_SESSION['cart'][$MaSP]['quantity']++;
@@ -85,7 +86,8 @@ else {
         }
 
         if ($count >= 1) {
-            echo "<div style='color: white; background-color: #f44336;padding: 10px;margin-bottom: 10px;' class='error-message'>Bạn không thể thêm sản phẩm này nữa.</div>";
+            $a =sprintf('Location: detail.php?id=%s&type=%s&isAdd=false', $product_id, $type);
+            header($a);
         } 
         else {
             $_SESSION['cart'][$MaSP] = $product;
@@ -98,7 +100,7 @@ else {
     }
 }
 if($flag==1){
-    $a =sprintf('Location: detail.php?id=%s&type=%s', $product_id, $type);
+    $a =sprintf('Location: detail.php?id=%s&type=%s&isAdd=true', $product_id, $type);
     header($a);
     exit();
 }

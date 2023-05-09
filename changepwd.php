@@ -25,6 +25,7 @@
                 $matkhau = password_hash($pws_new, PASSWORD_DEFAULT);
                 $sql1 = sprintf("UPDATE `taikhoan` SET `MatKhau`='%s' WHERE sdt = '%s'", $matkhau, $sdt);
                 $result1 = mysqli_query($conn, $sql1);
+                header('Location:' . 'account-setting.php');
             }
         }
         else {

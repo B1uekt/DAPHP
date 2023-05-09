@@ -12,13 +12,13 @@
             if(isset($_REQUEST['search'])){
                 $content = $_REQUEST['key'];
                 if($_REQUEST['page'] == 1)
-                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE '%".$content."%';";
+                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE N'%%".$content."%%';";
                 else if($_REQUEST['page'] == 2)
-                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE '%".$content."%' AND MaLoai = N'xe 2 chỗ'";
+                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE N'%%".$content."%%' AND MaLoai = N'xe 2 chỗ'";
                 else if($_REQUEST['page'] == 3)
-                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE '%".$content."%' AND MaLoai = N'xe 4 chỗ'";
+                    $sql = "SELECT * FROM sanpham WHERE TenSP LIKE N'%%".$content."%%' AND MaLoai = N'xe 4 chỗ'";
                 else 
-                    $sql = "SELECT * FROM phukien WHERE TenPK LIKE '%".$content."%';";
+                    $sql = "SELECT * FROM phukien WHERE TenPK LIKE N'%%".$content."%%';";
                 $result = mysqli_query($conn,$sql); 
             }else if(isset($_REQUEST['filter'])){
                 $min=(double)$_REQUEST['1-price']; 
@@ -240,19 +240,19 @@
                     if($_REQUEST['page'] == 1 || $_REQUEST['page'] == 2 || $_REQUEST['page'] == 3){
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
-                            $s .='<div class="conatiern-fluid row-product d-flex">';
-                            $s .= sprintf('<div class="col-1 text-center product"><p>%s</p></div>',$row['MaSP']);
-                            $s .= sprintf('<div class="col-1 product"><img src="%s" alt=""></div>',$row['Url_image']);
-                            $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['TenSP']);
-                            $s .= sprintf('<div class="col-2 text-center product">%s vnd</div>',number_format($row['GiaBan'], 0, '', ','));
-                            $s .= sprintf('<div class="col-1 text-center product"><p>%s</p></div>',$row['NamSX']);
-                            $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['MaLoai']);
-                            $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['SoLuong']);
-                            $s .='<div class="col-2 text-center product btn-de-up">';
-                            $s .= sprintf('<button onclick="UpdateForm1(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaSP']);
-                            $s .=sprintf('<a href="deleteproduct.php?MaSP=%s" onclick="YesorNo()"  class="btn but-delete ">DELETE</a>',$row['MaSP']);
-                            $s .='</div>';
-                            $s .='</div>';
+                                $s .='<div class="conatiern-fluid row-product d-flex">';
+                                    $s .= sprintf('<div class="col-1 text-center product"><p>%s</p></div>',$row['MaSP']);
+                                    $s .= sprintf('<div class="col-1 product"><img src="%s" alt=""></div>',$row['Url_image']);
+                                    $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['TenSP']);
+                                    $s .= sprintf('<div class="col-2 text-center product">%s vnd</div>',number_format($row['GiaBan'], 0, '', ','));
+                                    $s .= sprintf('<div class="col-1 text-center product"><p>%s</p></div>',$row['NamSX']);
+                                    $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['MaLoai']);
+                                    $s .= sprintf('<div class="col-2 text-center product"><p>%s</p></div>',$row['SoLuong']);
+                                    $s .='<div class="col-2 text-center product btn-de-up">';
+                                    $s .= sprintf('<button onclick="UpdateForm1(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaSP']);
+                                    $s .=sprintf('<a href="deleteproduct.php?MaSP=%s&page=%s&type=1" onclick="YesorNo()"  class="btn but-delete ">DELETE</a>',$row['MaSP'], $_GET['page']);
+                                    $s .='</div>';
+                                    $s .='</div>';
                         }
                     }
                     else{
@@ -266,7 +266,7 @@
                             $s .= sprintf('<div class="col-2 text-center product"><p>%d</p></div>',$row['SoLuong']);
                             $s .='<div class="col-2 text-center product btn-de-up">';
                             $s .= sprintf('<button onclick="UpdateForm2(this)" type="submit" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaPK']);
-                            $s .= sprintf('<a href="deleteproduct.php?MaSP=%s" onclick="YesorNo()"  class="btn but-delete ">DELETE</a>',$row['MaPK']);
+                            $s .= sprintf('<a href="deleteproduct.php?MaSP=%s&page=%s&type=2" onclick="YesorNo()"  class="btn but-delete ">DELETE</a>',$row['MaPK'],  $_GET['page']);
                             $s .='</div>';
                             $s .='</div>';
                         }

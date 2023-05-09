@@ -66,7 +66,7 @@
 					$s .= 'Password</a>';
 					$s .= '<a class="nav-link" id="History-tab" data-toggle="pill" href="#history" role="tab" aria-controls="history" aria-selected="false">';
 					$s .= '<i class="fa-solid fa-cart-shopping"></i>';
-					$s .= 'History Order</a>';
+					$s .= 'Order</a>';
 					$s .= '<a class="nav-link" href="index.php" role="tab" aria-controls="logout" aria-selected="false" style="padding-left: 24px;">';
 					$s .= '<i class="fa-solid fa-right-from-bracket"></i>';
 					$s .= 'Back To Home Page</a>';
