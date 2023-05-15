@@ -342,3 +342,10 @@ body{
     background-color: #86c9e4;
 
 }
+.row-order:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.row-order{
+    border-bottom: 1px solid black;
+    transition: 0.5s;
+}

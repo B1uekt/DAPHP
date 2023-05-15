@@ -46,7 +46,7 @@
                         switch($field){
                                 case 'provinces':
                                     $from = ",khachhang";
-                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%%".$value."%%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%%".$value."%%'";   
+                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'";   
                                     break;
                                 case 'status':
                                     $where .=(!empty($where))?" AND "." TrangthaiDH ='".$value."'":"TrangthaiDH ='".$value."'";
@@ -168,7 +168,7 @@
             </div>
         </div>
         <div class="col-2 nav float-left">
-            <h2 style="color:#F77D0A;padding-bottom: 20px;">ROYAL CARS</h2>
+            <h2 style="color:#F77D0A;padding-bottom: 20px;">ROYAL CAR</h2>
             <div class="nav-item"><a href="admin.php"><span class="material-symbols-outlined">home</span>Home</a></div>
             <button class="dropdown-btn"><span t class="material-symbols-outlined">category</span>Manage Products</button>
             <div class="dropdown-container">
@@ -252,11 +252,11 @@
                                 <option value="Vĩnh Phúc">Vĩnh Phúc
                                 <option value="Yên Bái">Yên Bái
                                 <option value="Phú Yên">Phú Yên
-                                <option value="Cần Thơ">Cần Thơ
-                                <option value="Đà Nẵng">Đà Nẵng
-                                <option value="Hải Phòng">Hải Phòng
-                                <option value="Hà Nội">Hà Nội
-                                <option value="HCM">HCM
+                                <option value="Tp.Cần Thơ">Tp.Cần Thơ
+                                <option value="Tp.Đà Nẵng">Tp.Đà Nẵng
+                                <option value="Tp.Hải Phòng">Tp.Hải Phòng
+                                <option value="Tp.Hà Nội">Tp.Hà Nội
+                                <option value="TP HCM">TP HCM
                             </select>
                         </div>
                         <div class="choose" >
@@ -269,14 +269,13 @@
                         </div>
                         <div class="min-price"><input type="text" onchange="addprice()" name="min" id="min" placeholder="&nbsp MIN PRICE"></div>
                         <div class="max-price"><input type="text" onchange="addprice()" name="max" id="max" placeholder="&nbsp MAX PRICE"></div>
-                        <div class="min-price">  
-                            
-                            <label for="max-date">From:</label>
-                            <input onchange="adddate()" type="date" id="min-date" name="min-date" value="<?php echo $_GET['min-date'] ?? ''; ?>">
+                        <div class="min-price">
+                            <label for="min-date">From:</label>   
+                            <input onchange ="adddate()" type="date" id="min-date" name="min-date">
                         </div>
                         <div class="max-price">
                             <label for="max-date">To:</label>
-                            <input onchange="adddate()" type="date" id="max-date" name="max-date" value="<?php echo $_GET['max-date'] ?? ''; ?>">
+                            <input onchange ="adddate()" type="date" id="max-date" name="max-date">
                         </div>
                         <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>
@@ -312,8 +311,8 @@
                     if($_REQUEST['page']==1){   
                         $s = '';
                             while($row = mysqli_fetch_assoc($result)){
-                            
-                            $s.='<div class="conatiern-fluid row-order d-flex">';
+                            if($row['TrangThaiDH'] != 'Canceled'){
+                            $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
                             if (!empty($row['NgayGiao'])) {
@@ -332,13 +331,14 @@
                             }*/    
                             $s.='</div>';
                             $s.='</div>';
-                        
+                        }
                         }
                         echo($s);
                     }else{
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
-                            $s.='<div class="conatiern-fluid row-order d-flex">';
+                        if($row['TrangthaiDH'] != 'Canceled'){
+                            $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDHPK']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
@@ -358,7 +358,7 @@
                             }*/
                             $s.='</div>';
                             $s.='</div>';
-                        
+                        }
                         }
                         echo($s);
                     }
@@ -447,6 +447,18 @@
                         inputForm2.appendChild(inputHidden2);
                 }
             }
+        </script>
+        <script>
+            const myDivs = document.querySelectorAll('.row-order');
+
+            myDivs.forEach(div => {
+                div.addEventListener('click', () => {
+                    const dataValue = div.dataset.value;
+                    const url = `orderdetail.php?ID=${dataValue}&page=`+<?=$_REQUEST['page']?>;
+                    window.location.assign(url);
+                });
+            });
+
         </script>
     </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <?php 
     if(isset($_GET['search'])){
-        var_dump($_GET['search']);
+        // var_dump($_GET['search']);
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -397,8 +397,11 @@
                 if($type=='car'){
                     echo('<h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>');
                 }
-                else {
+                else if($type=='accessory') {
                     echo('<h1 class="display-4 text-uppercase text-center mb-5">Find Your Accessory</h1>');
+                }
+                else {
+                    echo('<h1 class="display-4 text-uppercase text-center mb-5">Search Results</h1>'); 
                 }
             ?>
             

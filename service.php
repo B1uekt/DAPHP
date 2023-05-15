@@ -63,150 +63,137 @@
     </div>
     <!-- Topbar End -->
 
-
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item active">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+     <!-- Navbar Start -->
+     <?php require('navbar.php');  ?>
     <!-- Navbar End -->
 
 
     <!-- Search Start -->
     <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Pickup Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Drop Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                        data-target="#date" data-toggle="datetimepicker" />
+        <form action="car.php" method="get">
+            <div class="row mx-n2 justify-content-end"> 
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+                    <input type="hidden" name="type" value="timkiem">
+                    <input name="search" class="custom-select px-4 mb-3 " style="width: 230px; height: 50px; background:none; margin: 0px 15px" type="text" placeholder="Search">
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-6 px-2 pl-5">
+                    <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="time" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                        data-target="#time" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected>Select A Car</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-            </div>
-        </div>
+        </form>
     </div>
     <!-- Search End -->
 
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Testimonial</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">Service</h1>
         <div class="d-inline-flex text-white">
             <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">Testimonial</h6>
+            <h6 class="text-uppercase text-body m-0">Service</h6>
         </div>
     </div>
     <!-- Page Header Start -->
+    
 
-
-    <!-- Testimonial Start -->
+    <!-- Services Start -->
     <div class="container-fluid py-5">
-        <div class="container py-5">
-            <h1 class="display-4 text-uppercase text-center mb-5">Our Client's Say</h1>
-            <div class="owl-carousel testimonial-carousel">
-                <div class="testimonial-item d-flex flex-column justify-content-center px-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-1.jpg" alt="">
-                        <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Our Services</h1>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-taxi text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">01</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Car Rental</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
-                    <h4 class="text-uppercase mb-2">Client Name</h4>
-                    <i class="mb-2">Profession</i>
-                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                 </div>
-                <div class="testimonial-item d-flex flex-column justify-content-center px-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-2.jpg" alt="">
-                        <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item active d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-money-check-alt text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">02</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Car Financing</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
-                    <h4 class="text-uppercase mb-2">Client Name</h4>
-                    <i class="mb-2">Profession</i>
-                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                 </div>
-                <div class="testimonial-item d-flex flex-column justify-content-center px-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-3.jpg" alt="">
-                        <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-car text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">03</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Car Inspection</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
-                    <h4 class="text-uppercase mb-2">Client Name</h4>
-                    <i class="mb-2">Profession</i>
-                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                 </div>
-                <div class="testimonial-item d-flex flex-column justify-content-center px-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <img class="img-fluid ml-n4" src="img/testimonial-4.jpg" alt="">
-                        <h1 class="display-2 text-white m-0 fa fa-quote-right"></h1>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-cogs text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">04</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Auto Repairing</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
                     </div>
-                    <h4 class="text-uppercase mb-2">Client Name</h4>
-                    <i class="mb-2">Profession</i>
-                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-spray-can text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">05</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Auto Painting</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-center bg-primary ml-n4" style="width: 80px; height: 80px;">
+                                <i class="fa fa-2x fa-pump-soap text-secondary"></i>
+                            </div>
+                            <h1 class="display-2 text-white mt-n2 m-0">06</h1>
+                        </div>
+                        <h4 class="text-uppercase mb-3">Auto Cleaning</h4>
+                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Services End -->
+
+
+    <!-- Banner Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="bg-banner py-5 px-4 text-center">
+                <div class="py-5">
+                    <h1 class="display-1 text-uppercase text-primary mb-4">50% OFF</h1>
+                    <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
+                    <p class="mb-4">Only for Sunday from 1st Jan to 30th Jan 2045</p>
+                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
 
 
     <!-- Vendor Start -->
