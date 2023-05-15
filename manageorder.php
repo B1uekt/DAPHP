@@ -328,41 +328,48 @@
                 <?php
                     if($_REQUEST['page']==1){   
                         $s = '';
-                        while($row = mysqli_fetch_assoc($result)){
-                        $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDH']);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
-                        if (!empty($row['NgayGiao'])) {
-                            $date = date("d-m-Y", strtotime($row['NgayGiao']));
+                            while($row = mysqli_fetch_assoc($result)){
+                            $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
+                            if (empty($row['NgayGiao']) || strtotime($row['NgayGiao']) < 0) {
+                                $date = null;
+                            }
+                            else {
+                                $date = date("d-m-Y", strtotime($row['NgayGiao']));
+                            }
+
+                            if($row['TrangThaiDH'] == 'Canceled'){
+                                $date = null; 
+                            }
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$date);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
+                            $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
+                            $s.='<div class="col-2 text-center product btn-de-up my-2">';
+                            $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
+                            /*if($row['TrangThaiDH'] != 'Shipped'){
+                                $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH'],$_REQUEST['page']);
+                            }*/    
+                            $s.='</div>';
+                            $s.='</div>';
                         }
-                        else {
-                            $date = null;
-                        }
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$date);
-                        $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
-                        $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
-                        $s.='<div class="col-2 text-center product btn-de-up my-2">';
-                        $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
-                        /*if($row['TrangThaiDH'] != 'Shipped'){
-                            $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH'],$_REQUEST['page']);
-                        }*/    
-                        $s.='</div>';
-                        $s.='</div>';
-                    
-                    }
-                    echo($s);
+                        echo($s);
                     }else{
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
                             $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDHPK']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDHPK']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
-                            if (!empty($row['NgayGiao'])) {
-                                $date = date("d-m-Y", strtotime($row['NgayGiao']));
+                            if (empty($row['NgayGiao']) || strtotime($row['NgayGiao']) < 0) {
+                                $date = null;
                             }
                             else {
-                                $date = null;
+                                $date = date("d-m-Y", strtotime($row['NgayGiao']));
+                            }
+
+                            if($row['TrangthaiDH'] == 'Canceled'){
+                                $date = null; 
                             }
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$date);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
@@ -374,7 +381,6 @@
                             }*/
                             $s.='</div>';
                             $s.='</div>';
-                        
                         }
                         echo($s);
                     }
