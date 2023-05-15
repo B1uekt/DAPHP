@@ -28,7 +28,7 @@
         $id = $_GET['IDDH'];
         //var_dump($id);
         
-        $sql1 = "SELECT * FROM hoadon h, donhang d WHERE h.MaDH = d.MaDH and IDDH = '$id'";
+        $sql1 = "SELECT * FROM hoadon h, chitiethoadon d WHERE h.MaDH = d.MaDH and IDDH = '$id'";
         $result1 = mysqli_query($conn, $sql1);
         $row1 = mysqli_fetch_assoc($result1);
         //var_dump($row1['MaDH']);
@@ -36,7 +36,7 @@
     else{
         $id = $_GET['IDDHPK'];
 
-        $sql2 = "SELECT * FROM hoadon_pk h, donhang_pk d WHERE h.MaHDPK = d.MaHDPK and IDDHPK = '$id' ";
+        $sql2 = "SELECT * FROM hoadon_pk h, chitiethoadon_pk d WHERE h.MaHDPK = d.MaHDPK and IDDHPK = '$id' ";
         $result2 = mysqli_query($conn, $sql2);
         $row2 = mysqli_fetch_assoc($result2);
         //var_dump($row2['MaDHPK']);
@@ -85,6 +85,9 @@
                 <?php  if($_GET['type']=='car'){
                         if($row1['TrangThaiDH']== 'Shipped'){ ?>
                             <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
+                        <?php }
+                        else{ ?>
+                            <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
                         <?php }
                     }
                     else { ?>

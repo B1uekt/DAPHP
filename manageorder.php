@@ -16,7 +16,7 @@
                     switch($field){
                             case 'provinces':
                                 $from = " ,khachhang";
-                                $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang.MaKH AND DiaChi LIKE '%".$value."%'";   
+                                $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = chitiethoadon.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = chitiethoadon.MaKH AND DiaChi LIKE '%".$value."%'";   
                                 break;
                             case 'status':
                                 $where .=(!empty($where))?" AND "." TrangThaiDH ='".$value."'":"TrangThaiDH ='".$value."'";
@@ -46,7 +46,7 @@
                         switch($field){
                                 case 'provinces':
                                     $from = ",khachhang";
-                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = donhang_pk.MaKH AND DiaChi LIKE '%".$value."%'";   
+                                    $where .=(!empty($where)) ? " AND " ." khachhang.MaKH = chitiethoadon_pk.MaKH AND DiaChi LIKE '%".$value."%'":"khachhang.MaKH = chitiethoadon_pk.MaKH AND DiaChi LIKE '%".$value."%'";   
                                     break;
                                 case 'status':
                                     $where .=(!empty($where))?" AND "." TrangthaiDH ='".$value."'":"TrangthaiDH ='".$value."'";
@@ -71,17 +71,17 @@
     }
     if(!empty($where)){
         if($_REQUEST['page'] == 1){
-            $sql = "SELECT * FROM donhang".$from." WHERE ".$where;
+            $sql = "SELECT * FROM chitiethoadon".$from." WHERE ".$where;
         }
         else{
-            $sql = "SELECT * FROM donhang_pk".$from." WHERE ".$where;
+            $sql = "SELECT * FROM chitiethoadon_pk".$from." WHERE ".$where;
         }
     }
     else{
         if($_REQUEST['page'] ==1 )
-            $sql = "SELECT * FROM donhang";
+            $sql = "SELECT * FROM chitiethoadon";
         else
-            $sql = "SELECT * FROM donhang_pk";
+            $sql = "SELECT * FROM chitiethoadon_pk";
     }
     $result = mysqli_query($conn,$sql);
 ?>
@@ -149,7 +149,7 @@
                         <div class="container-price-cate my-3 d-flex">
                             <div class="price">
                                 <label for="date">Delivery Day</label><br>
-                                <input class="float-left price-cate" type="date" id="date" name="date">
+                                <input class="float-left price-cate" type="date" id="date" name="date" >
                             </div>
                             <?php
                                 if($_REQUEST['page']==2){
@@ -267,15 +267,33 @@
                                 <option value="Shipped">Shipped</option>
                             </select> 
                         </div>
+                        
                         <div class="min-price"><input type="text" onchange="addprice()" name="min" id="min" placeholder="&nbsp MIN PRICE"></div>
                         <div class="max-price"><input type="text" onchange="addprice()" name="max" id="max" placeholder="&nbsp MAX PRICE"></div>
+                        
                         <div class="min-price">
                             <label for="min-date">From:</label>   
-                            <input onchange ="adddate()" type="date" id="min-date" name="min-date">
+                            <?php
+                                if (isset($_GET['min-date'])) {
+                                    $minDateValue = $_GET['min-date'];
+                                } 
+                                else {
+                                    $minDateValue = null;
+                                }
+                                ?>
+                                <input onchange="adddate()" type="date" id="min-date" name="min-date" value="<?php echo $minDateValue ?>">
                         </div>
                         <div class="max-price">
                             <label for="max-date">To:</label>
-                            <input onchange ="adddate()" type="date" id="max-date" name="max-date">
+                            <?php
+                                if (isset($_GET['max-date'])) {
+                                    $maxDateValue = $_GET['max-date'];
+                                } 
+                                else {
+                                    $maxDateValue = null;
+                                }
+                                ?>
+                            <input onchange="adddate()" type="date" id="max-date" name="max-date" value="<?php echo $maxDateValue ?>">
                         </div>
                         <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>
@@ -285,15 +303,15 @@
 
             <div class="container-fluid all-p">
                 <div class="container-fluid row-title d-flex my-3">
-                    <div class="col-2 text-center title">CUSTOMER NUMBER</div>
+                    <div class="col-2 text-center title">ORDER NUMBER</div>
                     <?php
                         if($_REQUEST['page'] == 1){
                     ?>
-                        <div class="col-2 text-center title">PRODUCT NUMBER</div>
+                        <div class="col-2 text-center title">ORDER DATE</div>
                     <?php
                         }else{
                     ?>
-                         <div class="col-1 text-center title">PRODUCT NUMBER</div>
+                         <div class="col-1 text-center title">ORDER DATE</div>
                     <?php
                         }
                         if($_REQUEST['page']==2){
@@ -310,37 +328,35 @@
                 <?php
                     if($_REQUEST['page']==1){   
                         $s = '';
-                            while($row = mysqli_fetch_assoc($result)){
-                            if($row['TrangThaiDH'] != 'Canceled'){
-                            $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
-                            if (!empty($row['NgayGiao'])) {
-                                $date = date("d-m-Y", strtotime($row['NgayGiao']));
-                            }
-                            else {
-                                $date = null;
-                            }
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$date);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
-                            $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
-                            $s.='<div class="col-2 text-center product btn-de-up my-2">';
-                            $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
-                            /*if($row['TrangThaiDH'] != 'Shipped'){
-                                $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH'],$_REQUEST['page']);
-                            }*/    
-                            $s.='</div>';
-                            $s.='</div>';
+                        while($row = mysqli_fetch_assoc($result)){
+                        $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDH']);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
+                        if (!empty($row['NgayGiao'])) {
+                            $date = date("d-m-Y", strtotime($row['NgayGiao']));
                         }
+                        else {
+                            $date = null;
                         }
-                        echo($s);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$date);
+                        $s.=sprintf('<div class="col-2 text-center order my-2"><p> %d VND</p></div>',$row['Gia']);
+                        $s.=sprintf('<div class="col-2 text-center order status my-2"><p>%s</p></div>',$row['TrangThaiDH']);
+                        $s.='<div class="col-2 text-center product btn-de-up my-2">';
+                        $s .= sprintf('<button onclick="UpdateForm3(this)" name="update" value=%s class="btn but-update">UPDATE</button>',$row['MaDH']);
+                        /*if($row['TrangThaiDH'] != 'Shipped'){
+                            $s.= sprintf('<a href="deleteorder.php?id=%s&page=%s" onclick="YesorNo()" class="btn but-delete ">DELETE</a>',$row['MaDH'],$_REQUEST['page']);
+                        }*/    
+                        $s.='</div>';
+                        $s.='</div>';
+                    
+                    }
+                    echo($s);
                     }else{
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
-                        if($row['TrangthaiDH'] != 'Canceled'){
                             $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDHPK']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
-                            $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDHPK']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['NgayDat']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
                             if (!empty($row['NgayGiao'])) {
                                 $date = date("d-m-Y", strtotime($row['NgayGiao']));
@@ -358,7 +374,7 @@
                             }*/
                             $s.='</div>';
                             $s.='</div>';
-                        }
+                        
                         }
                         echo($s);
                     }
@@ -449,16 +465,20 @@
             }
         </script>
         <script>
-            const myDivs = document.querySelectorAll('.row-order');
+           const myDivs = document.querySelectorAll('.row-order');
 
             myDivs.forEach(div => {
-                div.addEventListener('click', () => {
-                    const dataValue = div.dataset.value;
-                    const url = `orderdetail.php?ID=${dataValue}&page=`+<?=$_REQUEST['page']?>;
-                    window.location.assign(url);
-                });
+            div.addEventListener('click', (event) => {
+            if (event.target.classList.contains("but-update")) {
+                event.stopPropagation();
+            // Khi nút "update" được bấm thì ngăn chặn thực hiện tiếp các đoạn mã bên trong 
+            } else {
+                const dataValue = div.dataset.value;
+                const url = `orderdetail.php?ID=${dataValue}&page=`+<?=$_REQUEST['page']?>;
+             window.location.assign(url);
+            }
             });
-
-        </script>
+        });
+    </script>
     </body>
 </html>

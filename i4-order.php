@@ -10,10 +10,10 @@
     }
     if(isset($_GET['MaDH'])){
         $orderId = $_GET['MaDH'];
-        $sql = "SELECT * FROM donhang WHERE MaDH = '" .$orderId . "'";
+        $sql = "SELECT * FROM chitiethoadon WHERE MaDH = '" .$orderId . "'";
     }else{
         $orderId = $_GET['MaDHPK'];
-        $sql = "SELECT * FROM donhang_pk WHERE MaDHPK = '" .$orderId . "'";
+        $sql = "SELECT * FROM chitiethoadon_pk WHERE MaDHPK = '" .$orderId . "'";
     }
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($result);

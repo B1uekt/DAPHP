@@ -81,7 +81,7 @@
             </div>
         </div>
 <div class="col-10" style="margin-left:16.66%">
-    <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage Order</h1>
+    <h1><i class="fa fa-gear" style="font-size:24px"></i>Manage User</h1>
 
     <div class="new-p my-3">
         <a href="Signup.php"><i class="fa fa-plus-circle" style="margin-right: 10px;"></i>ADD NEW USER</a>

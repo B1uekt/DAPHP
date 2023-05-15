@@ -81,7 +81,7 @@
             }
             
             $current_date = date("Y-m-d H:i:s");
-            $taoDH = sprintf("INSERT INTO `donhang`(`MaDH`, `MaSP`, `MaKH`, `TrangThaiDH`, `Gia`, `NgayDat`, `NgayGiao`) VALUES ('%s','%s','%s','Preparing','%f','%s', NULL)", $MaDH, $product['MaSP'], $MaKH, $Totalcar, date('Y-m-d', strtotime($current_date)));
+            $taoDH = sprintf("INSERT INTO `chitiethoadon`(`MaDH`, `MaSP`, `MaKH`, `TrangThaiDH`, `Gia`, `NgayDat`, `NgayGiao`) VALUES ('%s','%s','%s','Preparing','%f','%s', NULL)", $MaDH, $product['MaSP'], $MaKH, $Totalcar, date('Y-m-d', strtotime($current_date)));
             $result4 = mysqli_query($conn, $taoDH);
             $taoHD = sprintf("INSERT INTO `hoadon`(`MaHD`, `TongTien`, `MaDH`) VALUES ('%s','%f','%s')", $MaHD, $Totalcar, $MaDH);
             $result5 = mysqli_query($conn, $taoHD);
@@ -102,7 +102,7 @@
                 $result7 = mysqli_query($conn, $update_pk);
             }  
             $current_date = date("Y-m-d H:i:s");
-            $taoDH_PK = sprintf("INSERT INTO `donhang_pk`(`MaDHPK`, `MaPK`, `SoLuong`, `MaHDPK`, `Gia`, `MaKH`, `NgayDat`,`NgayGiao`, `TrangthaiDH`) VALUES ('%s','%s','%s','%s','%f','%s','%s',NULL,'Preparing')",$MaDHPK, $product['MaSP'], $product['quantity'], $MaHD_PK, $row1['Gia'], $MaKH, date('Y-m-d', strtotime($current_date)));
+            $taoDH_PK = sprintf("INSERT INTO `chitiethoadon_pk`(`MaDHPK`, `MaPK`, `SoLuong`, `MaHDPK`, `Gia`, `MaKH`, `NgayDat`,`NgayGiao`, `TrangthaiDH`) VALUES ('%s','%s','%s','%s','%f','%s','%s',NULL,'Preparing')",$MaDHPK, $product['MaSP'], $product['quantity'], $MaHD_PK, $row1['Gia'], $MaKH, date('Y-m-d', strtotime($current_date)));
             $result6 = mysqli_query($conn, $taoDH_PK);
             //var_dump($taoDH_PK);
             //var_dump($update_pk);

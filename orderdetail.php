@@ -13,9 +13,9 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     if($page == 1){
-        $sql =sprintf("SELECT d.*,k.*,s.* FROM donhang  d, khachhang k, sanpham s WHERE MaDH = '%s' and d.MaKH = k.MaKH and d.MaSP = s.MaSP",$id);
+        $sql =sprintf("SELECT d.*,k.*,s.* FROM chitiethoadon d, khachhang k, sanpham s WHERE MaDH = '%s' and d.MaKH = k.MaKH and d.MaSP = s.MaSP",$id);
     }else{
-        $sql =sprintf("SELECT d.*, k.*, p.TenPK, p.Gia, p.Url_image, p.MoTa FROM donhang_pk  d, khachhang k, phukien p WHERE MaDHPK = '%s' and d.MaKH = k.MaKH and d.MaPK = p.MaPK",$id);  
+        $sql =sprintf("SELECT d.*, k.*, p.TenPK, p.Gia, p.Url_image, p.MoTa FROM chitiethoadon_pk  d, khachhang k, phukien p WHERE MaDHPK = '%s' and d.MaKH = k.MaKH and d.MaPK = p.MaPK",$id);  
     }
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($result)
@@ -91,8 +91,8 @@
                         <p><?=$row['Email']?></p>
                     </div>
                     <div class="user" style="height: 80px">
-                        <h3>Email <i class="material-icons">email</i></h3>
-                        <p><?=$row['Email']?></p>
+                        <h3>Mã Khách hàng</h3>
+                        <p><?=$row['MaKH']?></p>
                     </div>
               
             </div>

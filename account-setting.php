@@ -31,11 +31,11 @@
     	$result = mysqli_query($conn, $sql);
 
 
-    	$sql1 = sprintf("SELECT * from khachhang k, donhang d, sanpham s where sdt = '%s' and k.MaKH = d.MaKH and s.MaSP = d.MaSP", $_SESSION['current_username']); 
+    	$sql1 = sprintf("SELECT * from khachhang k, chitiethoadon d, sanpham s where sdt = '%s' and k.MaKH = d.MaKH and s.MaSP = d.MaSP", $_SESSION['current_username']); 
     	$result1 = mysqli_query($conn, $sql1);
     	
 
-    	$sql2 = sprintf("SELECT * from khachhang k, donhang_pk d, phukien p where sdt = '%s' and k.MaKH = d.MaKH and d.MaPK = p.MaPK", $_SESSION['current_username']); 
+    	$sql2 = sprintf("SELECT * from khachhang k, chitiethoadon_pk d, phukien p where sdt = '%s' and k.MaKH = d.MaKH and d.MaPK = p.MaPK", $_SESSION['current_username']); 
     	$result2 = mysqli_query($conn, $sql2);
     	//var_dump($row1['GiaBan']); 
 
