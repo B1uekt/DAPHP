@@ -50,12 +50,10 @@
     // Ngăn chặn gửi form trực tiếp
     event.preventDefault();
     
-    // Lấy giá trị các trường input
     var sdt = $('input[name="sdt"]').val();
     var email = $('input[name="email"]').val();
     var mk = $('input[name="mk"]').val();
     
-    // Gửi yêu cầu kiểm tra tài khoản đã tồn tại hay chưa bằng AJAX
     $.ajax({
       url: 'kiem-tra-tai-khoan.php', // Đường dẫn đến file xử lý kiểm tra tài khoản
       type: 'POST',
@@ -69,9 +67,8 @@
         if (response.status === 'exists') {
           alert(response.message);
         } else {
-          // Nếu tài khoản chưa được đăng ký, gửi yêu cầu đăng ký tài khoản
           $.ajax({
-            url: 'xu-ly-dang-ky.php', // Đường dẫn đến file xử lý đăng ký tài khoản
+            url: 'xu-ly-dang-ky.php',
             type: 'POST',
             dataType: 'json',
             data: {

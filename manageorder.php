@@ -273,27 +273,11 @@
                         
                         <div class="min-price">
                             <label for="min-date">From:</label>   
-                            <?php
-                                if (isset($_GET['min-date'])) {
-                                    $minDateValue = $_GET['min-date'];
-                                } 
-                                else {
-                                    $minDateValue = null;
-                                }
-                                ?>
-                                <input onchange="adddate()" type="date" id="min-date" name="min-date" value="<?php echo $minDateValue ?>">
+                            <input onchange ="adddate()" type="date" id="min-date" name="min-date">
                         </div>
                         <div class="max-price">
                             <label for="max-date">To:</label>
-                            <?php
-                                if (isset($_GET['max-date'])) {
-                                    $maxDateValue = $_GET['max-date'];
-                                } 
-                                else {
-                                    $maxDateValue = null;
-                                }
-                                ?>
-                            <input onchange="adddate()" type="date" id="max-date" name="max-date" value="<?php echo $maxDateValue ?>">
+                            <input onchange ="adddate()" type="date" id="max-date" name="max-date">
                         </div>
                         <input type="hidden" name="page" value = "<?=$_REQUEST['page']?>">
                         <button type="submit"  value = "filter" name ="filter"><i class="fa fa-filter"></i></button>
@@ -330,7 +314,7 @@
                         $s = '';
                             while($row = mysqli_fetch_assoc($result)){
                             $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDH']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDH']);
                             $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaSP']);
                             if (empty($row['NgayGiao']) || strtotime($row['NgayGiao']) < 0) {
                                 $date = null;
@@ -358,7 +342,7 @@
                         $s = '';
                         while($row = mysqli_fetch_assoc($result)){
                             $s.=sprintf('<div class="conatiern-fluid row-order d-flex" data-value="%s">',$row['MaDHPK']);
-                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['MaKH']);
+                            $s.=sprintf('<div class="col-2 text-center order my-2"><p>%s</p></div>',$row['IDDHPK']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%s</p></div>',$row['MaPK']);
                             $s.=sprintf('<div class="col-1 text-center order my-2"><p>%d</p></div>',$row['SoLuong']);
                             if (empty($row['NgayGiao']) || strtotime($row['NgayGiao']) < 0) {

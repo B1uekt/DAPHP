@@ -29,6 +29,16 @@ if (isset($_POST['sdt']) && isset($_POST['email']) && isset($_POST['mk'])) {
 
 
   // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+// Kiểm tra tính hợp lệ của dữ liệu đầu vào
+  if (!preg_match("/^[0-9]{10}$/", $sdt)) {
+    $response = array(
+      'status' => 'error',
+      'message' => 'Số điện thoại không hợp lệ'
+    );
+    echo json_encode($response);
+    die();
+  }
+
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $response = array(
       'status' => 'error',
